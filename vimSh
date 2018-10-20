@@ -1,0 +1,20 @@
+:vsplit -- split vertically
+C-(g,h,j,k) -- navigate to different tab
+u -- undo
+p -- paste
+i -- insert
+dnd -- delete n rows below
+dd -- delete line
+yy -- yank /copy line
+e -- move forword to the end of line
+w -- move forward to the start of line
+A -- insert at the end of the line
+TEXT -------------
+a] arround [...]
+i] inner [...]
+
+ya] --- yank around[...] 
+o	Begin a new line below the cursor
+O	Begin a new line above the cursor
+r{text}	Replace the character under the cursor with {text}
+R	Replace characters instead of inserting them
