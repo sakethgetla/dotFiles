@@ -18,3 +18,5 @@ o	Begin a new line below the cursor
 O	Begin a new line above the cursor
 r{text}	Replace the character under the cursor with {text}
 R	Replace characters instead of inserting them
+
+ysiw) = add surrounging inner word () // surroung word with ()
