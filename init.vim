@@ -22,6 +22,7 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-surround'
+Plugin 'artur-shaik/vim-javacomplete2'
 " ...
 
 " All of your Plugins must be added before the following line
@@ -55,6 +56,7 @@ nnoremap <C-H> <C-W><C-H>
 noremap <Leader>q :quit<CR>  " Quit current window
 noremap <Leader>Q :qa!<CR>   " Quit all windows
 noremap <Leader>v :vs<CR>   " split window
+noremap <Leader>c :split<CR>   " split window horizontally
 
 noremap <Leader>h :noh<CR>   " no highlight
 
