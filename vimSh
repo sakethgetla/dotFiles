@@ -10,6 +10,10 @@ yy -- yank /copy line
 e -- move forword to the end of line
 w -- move forward to the start of line
 A -- insert at the end of the line
+~ -- change to uppercase
+f() -- move to next ()
+t() -- move before next ()
+
 TEXT -------------
 a] arround [...]
 i] inner [...]
