@@ -1,3 +1,8 @@
+location of init.vim
+/home/saketh/.config/nvim
+
+
+
 :vsplit -- split vertically
 C-(g,h,j,k) -- navigate to different tab
 u -- undo
@@ -11,8 +16,15 @@ e -- move forword to the end of line
 w -- move forward to the start of line
 A -- insert at the end of the line
 ~ -- change to uppercase
+
+qq --start recording macro
+q --stop recording macro
+@q --perform macro
+
 f() -- move to next ()
+F() -- move to last ()
 t() -- move before next ()
+T() -- move before last ()
 
 TEXT -------------
 a] arround [...]

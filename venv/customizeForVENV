@@ -1,0 +1,25 @@
+// created by saketh 16/4/2019
+// things i did to make venv work with py3
+
+$ which python3 
+/usr/bin/python3
+// so //////////
+$ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+ 
+
+$ which virtualenvwrapper.sh 
+/home/saketh/.local/bin/virtualenvwrapper.sh
+// so //////////
+$ source /home/saketh/.local/bin/virtualenvwrapper.sh
+
+/////////////////////// added this line to ~/.bashrc ///////////
+source /home/saketh/.local/bin/virtualenvwrapper.sh
+
+-- commands
+workon 
+== virtual envs
+deactivate
+mkvirtualenv
+cdvirtualenv
+rmvirtualenv
+
