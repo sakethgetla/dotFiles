@@ -1,6 +1,21 @@
 // created by saketh 16/4/2019
 // things i did to make venv work with py3
 
+
+
+virtualenv --system-site-packages -p python3 ./venv
+// creates a virtual env and inclides all the packages that are system wide
+
+source ./venv/bin/activate  # sh, bash, ksh, or zsh
+// activate the venv
+
+deactivate
+// exactly what it sounds like
+
+
+
+
+
 $ which python3 
 /usr/bin/python3
 // so //////////
