@@ -6,7 +6,8 @@
 virtualenv --system-site-packages -p python3 ./venv
 // creates a virtual env and inclides all the packages that are system wide
 
-source ./venv/bin/activate  # sh, bash, ksh, or zsh
+source ~/./venv/bin/activate  
+# sh, bash, ksh, or zsh
 // activate the venv
 
 deactivate
