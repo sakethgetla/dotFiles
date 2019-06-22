@@ -24,6 +24,8 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-surround'
 Plugin 'artur-shaik/vim-javacomplete2'
+Plugin 'w0rp/ale'
+Plugin 'nathanaelkane/vim-indent-guides'
 " ...
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
