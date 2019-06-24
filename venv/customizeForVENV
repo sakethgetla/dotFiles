@@ -9,12 +9,15 @@ virtualenv --system-site-packages -p python3 ./venv
 source ~/./venv/bin/activate  
 # sh, bash, ksh, or zsh
 // activate the venv
+// after activating the venv pip and pip3 mean the same thing?
 
 deactivate
 // exactly what it sounds like
 
 
-
+/////////////////////////////////////////////////////////
+		don't do what's below
+/////////////////////////////////////////////////////////
 
 
 $ which python3 
