@@ -17,7 +17,8 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'altercation/vim-colors-solarized'
+Plugin 'lifepillar/vim-solarized8'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 "Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
@@ -107,13 +108,15 @@ set foldlevel=99
 
 " Enable folding with the spacebar
 nnoremap <space> za
-if has('gui_running')
-  set background=dark
-  colorscheme solarized
-else
-  colorscheme zenburn
-endif
-call togglebg#map("<F5>")
+
+"if has('gui_running')
+"  set background=dark
+"  colorscheme solarized
+"else
+"  colorscheme zenburn
+"endif
+
+"call togglebg#map("<F5>")
 map <C-n> :NERDTreeToggle<CR>
 set clipboard=unnamed
 
