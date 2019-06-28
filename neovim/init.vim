@@ -124,3 +124,8 @@ autocmd vimenter * set number relativenumber
 
 set encoding=utf-8
 let g:SimpylFold_docstring_preview=1
+
+""""""""""""""""""""""""""
+" Terminal mode mappings
+""""""""""""""""""""""""""
+:tnoremap <Esc> <C-\><C-n>
