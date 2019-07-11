@@ -66,8 +66,9 @@ noremap <Leader>c :split<CR>   " split window horizontally
 noremap <Leader>h :noh<CR>   " no highlight
 
 noremap <Leader>w  :update<CR>
-vnoremap <Leader>w :update<CR>
-inoremap <Leader>w :update<CR>
+" does vnoremap mean visal mode and inoremap mean input mode
+"vnoremap <Leader>w :update<CR>
+"inoremap <Leader>w :update<CR>
 
 " easier moving between tabs
 map <Leader>n <esc>:tabprevious<CR>
@@ -126,6 +127,7 @@ set encoding=utf-8
 let g:SimpylFold_docstring_preview=1
 
 """"""""""""""""""""""""""
-" Terminal mode mappings
+" Terminal mode mappings "
 """"""""""""""""""""""""""
+noremap <Leader>t  :terminal<CR>
 :tnoremap <Esc> <C-\><C-n>
