@@ -27,6 +27,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'artur-shaik/vim-javacomplete2'
 Plugin 'w0rp/ale'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'nvie/vim-flake8'
+Plugin 'hynek/vim-python-pep8-indent'
 " ...
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
