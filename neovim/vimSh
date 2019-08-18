@@ -4,7 +4,8 @@ location of init.vim
 
 
 :vsplit -- split vertically
-C-(g,h,j,k) -- navigate to different tab
+Ctrl-(g,h,j,k) -- navigate to different tab
+C - change from cursor to the end of line equalilent to c$
 u -- undo
 p -- paste
 "0p -- paste from 0 registery
@@ -16,6 +17,9 @@ e -- move forword to the end of line
 w -- move forward to the start of line
 A -- insert at the end of the line
 ~ -- change to uppercase
+* -- go to next uccorence of word
+; -- go to the next uccorance of letter
+
 
 qq --start recording macro
 q --stop recording macro
@@ -44,6 +48,7 @@ o	Begin a new line below the cursor
 O	Begin a new line above the cursor
 r{text}	Replace the character under the cursor with {text}
 R	Replace characters instead of inserting them
+% 	move to the corrospond bracket eg % on ( takes u to the corrospinding )
 
 Ctrl-y Moves screen up one line
 Ctrl-e Moves screen down one line
