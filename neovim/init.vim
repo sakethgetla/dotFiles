@@ -40,7 +40,12 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"""autocmd! bufwritepost .vimrc source %
 
 set pastetoggle=<F2>
-set clipboard=unnamed
+set clipboard=unnamedplus
+""""""""""""""""""""""""""""
+"change tabs to spaces
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
 " Mouse and backspace
 set mouse=a  " on OSX press ALT and click
@@ -112,12 +117,12 @@ set foldlevel=99
 " Enable folding with the spacebar
 nnoremap <space> za
 
-"if has('gui_running')
-"  set background=dark
-"  colorscheme solarized
-"else
-"  colorscheme zenburn
-"endif
+if has('gui_running')
+  set background=dark
+  colorscheme solarized
+else
+  colorscheme zenburn
+endif
 
 "call togglebg#map("<F5>")
 map <C-n> :NERDTreeToggle<CR>
