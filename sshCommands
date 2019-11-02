@@ -1,0 +1,9 @@
+sudo scp -r lab4/ z5258787@cse.unsw.edu.au:~
+sudo ssh z5258787@cse.unsw.edu.au
+
+sudo scp -r lab4/ z5258787@cse.unsw.edu.au:~/comp1521 .
+
+sshfs z5258787@cse.unsw.edu.au: ~/docs/unswMachine
+fusermount -u /home/a/docs/unswMachine 
+
+
