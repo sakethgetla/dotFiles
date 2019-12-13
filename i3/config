@@ -43,11 +43,17 @@ default_border pixel
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#
+# to change the color of rofi write in terminal "rofi-theme-selector"
+bindsym $mod+d exec rofi -show run -lines 20 -eh 1.3 -opacity "85" -bw 0 -font "System San Francisco Display 10"
+
 
 #autostart
-set $wallpaper "~/.wallpaper.jpeg"
-exec --no-startup-id hsetroot -center ~/.wallpaper.jpeg
+#set $wallpaper "~/.wallpaper.png"
+#exec --no-startup-id hsetroot ~/.wallpaper.png
+#exec_always feh --bg-scale ~/.wallpaper.png
+exec --no-startup-id unity-settings-daemon # applies the settings i used in ubuntu/unity eg wallpaper, theme
 exec --no-startup-id xsettingsd &
 exec --no-startup-id compton -b
 
@@ -159,10 +165,12 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 #######################################################
 #bindsym $mod+n exec Files
 bindsym $mod+m exec google-chrome
+bindsym $mod+n exec cinnamon-settings
 #bindsym $super+l exec i3lock -i $wallpaper
-bindsym $super+l exec i3lock -i ~/wallpaper.jpeg
+#bindsym $super+l exec i3lock -i $wallpaper
+bindsym $super+l exec i3lock -i ~/.wallpaper.png
+#bindsym $super+l exec i3lock -center ~/.wallpaper.png
 #bindsym $mod+b exec Bluetooth Adapters
-#bindsym $mod+b exec Sound
 #bindsym $mod+e exec Emacs
 #######################################################
 

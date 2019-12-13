@@ -1,3 +1,5 @@
+" created a sybolic link of this file in ~/.config/nvim
+" can create a symbolic link with command ln -s [file]
 set nocompatible              " required
 filetype off                  " required
 
@@ -21,7 +23,7 @@ Plugin 'jnurmine/Zenburn'
 Plugin 'lifepillar/vim-solarized8'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
-"Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-surround'
 Plugin 'artur-shaik/vim-javacomplete2'
@@ -36,8 +38,8 @@ filetype plugin indent on    " required
 
 "Automatic reloading of .vimrc
 "    " Use <TAB> to select the popup menu:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"""autocmd! bufwritepost .vimrc source %
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"""autocmd! bufwritepost .vimrc source %
 
 set pastetoggle=<F2>
 set clipboard=unnamedplus
@@ -81,7 +83,7 @@ noremap <Leader>w  :update<CR>
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
 
-map <Leader>1 <esc>:colo morning<CR>
+map <Leader>1 <esc>:colo solarized8_high<CR>
 map <Leader>2 <esc>:colo zenburn<CR>
 
 nnoremap <leader>d "_d
@@ -117,11 +119,12 @@ set foldlevel=99
 " Enable folding with the spacebar
 nnoremap <space> za
 
+" what is gui_runnig ?
 if has('gui_running')
-  set background=dark
-  colorscheme solarized
+  "set background=dark
+  colorscheme solarized8_high
 else
-  colorscheme zenburn
+  colorscheme solarized8_high
 endif
 
 "call togglebg#map("<F5>")
