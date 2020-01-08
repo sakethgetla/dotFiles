@@ -89,7 +89,8 @@ bindsym $mod+v split h
 bindsym $mod+c split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+#bindsym $mod+f fullscreen toggle
+bindsym $mod+f  fullscreen 
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -164,7 +165,8 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 #######################################################
 #bindsym $mod+n exec Files
-bindsym $mod+m exec google-chrome
+bindsym $mod+m exec firefox
+#bindsym $mod+m exec google-chrome
 bindsym $mod+n exec cinnamon-settings
 #bindsym $super+l exec i3lock -i $wallpaper
 #bindsym $super+l exec i3lock -i $wallpaper

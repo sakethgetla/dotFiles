@@ -1,0 +1,5 @@
+laptop screen = eDP1
+desktop screen = HDMI-2
+xrandr --output eDP1 --scale 1.25x1.25  # change display scale
+
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.2

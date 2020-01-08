@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# making it easy to push code
 git add .
 
 if [ "$1" != "" ]; then
