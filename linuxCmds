@@ -19,3 +19,17 @@ sudo vim /etc/hosts
 # 127.0.0.1 www.youtube.com
 
 htop # show system info 
+
+# swap caps and esc
+setxkbmap -option caps:swapescape
+
+caps:none #to deactivate
+caps:escape #to make it an additional escape
+caps:super #to make it an additional super (windows) key.
+
+
+# paste in ~/.inputrc 
+set editing-mode vi
+set keymap vi-command
+xmodmap ~/.xmodmap   # turn left super into control
+
