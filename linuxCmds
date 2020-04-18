@@ -7,6 +7,7 @@ xrandr --output HDMI-2 --scale 1.20x1.20
 
 # change resolution so the corners are not being cut
 xrandr --output HDMI-2 --mode 1280x1024
+xrandr --output HDMI-2 --mode 1920x1080i
 
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.2
 

@@ -168,6 +168,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 bindsym $mod+m exec firefox
 #bindsym $mod+m exec google-chrome
 bindsym $mod+n exec cinnamon-settings
+bindsym $mod+b exec nemo
 #bindsym $super+l exec i3lock -i $wallpaper
 #bindsym $super+l exec i3lock -i $wallpaper
 bindsym $super+l exec i3lock -i ~/.wallpaper.png

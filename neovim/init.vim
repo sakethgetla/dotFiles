@@ -84,7 +84,7 @@ map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
 
 map <Leader>1 <esc>:colo solarized8_high<CR>
-map <Leader>2 <esc>:colo zenburn<CR>
+map <Leader>2 <esc>:colo morning<CR>
 
 nnoremap <leader>d "_d
 xnoremap <leader>d "_d
