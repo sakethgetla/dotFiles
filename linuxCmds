@@ -34,3 +34,5 @@ set editing-mode vi
 set keymap vi-command
 xmodmap ~/.xmodmap   # turn left super into control
 
+# paste in ~/.profile
+setxkbmap -option caps:swapescape
