@@ -17,7 +17,7 @@ sct [1000 to 10000]
 # block youtube
 sudo vim /etc/hosts
 # then at the end of the file type 
-# 127.0.0.1 www.youtube.com
+ 127.0.0.1 www.youtube.com
 
 htop # show system info 
 
@@ -36,3 +36,17 @@ xmodmap ~/.xmodmap   # turn left super into control
 
 # paste in ~/.profile
 setxkbmap -option caps:swapescape
+
+# shows all the keys per modifier
+xmodmap -pm
+
+# brightness
+# install brightnessctl with apt
+
+# increase brightness by 3%, exponental scale
+sudo brightnessctl --exponent=2 set 3%+ 
+
+# blue light filter
+# install sct with apt 
+sct [0-6000]
+sct [3000]
