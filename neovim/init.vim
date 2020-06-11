@@ -92,6 +92,8 @@ xnoremap <leader>d "_d
 nnoremap <leader>p "0p
 xnoremap <leader>p "0p
 
+"nnoremap <leader>s <C-e>
+"xnoremap <leader>s <C-e>
 " map sort function to a key
 "" vnoremap <Leader>s :sort<CR>
 
@@ -129,7 +131,7 @@ endif
 
 "call togglebg#map("<F5>")
 map <C-n> :NERDTreeToggle<CR>
-set clipboard=unnamed
+"set clipboard=unnamed
 
 autocmd vimenter * set number relativenumber 
 

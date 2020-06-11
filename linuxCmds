@@ -50,3 +50,12 @@ sudo brightnessctl --exponent=2 set 3%+
 # install sct with apt 
 sct [0-6000]
 sct [3000]
+
+# checksums
+#    MD5 = md5sum
+#    SHA-1 = sha1sum
+#    SHA-256 = sha256sum
+
+example :
+sha256sum [FILE]
+sha256sum ubuntu-mate-16.10-desktop-amd64.iso
