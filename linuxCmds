@@ -1,4 +1,4 @@
-laptop screen = eDP1
+laptop screen = eDP2
 desktop screen = HDMI-2
 
 # change display scale
@@ -59,3 +59,19 @@ sct [3000]
 example :
 sha256sum [FILE]
 sha256sum ubuntu-mate-16.10-desktop-amd64.iso
+
+# dd comand
+    # can be used to write zero to the whole drive.
+    # make sure data is unrecoverable
+        # dd if=/dev/zero of=/dev/sda
+        
+    # create a bootable usb
+        # dd bs=4M if=/path/to/archlinux.iso of=/dev/sdx status=progress && sync
+
+
+
+# lsblk command
+# list avaliable block devices
+
+# list filesystem / usbs
+# df -h 
