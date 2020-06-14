@@ -19,3 +19,11 @@ git diff branch1..branch2
 
 # view the diff between branch1 and branch2 then branch2 was created
 git diff branch1...branch2
+
+# create a git repo in cmd
+echo "# 9517_comp-vis" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:sakethgetla/9517_comp-vis.git
+git push -u origin master

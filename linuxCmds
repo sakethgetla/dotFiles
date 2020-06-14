@@ -70,18 +70,14 @@ sha256sum ubuntu-mate-16.10-desktop-amd64.iso
 
 
 
-# lsblk command
 # list avaliable block devices
+# lsblk command
 
 # list filesystem / usbs
 # df -h 
 #
 
-# create linux life in cmd
+# generate a private and public key using the ecdsa algo
+ssh-keygen -t ecdsa -b 521
 
-echo "# 9517_comp-vis" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin git@github.com:sakethgetla/9517_comp-vis.git
-git push -u origin master
+#
