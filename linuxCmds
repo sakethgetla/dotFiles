@@ -22,6 +22,7 @@ sudo vim /etc/hosts
 htop # show system info 
 
 # swap caps and esc
+# paste in ~/.profile
 setxkbmap -option caps:swapescape
 
 caps:none #to deactivate
@@ -34,8 +35,6 @@ set editing-mode vi
 set keymap vi-command
 xmodmap ~/.xmodmap   # turn left super into control
 
-# paste in ~/.profile
-setxkbmap -option caps:swapescape
 
 # shows all the keys per modifier
 xmodmap -pm
@@ -60,7 +59,7 @@ example :
 sha256sum [FILE]
 sha256sum ubuntu-mate-16.10-desktop-amd64.iso
 
-# dd comand
+dd comand
     # can be used to write zero to the whole drive.
     # make sure data is unrecoverable
         # dd if=/dev/zero of=/dev/sda
@@ -70,8 +69,8 @@ sha256sum ubuntu-mate-16.10-desktop-amd64.iso
 
 
 
-# list avaliable block devices
-# lsblk command
+list avaliable block devices
+lsblk command
 
 # list filesystem / usbs
 # df -h 
