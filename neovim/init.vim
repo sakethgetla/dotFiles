@@ -6,9 +6,11 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
+"
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
+"" alternatively, pass a path whe
+" alternatively, pass a path whe
 
 " let Vundle manage Vundle, required
 "Plugin 'gmarik/Vundle.vim'
@@ -31,6 +33,10 @@ Plugin 'w0rp/ale'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'nvie/vim-flake8'
 Plugin 'hynek/vim-python-pep8-indent'
+
+Plugin 'jpalardy/vim-slime'
+Plugin 'hanschen/vim-ipython-cell'
+Plugin 'christoomey/vim-tmux-navigator'
 "Plugin 'davidhalter/jedi-vim'
 
 " ...
@@ -43,8 +49,9 @@ filetype plugin indent on    " required
 "inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 "inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"""autocmd! bufwritepost .vimrc source %
 
-set pastetoggle=<F2>
-set clipboard=unnamedplus
+"set pastetoggle=<F2>
+"set clipboard=unnamedplus
+"set clipboard=unnamed
 """"""""""""""""""""""""""""
 "change tabs to spaces
 set tabstop=4
@@ -70,11 +77,11 @@ nnoremap <C-H> <C-W><C-H>
 
 " Quick quit command
 noremap <Leader>q :quit<CR>  " Quit current window
-noremap <Leader>Q :qa!<CR>   " Quit all windows
-noremap <Leader>v :vs<CR>   " split window
-noremap <Leader>c :split<CR>   " split window horizontally
+"noremap <Leader>Q :qa!<CR>   " Quit all windows
+noremap <Leader>' :vs<CR>   " split window
+noremap <Leader>v :split<CR>   " split window horizontally
 
-noremap <Leader>h :noh<CR>   " no highlight
+"noremap <Leader>c :noh<CR>   " no highlight
 
 noremap <Leader>w  :update<CR>
 " does vnoremap mean visal mode and inoremap mean input mode
@@ -133,7 +140,6 @@ endif
 
 "call togglebg#map("<F5>")
 map <C-n> :NERDTreeToggle<CR>
-"set clipboard=unnamed
 
 autocmd vimenter * set number relativenumber 
 
@@ -144,4 +150,79 @@ let g:SimpylFold_docstring_preview=1
 " Terminal mode mappings "
 """"""""""""""""""""""""""
 noremap <Leader>t  :terminal<CR>
-:tnoremap <Esc> <C-\><C-n>
+noremap <Esc> <C-\><C-n>
+":tnoremap <Esc> <C-\><C-n>
+"
+"let g:slime_target = 'tmux'
+"let g:slime_target = 'neovim'
+"
+"let g:ipython_cell_delimit_cells_by = 'tags'
+"g:ipython_cell_tag = ['# %%', '#%%', '# <codecell>', '##'] 
+"" fix paste issues in ipython
+"
+""let g:slime_python_ipython = 1
+"------------------------------------------------------------------------------
+" slime configuration 
+"------------------------------------------------------------------------------
+" always use tmux
+let g:slime_target = 'tmux'
+"let g:slime_target = 'neovim'
+
+let g:ipython_cell_delimit_cells_by = 'tags'
+
+let g:ipython_cell_tag = ['# %%', '#%%', '# <codecell>', '##'] 
+
+" fix paste issues in ipython
+let g:slime_python_ipython = 1
+
+" always send text to the top-right pane in the current tmux tab without asking
+let g:slime_default_config = {
+            \ 'socket_name': get(split($TMUX, ','), 0),
+            \ 'target_pane': '{top-right}' }
+let g:slime_dont_ask_default = 1
+
+"------------------------------------------------------------------------------
+" ipython-cell configuration
+"------------------------------------------------------------------------------
+" Keyboard mappings. <Leader> is \ (backslash) by default
+
+" map <Leader>s to start IPython
+nnoremap <Leader>s :SlimeSend1 ipython --matplotlib<CR>
+
+" map <Leader>r to run script
+nnoremap <Leader>r :IPythonCellRun<CR>
+
+" map <Leader>R to run script and time the execution
+nnoremap <Leader>R :IPythonCellRunTime<CR>
+
+" map <Leader>c to execute the current cell
+nnoremap <Leader>c :IPythonCellExecuteCell<CR>
+
+" map <Leader>C to execute the current cell and jump to the next cell
+nnoremap <Leader>C :IPythonCellExecuteCellJump<CR>
+
+" map <Leader>l to clear IPython screen
+nnoremap <Leader>l :IPythonCellClear<CR>
+
+" map <Leader>x to close all Matplotlib figure windows
+nnoremap <Leader>x :IPythonCellClose<CR>
+
+" map [c and ]c to jump to the previous and next cell header
+nnoremap [c :IPythonCellPrevCell<CR>
+nnoremap ]c :IPythonCellNextCell<CR>
+
+" map <Leader>h to send the current line or current selection to IPython
+nmap <Leader>h <Plug>SlimeLineSend
+xmap <Leader>h <Plug>SlimeRegionSend
+
+" map <Leader>p to run the previous command
+nnoremap <Leader>p :IPythonCellPrevCommand<CR>
+
+" map <Leader>Q to restart ipython
+nnoremap <Leader>Q :IPythonCellRestart<CR>
+
+" map <Leader>d to start debug mode
+nnoremap <Leader>d :SlimeSend1 %debug<CR>
+
+" map <Leader>b to exit debug mode or IPython
+nnoremap <Leader>b :SlimeSend1 exit<CR>
