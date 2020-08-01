@@ -1,0 +1,4 @@
+mod = meta +a
+mod+{ #move pane
+mod+space #toggle pane layout
+
