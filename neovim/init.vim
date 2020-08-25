@@ -50,7 +50,7 @@ filetype plugin indent on    " required
 "inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"""autocmd! bufwritepost .vimrc source %
 
 "set pastetoggle=<F2>
-"set clipboard=unnamedplus
+set clipboard=unnamedplus
 "set clipboard=unnamed
 """"""""""""""""""""""""""""
 "change tabs to spaces

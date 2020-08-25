@@ -1,0 +1,1 @@
+/home/a/doc/dotFiles/neovim/init.vim

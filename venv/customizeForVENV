@@ -1,6 +1,18 @@
 // created by saketh 16/4/2019
 // things i did to make venv work with py3
 
+// for notebook
+pip install --user ipykernel
+
+Next you can add your virtual environment to Jupyter by typing:
+
+python -m ipykernel install --user --name=myenv
+
+This should print the following:
+
+Installed kernelspec myenv in /home/user/.local/share/jupyter/kernels/myenv
+
+
 
 
 virtualenv --system-site-packages -p python3 ./venv
