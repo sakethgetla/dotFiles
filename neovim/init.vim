@@ -37,6 +37,7 @@ Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'jpalardy/vim-slime'
 Plugin 'hanschen/vim-ipython-cell'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'pangloss/vim-javascript'
 "Plugin 'davidhalter/jedi-vim'
 
 " ...
