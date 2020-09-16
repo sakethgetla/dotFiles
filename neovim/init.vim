@@ -20,6 +20,8 @@ Plug 'hanschen/vim-ipython-cell'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'pangloss/vim-javascript'
 "Plugin 'davidhalter/jedi-vim'
+Plug 'tpope/vim-fugitive'
+
 
 "---------SYNTAX-------------
 "Plugin 'w0rp/ale'
@@ -156,6 +158,7 @@ autocmd vimenter * set number relativenumber
 set encoding=utf-8
 let g:SimpylFold_docstring_preview=1
 
+" tab autocomplete from the bottom
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 """"""""""""""""""""""""""
