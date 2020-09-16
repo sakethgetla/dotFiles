@@ -1,52 +1,67 @@
 " created a sybolic link of this file in ~/.config/nvim
+" can create a symbolic link with command ln -s [file]
+" install vundle
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-" Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
-"call plug#begin('~/.vim/plugged')
-call plug#begin(stdpath('data') . '/plugged')
 
-Plug 'tmhedberg/SimpylFold'
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-"Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plug 'tpope/vim-surround'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'nvie/vim-flake8'
-Plug 'hynek/vim-python-pep8-indent'
+set nocompatible              " required
+filetype off                  " required
 
-Plug 'jpalardy/vim-slime'
-Plug 'hanschen/vim-ipython-cell'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'pangloss/vim-javascript'
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+"
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+"" alternatively, pass a path whe
+" alternatively, pass a path whe
+
+" let Vundle manage Vundle, required
+"Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
+
+" add all your plugins here (note older versions of Vundle
+" used Bundle instead of Plugin)
+
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+"Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'tpope/vim-surround'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'nvie/vim-flake8'
+Plugin 'hynek/vim-python-pep8-indent'
+
+Plugin 'jpalardy/vim-slime'
+Plugin 'hanschen/vim-ipython-cell'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'pangloss/vim-javascript'
 "Plugin 'davidhalter/jedi-vim'
 
 "---------SYNTAX-------------
 "Plugin 'w0rp/ale'
 "Plugin 'mxw/vim-jsx'
 "Plugin 'maxmellon/vim-jsx-pretty'
-Plug 'sheerun/vim-polyglot'
+Plugin 'sheerun/vim-polyglot'
 
 
+"
 "---------AUTO COMPLETE-------------
 "Plugin 'artur-shaik/vim-javacomplete2'
-"Plug 'othree/html5.vim'
+Plugin 'othree/html5.vim'
 "Plugin 'Valloric/YouCompleteMe'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'ervandew/supertab'
-
 
 "---------COLOR SCHEME-------------
-Plug 'morhetz/gruvbox'
+Plugin 'morhetz/gruvbox'
 "Plugin 'jnurmine/Zenburn'
 "Plugin 'altercation/vim-colors-solarized'
 "Plugin 'lifepillar/vim-solarized8'
 
-call plug#end()
-
 
 " ...
 " All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 "Automatic reloading of .vimrc
 "    " Use <TAB> to select the popup menu:
@@ -141,10 +156,8 @@ let g:gruvbox_italic=1
 " what is gui_runnig ?
 if has('gui_running')
   "set background=dark
-  "colorscheme default    
   colorscheme gruvbox
 else
-  "colorscheme default    
   colorscheme gruvbox
 endif
 
