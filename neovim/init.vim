@@ -156,6 +156,8 @@ autocmd vimenter * set number relativenumber
 set encoding=utf-8
 let g:SimpylFold_docstring_preview=1
 
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
 """"""""""""""""""""""""""
 " Terminal mode mappings "
 """"""""""""""""""""""""""
