@@ -1,3 +1,5 @@
+kfjksef
+
 laptop screen = eDP2
 desktop screen = HDMI-2
 
@@ -10,6 +12,7 @@ xrandr --output HDMI-2 --mode 1280x1024
 xrandr --output HDMI-2 --mode 1920x1080i
 
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.2
+
 
 # change color temperature
 sct [1000 to 10000]
