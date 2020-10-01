@@ -36,7 +36,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 font pango:Droid Sans Regular 8
 
 # thin borders
-hide_edge_borders both
+#hide_edge_borders both
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -92,16 +92,19 @@ bindsym $mod+Shift+l move right
 bindsym $mod+b split h
 
 # split in vertical orientation
-#bindsym $mod+v split v
+bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+#bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
+bindsym $mod+y exec i3lock -i ~/.wallpaper.png
+#bindsym $super+l exec i3lock
+#bindsym $super+l exec i3lock -i ~/.wallpaper.png
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
@@ -313,6 +316,7 @@ bindsym $mod+F8 exec mocp --next
 # App shortcuts
 bindsym $mod+m exec "/usr/bin/chromium"
 bindsym $mod+n exec "/usr/bin/thunar"
+bindsym $mod+s exec "/usr/bin/emacs"
 bindsym Print exec "scrot ~/%Y-%m-%d-%T-screenshot.png"
 
 # Redirect sound to headphones
@@ -324,6 +328,7 @@ bindsym Print exec "scrot ~/%Y-%m-%d-%T-screenshot.png"
 #bindsym F12 exec rofi -show window -lines 7
 
 # Lock the system
+#bindsym $mod+l exec i3lock -i ~/.config/i3/i3-lock-screen.png -t -f
 #bindsym $mod+l exec i3lock -i ~/.config/i3/i3-lock-screen.png -t -f
 
 
