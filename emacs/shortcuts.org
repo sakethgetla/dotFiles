@@ -2,34 +2,35 @@
 
 STARTED USING EMACS with doom (emacs with vim keybindings):<2020-10-01 Thu>
 
-|--------------+--------------------------------------------------|
-| keys         | function                                         |
-|--------------+--------------------------------------------------|
-| Gernal       |                                                  |
-| leader-w-s   | :split                                           |
-| leader-w-v   | :vsplit                                          |
-| leader-w-q   | close window, :q                                 |
-| leader-o-p   | neo tree, q to quit                              |
-| leader-b-m   | bookmark file                                    |
-| leader-b-i   | interactive buffer list                          |
-|              |                                                  |
-|--------------+--------------------------------------------------|
-| Org mode     |                                                  |
-| leader-m-d-t | timestamp                                        |
-| leader-m-b-b | clear table field                                |
-| M-arrow      | move row/column inline with arrow                |
-|              |                                                  |
-|--------------+--------------------------------------------------|
-| Magit        |                                                  |
-| leader-g-g   | magit status, after commit message press C-c C-c |
-| s            | stage, may use v to select                       |
-| p-u          | push origin                                      |
-|              |                                                  |
-|--------------+--------------------------------------------------|
-| Journal      |                                                  |
-| M-x calender | have to switch to emacs mode with C-z            |
-| j-r          | view entry in new buffer                         |
-|              |                                                  |
-|              |                                                  |
-|              |                                                  |
-|--------------+--------------------------------------------------|
+|---------------+--------------------------------------------------|
+| keys          | function                                         |
+|---------------+--------------------------------------------------|
+| Gernal        |                                                  |
+| leader-w-s    | :split                                           |
+| leader-w-v    | :vsplit                                          |
+| leader-w-q    | close window, :q                                 |
+| leader-o-p    | neo tree, q to quit                              |
+| leader-b-m    | bookmark file                                    |
+| leader-b-i    | interactive buffer list                          |
+|               |                                                  |
+|---------------+--------------------------------------------------|
+| Org mode      |                                                  |
+| leader-m-d-t  | timestamp                                        |
+| leader-m-b-b  | clear table field                                |
+| M-arrow       | move row/column inline with arrow                |
+| <ret> on TODO | changes it to DONE                               |
+|               |                                                  |
+|---------------+--------------------------------------------------|
+| Magit         |                                                  |
+| leader-g-g    | magit status, after commit message press C-c C-c |
+| s             | stage, may use v to select                       |
+| p-u           | push origin                                      |
+|               |                                                  |
+|---------------+--------------------------------------------------|
+| Journal       |                                                  |
+| M-x calender  | have to switch to emacs mode with C-z            |
+| j-r           | view entry in new buffer                         |
+| j-d           | view entry, read only                            |
+| C-c C-j       | new journal entry                                |
+|               |                                                  |
+|---------------+--------------------------------------------------|
