@@ -1,0 +1,12 @@
+#+TITLE: arch_notes
+#+CREATOR: saketh
+
+todo
+xserver config file
+emacs org journal
+
+done
+-firewall
+-user
+-windown manager (qtile)
+-wifi, network manager
