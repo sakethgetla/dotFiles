@@ -9,4 +9,12 @@ done
 -firewall
 -user
 -windown manager (qtile)
--wifi, network manager
+-wifi, network
+
+|---------------------------+--------------------------------|
+| commands                  | discription                    |
+|---------------------------+--------------------------------|
+| systemctl is-enabled unit | check if a unit is enabled     |
+| systemctl enable unit     | enable a unit                  |
+| systemctl disable unit    | disable a unit                 |
+| makepkg                   | used after cloning mongodb-bin |
