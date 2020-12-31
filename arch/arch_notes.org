@@ -18,3 +18,5 @@ done
 | systemctl enable unit     | enable a unit                  |
 | systemctl disable unit    | disable a unit                 |
 | makepkg                   | used after cloning mongodb-bin |
+| xrdb -merge ~/.Xresources | change xterm theme.            |
+|---------------------------+--------------------------------|

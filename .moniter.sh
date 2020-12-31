@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-xrandr --output HDMI-2 --auto
-xrandr --output eDP-1 --off
+xrandr --output HDMI2 --auto
+xrandr --output eDP1 --off
