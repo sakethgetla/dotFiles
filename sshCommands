@@ -7,3 +7,5 @@ sshfs z5258787@cse.unsw.edu.au: ~/docs/unswMachine
 fusermount -u /home/a/docs/unswMachine 
 
 
+for cs3311, psql
+$ ssh CSEUsername@grieg.cse.unsw.edu.au

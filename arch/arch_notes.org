@@ -6,17 +6,29 @@ xserver config file
 emacs org journal
 
 done
--firewall
 -user
--windown manager (qtile)
+-window manager (i3)
 -wifi, network
 
-|---------------------------+--------------------------------|
-| commands                  | discription                    |
-|---------------------------+--------------------------------|
-| systemctl is-enabled unit | check if a unit is enabled     |
-| systemctl enable unit     | enable a unit                  |
-| systemctl disable unit    | disable a unit                 |
-| makepkg                   | used after cloning mongodb-bin |
-| xrdb -merge ~/.Xresources | change xterm theme.            |
-|---------------------------+--------------------------------|
+|---------------------------+-----------------------------------------------|
+| commands                  | discription                                   |
+|---------------------------+-----------------------------------------------|
+| systemctl is-enabled unit | check if a unit is enabled                    |
+| systemctl enable unit     | enable a unit                                 |
+| systemctl disable unit    | disable a unit                                |
+| makepkg                   | used after cloning mongodb-bin                |
+| xrdb -merge ~/.Xresources | change xterm theme.                           |
+|                           |                                               |
+| nmcli device              | See a list of network devices and their state |
+| nmcli device wifi list    | List nearby Wi-Fi networks                    |
+| nmcli radio wifi off      | turn wifi off                                 |
+|---------------------------+-----------------------------------------------|
+
+
+# paste in .bashrc
+# command line script template
+export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
+# make dir and cd into it
+md () { [ $# = 1 ] && mkdir -p "$@" && cd "$@" || echo "Error - no directory passed!"; }
+# second command line script template
+PS2='\[\033[01;36m\]>'
