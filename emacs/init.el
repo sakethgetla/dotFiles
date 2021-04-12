@@ -19,6 +19,7 @@
 (require 'lsp-mode)
 (require 'evil-org)
 (require 'evil-org-agenda)
+(require 'evil-surround)
 ;;
 ;;
 ;;(setq load-prefer-newer t)
@@ -76,6 +77,7 @@
 (setq evil-operator-state-cursor '("red" hollow))
 
 
+(global-evil-surround-mode 1)
 ;;-----------------------------------------------------------------------
 ;;(global-evil-tabs-mode t)
 ;;
