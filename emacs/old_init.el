@@ -17,6 +17,9 @@
  ;; If there is more than one, they won't work right.
 )
 
+(setq visible-bell 1)
+
+
 (require 'evil)
 (evil-mode 1)
 

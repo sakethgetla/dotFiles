@@ -1,0 +1,12 @@
+
+* one line if else
+    value_when_true if condition else value_when_false
+    eg.
+    fruit = 'Apple'
+    isApple = True if fruit == 'Apple' else False
+
+* one line for
+    list = [thing for thing in list_of_things]
+
+* one line for and if
+    list = [i**2 for i in range(10) if i%2==0] 

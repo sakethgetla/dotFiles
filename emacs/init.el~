@@ -6,6 +6,7 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 ;;(package-refresh-contents)
+;;(package-refresh-contents)
 
 
 ;; Download Evil
@@ -14,11 +15,24 @@
 ;; Enable Evil
 (require 'evil)
 
-(require 'evil-search-highlight-persist)
+;;(require 'evil-search-highlight-persist)
 (require 'linum-relative)
-(require 'lsp-mode)
+;;(require 'jedi)
+;;(require 'lsp-mode)
 (require 'evil-org)
 (require 'evil-org-agenda)
+(require 'evil-surround)
+(require 'org-journal)
+(require 'undo-tree)
+(require 'flycheck)
+(require 'rjsx-mode)
+
+
+(setq org-journal-dir "~/docs/.p/journals")
+(global-undo-tree-mode)
+;;(pdf-tools-install)
+
+
 ;;
 ;;
 ;;(setq load-prefer-newer t)
@@ -54,8 +68,55 @@
 (toggle-scroll-bar -1) 
 (tool-bar-mode -1) 
 
-(global-evil-search-highlight-persist t)
+;;(global-evil-search-highlight-persist t)
 ;;(set-face-background 'evil-ex-lazy-highlight "black")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(add-to-list 'auto-mode-alist '("\\.js?$" . rjsx-mode))
+
+;;(add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
+;;(add-to-list 'auto-mode-alist '("\\.js?$" . rjsx-mode))
+
+;;(add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode)) ;; auto-enable for .js/.jsx files
+;;(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+;;(defun web-mode-init-hook ()
+;;  "Hooks for Web mode.  Adjust indent."
+;;  (setq web-mode-markup-indent-offset 4))
+;;  
+;;(add-hook 'web-mode-hook  'web-mode-init-hook)
+;;
+;;(setq-default flycheck-disabled-checkers
+;;              (append flycheck-disabled-checkers
+;;                      '(javascript-jshint json-jsonlist)))
+;;
+;;;; Enable eslint checker for web-mode
+;;(flycheck-add-mode 'javascript-eslint 'web-mode)
+;;;; Enable flycheck globally
+;;(add-hook 'after-init-hook #'global-flycheck-mode)
+;;
+;;(defun web-mode-init-prettier-hook ()
+;;  (add-node-modules-path)
+;;  (prettier-js-mode))
+;;
+;;(add-hook 'web-mode-hook  'web-mode-init-prettier-hook)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ;; You can use the following configuration to have all modes start in normal state:
@@ -75,7 +136,10 @@
 (setq evil-replace-state-cursor '("red" bar))
 (setq evil-operator-state-cursor '("red" hollow))
 
+(setq visible-bell 1)
 
+
+(global-evil-surround-mode 1)
 ;;-----------------------------------------------------------------------
 ;;(global-evil-tabs-mode t)
 ;;
@@ -108,18 +172,35 @@
 (evil-define-key 'normal 'global (kbd "<leader>.") 'find-file)
 (evil-define-key 'normal 'global (kbd "<leader>bi") 'buffer-menu)
 (evil-define-key 'normal 'global (kbd "<leader>fr") 'recentf-open-files)
-(evil-define-key 'normal 'global (kbd "<leader>t") 'treemacs)
+;;(evil-define-key 'normal 'global (kbd "<leader>t") 'treemacs)
+(evil-define-key 'normal 'global (kbd "<leader>t") 'neotree-toggle)
+;;(evil-define-key 'normal neotree-mode (kbd "<return>") 'neotree-enter)
+(evil-global-set-key 'normal (kbd "<return>") 'neotree-enter)
 (evil-define-key 'normal 'global (kbd "<leader>v") 'split-window-vertically)
+(evil-define-key 'normal 'global (kbd "<leader>V") 'split-window-horizontally)
+(evil-define-key 'normal 'global (kbd "<leader>q") 'evil-quit)
+(evil-define-key 'normal 'global (kbd "<leader><return>") 'bookmark-bmenu-list)
+(evil-define-key 'normal 'global (kbd "u") 'undo-tree-undo)
+(evil-define-key 'normal 'global (kbd "C-r") 'undo-tree-redo)
+;;(evil-define-key 'normal 'global (kbd "<leader>r") 'evil-quit)
+
+;; move focus
 (evil-define-key 'normal 'global (kbd "<leader>h") 'evil-window-left)
 (evil-define-key 'normal 'global (kbd "<leader>j") 'evil-window-down)
 (evil-define-key 'normal 'global (kbd "<leader>k") 'evil-window-up)
 (evil-define-key 'normal 'global (kbd "<leader>l") 'evil-window-right)
-(evil-define-key 'normal 'global (kbd "<leader>q") 'evil-quit)
-(evil-define-key 'normal 'global (kbd "<leader><return>") 'bookmark-bmenu-list)
-;;(evil-define-key 'normal 'global (kbd "<leader>r") 'evil-quit)
 
-(add-hook 'python-mode-hook 'lsp)
+
+;; move window
+(evil-define-key 'normal 'global (kbd "<leader>H") 'evil-window-move-far-left)
+(evil-define-key 'normal 'global (kbd "<leader>J") 'evil-window-move-very-bottom)
+(evil-define-key 'normal 'global (kbd "<leader>K") 'evil-window-move-very-top)
+(evil-define-key 'normal 'global (kbd "<leader>L") 'evil-window-move-far-right)
+
+;;add-hook 'python-mode-hook 'lsp)
 ;;(add-hook 'python-mode-hook #'lsp)
+(add-hook 'python-mode-hook 'jedi:setup)
+
 
 (add-hook 'org-mode-hook 'evil-org-mode)
 (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
@@ -127,14 +208,17 @@
 (evil-org-agenda-set-keys)
 
 
+;;(load-theme 'gruvbox-light-hard t)
 (load-theme 'gruvbox-dark-hard t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("4eb6fa2ee436e943b168a0cd8eab11afc0752aebb5d974bba2b2ddc8910fca8f" "78c4238956c3000f977300c8a079a3a8a8d4d9fee2e68bad91123b58a4aa8588" default))
  '(package-selected-packages
-   '(evil-search-highlight-persist evil-surround evil-org auto-compile magit linum-relative lsp-pyright lsp-python-ms company flycheck helm-lsp lsp-ivy lsp-treemacs lsp-ui org-journal evil-nerd-commenter treemacs-evil gruvbox-theme undo-fu undo-tree evil)))
+   '(rjsx-mode web-mode neotree company-jedi company evil-surround evil-org magit linum-relative flycheck org-journal evil-nerd-commenter gruvbox-theme undo-tree evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
