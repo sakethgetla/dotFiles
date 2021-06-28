@@ -32,6 +32,11 @@
 (global-undo-tree-mode)
 ;;(pdf-tools-install)
 
+;;(custom-set-variables
+;; '(jdee-server-dir "~/.emacs.d/jdee-server"))
+
+(require 'lsp-java)
+(add-hook 'java-mode-hook #'lsp)
 
 ;;
 ;;
@@ -79,14 +84,6 @@
 
 (require 'lsp-mode)
 (add-hook 'js-mode-hook #'lsp)
-
-
-
-
-
-
-
-
 
 
 
@@ -200,10 +197,10 @@
 (evil-define-key 'normal 'global (kbd "<leader>bi") 'buffer-menu)
 (evil-define-key 'normal 'global (kbd "<leader>gg") 'magit)
 (evil-define-key 'normal 'global (kbd "<leader>fr") 'recentf-open-files)
-;;(evil-define-key 'normal 'global (kbd "<leader>t") 'treemacs)
-(evil-define-key 'normal 'global (kbd "<leader>t") 'neotree-toggle)
+(evil-define-key 'normal 'global (kbd "<leader>t") 'treemacs)
+;;(evil-define-key 'normal 'global (kbd "<leader>t") 'neotree-toggle)
 ;;(evil-define-key 'normal neotree-mode (kbd "<return>") 'neotree-enter)
-(evil-global-set-key 'normal (kbd "<return>") 'neotree-enter)
+(evil-global-set-key 'normal (kbd "<return>") 'treemacs-RET-action)
 (evil-define-key 'normal 'global (kbd "<leader>v") 'split-window-vertically)
 (evil-define-key 'normal 'global (kbd "<leader>V") 'split-window-horizontally)
 (evil-define-key 'normal 'global (kbd "<leader>q") 'evil-quit)
@@ -246,7 +243,7 @@
  '(custom-safe-themes
    '("4eb6fa2ee436e943b168a0cd8eab11afc0752aebb5d974bba2b2ddc8910fca8f" "78c4238956c3000f977300c8a079a3a8a8d4d9fee2e68bad91123b58a4aa8588" default))
  '(package-selected-packages
-   '(company lsp-mode web-mode neotree evil-surround evil-org magit linum-relative flycheck org-journal evil-nerd-commenter gruvbox-theme undo-tree evil)))
+   '(lsp-java company lsp-mode web-mode neotree evil-surround evil-org magit linum-relative flycheck org-journal evil-nerd-commenter gruvbox-theme undo-tree evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
