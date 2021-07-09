@@ -15,7 +15,7 @@ export EDITOR="nvim"
 
 
 set -o vi
-xrdb -merge ~/.Xresources
+#xrdb -merge ~/.Xresources
 export PATH=/home/dawes/.local/bin:$PATH
 
 

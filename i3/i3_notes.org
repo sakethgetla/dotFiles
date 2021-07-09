@@ -1,0 +1,5 @@
+
+
+
+# select rofi theme
+$rofi-theme-selector

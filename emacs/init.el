@@ -1,64 +1,64 @@
 ;; Set up package.el to work with MELPA
 (require 'package)
-
-
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 ;;(package-refresh-contents)
-;;(package-refresh-contents)
-
 
 ;; Download Evil
-;;(unless (package-installed-p 'evil)
-;;  (package-install 'evil))
+(unless (package-installed-p 'evil)
+  (package-install 'evil))
+
 ;; Enable Evil
+(require 'evil)
+;; Download Evil
+(unless (package-installed-p 'evil)
+  (package-install 'evil)
+  (package-install 'company)
+  (package-install 'lsp-mode)
+  (package-install 'evil-org)
+  (package-install 'evil-surround)
+  (package-install 'org-journal)
+  (package-install 'undo-tree)
+  (package-install 'flycheck)
+  (package-install 'rjsx-mode)
+)
+
+ ;;Enable Evil
 (require 'evil)
 
 ;;(require 'evil-search-highlight-persist)
 (require 'linum-relative)
 ;;(require 'jedi)
-;;(require 'lsp-mode)
+(require 'lsp-mode)
 (require 'evil-org)
-(require 'evil-org-agenda)
+;;(require 'evil-org-agenda)
 (require 'evil-surround)
 (require 'org-journal)
 (require 'undo-tree)
 (require 'flycheck)
-;;(require 'rjsx-mode)
+(require 'rjsx-mode)
+;;(require 'rjsxialkwef-mode)
 
 
-(setq org-journal-dir "~/docs/.p/journals")
-(global-undo-tree-mode)
-;;(pdf-tools-install)
 
-;;(custom-set-variables
-;; '(jdee-server-dir "~/.emacs.d/jdee-server"))
-
-(require 'lsp-java)
-(add-hook 'java-mode-hook #'lsp)
-
-;;
-;;
-;;(setq load-prefer-newer t)
-;;;;(add-to-list 'load-path "/path/to/packed")
-;;(add-to-list 'load-path ".emacs.d/init.el")
-;;(require 'auto-compile)
-;;(auto-compile-on-load-mode)
-;;(auto-compile-on-save-mode)
 
 
 (evil-mode 1)
 (evil-set-leader 'normal (kbd "SPC"))
 
+
+(global-undo-tree-mode)
+
 (setq inhibit-startup-message t) ;; hide the startup message
-;;(global-linum-mode t) ;; enable line numbers globally
-;;(display-line-numbers-mode)
-;;(setq display-line-numbers 'relative)
-;;(when (version<= "26.0.50" emacs-version )
-;;  (global-display-line-numbers-mode))
-;; Disabling things
-;;-----------------------------------------------------------------------
+(setq visible-bell 1)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+
+(require 'lsp-mode)
+(add-hook 'js-mode-hook #'lsp)
+
 
 (linum-on)
 ;;(linum-relative-mode t)
@@ -68,86 +68,14 @@
 (global-linum-mode 1)
 
 
-;;(shell)
-(menu-bar-mode -1) 
-(toggle-scroll-bar -1) 
-(tool-bar-mode -1) 
-
-
-
-
-
-
-
-
-
-
-(require 'lsp-mode)
-(add-hook 'js-mode-hook #'lsp)
-
-
-
-
-
-
-
-
-;;(global-evil-search-highlight-persist t)
-;;(set-face-background 'evil-ex-lazy-highlight "black")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;(add-to-list 'auto-mode-alist '("\\.js?$" . rjsx-mode))
-
-;;(add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
-;;(add-to-list 'auto-mode-alist '("\\.js?$" . rjsx-mode))
-
-;;(add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode)) ;; auto-enable for .js/.jsx files
-;;(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
-;;(defun web-mode-init-hook ()
-;;  "Hooks for Web mode.  Adjust indent."
-;;  (setq web-mode-markup-indent-offset 4))
-;;  
-;;(add-hook 'web-mode-hook  'web-mode-init-hook)
-;;
-;;(setq-default flycheck-disabled-checkers
-;;              (append flycheck-disabled-checkers
-;;                      '(javascript-jshint json-jsonlist)))
-;;
-;;;; Enable eslint checker for web-mode
-;;(flycheck-add-mode 'javascript-eslint 'web-mode)
-;;;; Enable flycheck globally
-;;(add-hook 'after-init-hook #'global-flycheck-mode)
-;;
-;;(defun web-mode-init-prettier-hook ()
-;;  (add-node-modules-path)
-;;  (prettier-js-mode))
-;;
-;;(add-hook 'web-mode-hook  'web-mode-init-prettier-hook)
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+;;(global-evil-surround-mode 1)
 
 ;; You can use the following configuration to have all modes start in normal state:
 (setq evil-emacs-state-modes nil)
 (setq evil-insert-state-modes nil)
 (setq evil-motion-state-modes nil)
 
+ 
 ;;Note: If, after turning any of these off, you want to re-enable them for a single emacs window, you can do so by pressing Meta-x and then typing the command at the M-x prompt. (Copied from Web)
 ;;Example:
 ;;M-x tool-bar-mode
@@ -160,37 +88,6 @@
 (setq evil-replace-state-cursor '("red" bar))
 (setq evil-operator-state-cursor '("red" hollow))
 
-(setq visible-bell 1)
-
-
-(global-evil-surround-mode 1)
-;;-----------------------------------------------------------------------
-;;(global-evil-tabs-mode t)
-;;
-;;(define-key evil-normal-state-map (kbd "C-0") (lambda() (interactive) (elscreen-goto 0)))
-;;;;(define-key evil-normal-state-map (kbd "C- ") (lambda() (interactive) (elscreen-goto 0)))
-;;(define-key evil-normal-state-map (kbd "C-1") (lambda() (interactive) (elscreen-goto 1)))
-;;(define-key evil-normal-state-map (kbd "C-2") (lambda() (interactive) (elscreen-goto 2)))
-;;(define-key evil-normal-state-map (kbd "C-3") (lambda() (interactive) (elscreen-goto 3)))
-;;(define-key evil-normal-state-map (kbd "C-4") (lambda() (interactive) (elscreen-goto 4)))
-;;(define-key evil-normal-state-map (kbd "C-5") (lambda() (interactive) (elscreen-goto 5)))
-;;(define-key evil-normal-state-map (kbd "C-6") (lambda() (interactive) (elscreen-goto 6)))
-;;(define-key evil-normal-state-map (kbd "C-7") (lambda() (interactive) (elscreen-goto 7)))
-;;(define-key evil-normal-state-map (kbd "C-8") (lambda() (interactive) (elscreen-goto 8)))
-;;(define-key evil-normal-state-map (kbd "C-9") (lambda() (interactive) (elscreen-goto 9)))
-;;(define-key evil-insert-state-map (kbd "C-0") (lambda() (interactive) (elscreen-goto 0)))
-;;;;(define-key evil-insert-state-map (kbd "C- ") (lambda() (interactive) (elscreen-goto 0)))
-;;(define-key evil-insert-state-map (kbd "C-1") (lambda() (interactive) (elscreen-goto 1)))
-;;(define-key evil-insert-state-map (kbd "C-2") (lambda() (interactive) (elscreen-goto 2)))
-;;(define-key evil-insert-state-map (kbd "C-3") (lambda() (interactive) (elscreen-goto 3)))
-;;(define-key evil-insert-state-map (kbd "C-4") (lambda() (interactive) (elscreen-goto 4)))
-;;(define-key evil-insert-state-map (kbd "C-5") (lambda() (interactive) (elscreen-goto 5)))
-;;(define-key evil-insert-state-map (kbd "C-6") (lambda() (interactive) (elscreen-goto 6)))
-;;(define-key evil-insert-state-map (kbd "C-7") (lambda() (interactive) (elscreen-goto 7)))
-;;(define-key evil-insert-state-map (kbd "C-8") (lambda() (interactive) (elscreen-goto 8)))
-;;(define-key evil-insert-state-map (kbd "C-9") (lambda() (interactive) (elscreen-goto 9)))
-
-;;-----------------------------------------------------------------------
 
 (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>.") 'find-file)
@@ -222,28 +119,21 @@
 (evil-define-key 'normal 'global (kbd "<leader>K") 'evil-window-move-very-top)
 (evil-define-key 'normal 'global (kbd "<leader>L") 'evil-window-move-far-right)
 
-;;add-hook 'python-mode-hook 'lsp)
-;;(add-hook 'python-mode-hook #'lsp)
-(add-hook 'python-mode-hook 'jedi:setup)
-
-
+ 
 (add-hook 'org-mode-hook 'evil-org-mode)
-(evil-org-set-key-theme '(navigation insert textobjects additional calendar))
-
-(evil-org-agenda-set-keys)
-
-
-;;(load-theme 'gruvbox-light-hard t)
+(add-hook 'python-mode-hook 'jedi:setup)
+(add-to-list 'auto-mode-alist '("\\/.*\\.js\\'" . rjsx-mode))
+ 
 (load-theme 'gruvbox-dark-hard t)
+ 
+;;(global-evil-surround-mode 1)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("4eb6fa2ee436e943b168a0cd8eab11afc0752aebb5d974bba2b2ddc8910fca8f" "78c4238956c3000f977300c8a079a3a8a8d4d9fee2e68bad91123b58a4aa8588" default))
  '(package-selected-packages
-   '(lsp-java company lsp-mode web-mode neotree evil-surround evil-org magit linum-relative flycheck org-journal evil-nerd-commenter gruvbox-theme undo-tree evil)))
+   '(lsp-treemacs flycheck undo-tree org-journal magit lsp-mode linum-relative gruvbox-theme evil company)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
