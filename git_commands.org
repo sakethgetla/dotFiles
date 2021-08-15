@@ -34,6 +34,15 @@ git push -u origin master
 * remove all tracked files
 git rm -r --cached .
 
+* discard local changes
+git restore .
+
+* merge <branch name> into current branch
+git merge <branch name>
+
+* git list all branches
+git branch -all
+
 * git ignore rules/patterns
 ** ignore all files inside node_modules:
 node_modules/*

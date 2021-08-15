@@ -70,6 +70,14 @@
 
 ;;(global-evil-surround-mode 1)
 
+;; no backup files
+(setq create-lockfiles nil)
+
+;;(setq make-backup-files nil)
+(setq backup-directory-alist `(("." . "~/.saves")))
+
+(setq org-journal-dir "~/docs/.p/journals/")
+
 ;; You can use the following configuration to have all modes start in normal state:
 (setq evil-emacs-state-modes nil)
 (setq evil-insert-state-modes nil)
