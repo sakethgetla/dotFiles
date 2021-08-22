@@ -10,19 +10,20 @@ done
 -window manager (i3)
 -wifi, network
 
-|---------------------------+-----------------------------------------------|
-| commands                  | discription                                   |
-|---------------------------+-----------------------------------------------|
-| systemctl is-enabled unit | check if a unit is enabled                    |
-| systemctl enable unit     | enable a unit                                 |
-| systemctl disable unit    | disable a unit                                |
-| makepkg                   | used after cloning mongodb-bin                |
-| xrdb -merge ~/.Xresources | change xterm theme.                           |
-|                           |                                               |
-| nmcli device              | See a list of network devices and their state |
-| nmcli device wifi list    | List nearby Wi-Fi networks                    |
-| nmcli radio wifi off      | turn wifi off                                 |
-|---------------------------+-----------------------------------------------|
+|---------------------------------------------------+-----------------------------------------------|
+| commands                                          | discription                                   |
+|---------------------------------------------------+-----------------------------------------------|
+| systemctl is-enabled unit                         | check if a unit is enabled                    |
+| systemctl enable unit                             | enable a unit                                 |
+| systemctl disable unit                            | disable a unit                                |
+| timedatectl set-local-rtc 1 --adjust-system-clock | set system time to local time                 |
+| makepkg                                           | used after cloning mongodb-bin                |
+| xrdb -merge ~/.Xresources                         | change xterm theme.                           |
+|                                                   |                                               |
+| nmcli device                                      | See a list of network devices and their state |
+| nmcli device wifi list                            | List nearby Wi-Fi networks                    |
+| nmcli radio wifi off                              | turn wifi off                                 |
+|---------------------------------------------------+-----------------------------------------------|
 
 
 # paste in .bashrc
