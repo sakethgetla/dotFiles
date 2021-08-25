@@ -34,12 +34,15 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type `relative)
 
 ;; org-journal
 (setq org-journal-dir "~/docs/.p/journals/")
 (setq org-journal-date-format "%A, %d %B %Y")
 (require 'org-journal)
+
+
+(add-to-list 'auto-mode-alist '("\\/.*\\.tsx\\'" . rjsx-mode))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

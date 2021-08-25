@@ -85,7 +85,8 @@
 (setq evil-insert-state-modes nil)
 (setq evil-motion-state-modes nil)
 
- 
+(setq-default indent-tabs-mode nil)
+
 ;;Note: If, after turning any of these off, you want to re-enable them for a single emacs window, you can do so by pressing Meta-x and then typing the command at the M-x prompt. (Copied from Web)
 ;;Example:
 ;;M-x tool-bar-mode
@@ -132,7 +133,7 @@
  
 (add-hook 'org-mode-hook 'evil-org-mode)
 (add-hook 'python-mode-hook 'jedi:setup)
-(add-to-list 'auto-mode-alist '("\\/.*\\.js\\'" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\/.*\\.tsx\\'" . rjsx-mode))
  
 (load-theme 'gruvbox-dark-hard t)
  
