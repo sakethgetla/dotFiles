@@ -5,11 +5,6 @@ set $mod Mod1
 # workspace layouts:
 workspace_layout default
 
-#default i3 tiling mode
-#workspace_layout stacking
-#workspace_layout tabbed
-#Tiling mode is tabbed:
-
 font pango:Droid Sans Regular 8
 
 # thin borders
@@ -24,12 +19,6 @@ bindsym $mod+Return exec xterm
 # kill focused window
 bindsym $mod+q kill
 
-# open keybindings overview
-#bindsym $mod+F1 exec "leafpad ~/.config/i3/keybindings"
-
-# start dmenu (a program launcher)
-# bindsym $mod+d exec dmenu_run
-
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -42,10 +31,10 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
-#bindsym $mod+Left focus left
-#bindsym $mod+Down focus down
-#bindsym $mod+Up focus up
-#bindsym $mod+Right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -54,10 +43,10 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
-#bindsym $mod+Shift+Left move left
-#bindsym $mod+Shift+Down move down
-#bindsym $mod+Shift+Up move up
-#bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+b split h
@@ -107,8 +96,7 @@ bindsym $mod+space focus mode_toggle
 #exec --no-startup-id sleep 2 && xfce4-terminal -e "glances --percpu"
 ##exec --no-startup-id sleep 3 && thunar
 ##transparency 
-#exec --no-startup-id xcompmgr -c
-##exec --no-startup-id picom -cC
+#exec --no-startup-id #exec --no-startup-id picom -cC
 ##networkmanager-applet
 #exec --no-startup-id nm-applet
 #exec --no-startup-id nitrogen --restore
@@ -118,21 +106,10 @@ bindsym $mod+space focus mode_toggle
 #
 ## Desktop notifications
 ##exec --no-startup-id /usr/bin/dunst
-##exec --no-startup-id git clone https://github.com/endeavouros-team/i3-EndeavourOS.git ~/.config/i3/original/
 #
 ## update notification should be set to tray and notification
 #exec --no-startup-id sleep 15 && eos-update-notifier
 #exec --no-startup-id sleep 15 && eos-welcome
-
-# set floating for apps needing it
-for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
-## welcome and others
-for_window [class="Yad" instance="yad"] floating enable
-for_window [class="Galculator" instance="galculator"] floating enable
-for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
-#for_window [class="Leafpad" instance="leafpad"] floating enable
-#for_window [class="Leafpad"] resize set 900 700
-
 
 
 #resize floating windows with mouse scroll:
@@ -146,6 +123,11 @@ set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -153,6 +135,11 @@ bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -160,6 +147,11 @@ bindsym $mod+Shift+2 move container to workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3
 bindsym $mod+Shift+4 move container to workspace $ws4
 bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 
 
@@ -218,37 +210,15 @@ client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-col
 client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color          $indicator-color
 
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#bar {
-#}
-
-#bar {
-#    #status_command i3status --config ~/.i3/i3status.conf
-#    # Disable all tray icons
-#    #tray_output none
-#    colors {
-#        background $black2
-#        statusline $white2
-#        separator $white2 
-#
-#        #                  border background text
-#        focused_workspace  $background $background $red1
-#        active_workspace   $black2 $black1 $white2
-#        inactive_workspace $black1 $black2 $foreground
-#        urgent_workspace   $red1 $red1 $white2
-#        binding_mode       $background $red2 $white2
-#    }
-#}
 
 # shutdown / restart / suspend...
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (CTRL+s) shutdown
+set $mode_system System: (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (CTRL+s) shutdown
 
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $i3lockwall, mode "default"
+    bindsym l exec --no-startup-id $i3lock, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $i3lockwall && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $i3lockwall && systemctl hibernate, mode "default"
+    bindsym s exec --no-startup-id $i3lock && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $i3lock && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Ctrl+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
@@ -263,40 +233,7 @@ bindsym $mod+BackSpace mode "$mode_system"
 bar {
 	status_command i3status
 	font pango:monospace 9
-	#status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	#tray_output primary 
-	#position bottom
-	#tray_padding 0
-	#separator_symbol "|"
-
-	#colors {
-	#	background $bg-color
-	#	separator #757575
-	#	#                  border             background         text
-	#	focused_workspace  $bg-color          $bg-color          $text-color
-	#active_workspace   $active-bg-color   $active-bg-color   $text-color
-	#	inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-	#	urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	#}
 }
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#bar {
-#    status_command i3blocks -c ~/.config/i3/i3blocks.conf
-#tray_output primary 
-#    position bottom
-#    tray_padding 0
-#    colors {
-#        separator          #666666
-#        background         #222222
-#        statusline         #dddddd
-#        focused_workspace  #0088CC #0088CC #ffffff
-#        active_workspace   #333333 #333333 #ffffff
-#        inactive_workspace #333333 #333333 #888888
-#        urgent_workspace   #2f343a #900000 #ffffff
-#    }
-#}
 
 ##set floating (nontiling) for special apps
 #for_window [class="Xsane" instance="xsane"] floating enable
@@ -315,11 +252,6 @@ bar {
 bindsym XF86AudioRaiseVolume exec amixer sset Master 2%+ && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioLowerVolume exec amixer sset Master 2%- && pkill -RTMIN+1 i3blocks
 
-# granular volume control
-#bindsym $mod+XF86AudioRaiseVolume exec amixer -D pulse sset Master 1%+ && pkill -RTMIN+1 i3blocks
-#bindsym $mod+XF86AudioLowerVolume exec amixer -D pulse sset Master 1%- && pkill -RTMIN+1 i3blocks
-#bindsym $mod+XF86AudioRaiseVolume exec amixer -D pulse sset Master 1%+
-#bindsym $mod+XF86AudioLowerVolume exec amixer -D pulse sset Master 1%-
 
 # mute
 bindsym XF86AudioMute exec amixer sset Master toggle && killall -USR1 i3blocks
@@ -345,7 +277,7 @@ bindsym $mod+F7 exec mocp --previous
 bindsym $mod+F8 exec mocp --next
 
 # App shortcuts
-bindsym $mod+m exec "/usr/bin/chromium"
+bindsym $mod+m exec "/usr/bin/qutebrowser"
 bindsym $mod+n exec "/usr/bin/nemo"
 bindsym $mod+s exec "/usr/bin/emacs"
 bindsym Print exec "scrot ~/%Y-%m-%d-%T-screenshot.png"

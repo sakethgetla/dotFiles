@@ -1,11 +1,19 @@
 #+TITLE:js_notes
 #+CREATOR: saketh
 
-|-------------------------------+------------------------------------------------|
-| command                       | function                                       |
-|-------------------------------+------------------------------------------------|
-| ./mongo --dbpath ~/mongo-data | run mongo server                               |
-| npm run dev                   | run express and react server at the same time. |
-| npm install                   | install all the node modules.                  |
-| npm init                      | make current dir into a project.               |
-|-------------------------------+------------------------------------------------|
+|---------------------------------------------------+------------------------------------------------|
+| command                                           | function                                       |
+|---------------------------------------------------+------------------------------------------------|
+| ./mongo --dbpath ~/mongo-data                     | run mongo server                               |
+| npm run dev                                       | run express and react server at the same time. |
+| npm install                                       | install all the node modules.                  |
+| npm init                                          | make current dir into a project.               |
+| npx create-react-app my-app --template typescript | create typescript app.                         |
+| npm list -g                                       | list globally installed modules.               |
+|---------------------------------------------------+------------------------------------------------|
+
+
+scripts:
+    "server": "nodemon server/index.js",
+    "client": "npm start --prefix front-end",
+    "dev": "concurrently \"npm run server\" \"npm run client\" "

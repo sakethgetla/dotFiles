@@ -13,9 +13,12 @@ done
 |---------------------------------------------------+-----------------------------------------------|
 | commands                                          | discription                                   |
 |---------------------------------------------------+-----------------------------------------------|
+| systemctl                                         | list active services                          |
+| systemctl status                                  |                                               |
 | systemctl is-enabled unit                         | check if a unit is enabled                    |
 | systemctl enable unit                             | enable a unit                                 |
 | systemctl disable unit                            | disable a unit                                |
+|                                                   |                                               |
 | timedatectl set-local-rtc 1 --adjust-system-clock | set system time to local time                 |
 | makepkg                                           | used after cloning mongodb-bin                |
 | xrdb -merge ~/.Xresources                         | change xterm theme.                           |
@@ -23,6 +26,8 @@ done
 | nmcli device                                      | See a list of network devices and their state |
 | nmcli device wifi list                            | List nearby Wi-Fi networks                    |
 | nmcli radio wifi off                              | turn wifi off                                 |
+| /etc/profile.d                                    | has all bash script files that run on login   |
+|                                                   |                                               |
 |---------------------------------------------------+-----------------------------------------------|
 
 
