@@ -8,7 +8,13 @@
 alias ls='ls --color=auto'
 #PS1='[\u@\h \W]\$ '
 export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
+
+# custom commands written by user
+#   make directory and change current dir to new dir
 md () { [ $# = 1 ] && mkdir -p "$@" && cd "$@" || echo "Error - no directory passed!"; }
+#   move file to .trash / avoid permanent deletion
+rmt () { [ $# = 1 ] && mv -v "$@" ~/.trash/ || echo "Error - no file!"; }
+
 PS2='\[\033[01;36m\]>'
 
 export EDITOR="nvim"
