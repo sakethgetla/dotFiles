@@ -281,6 +281,8 @@ bindsym $mod+m exec "/usr/bin/qutebrowser"
 bindsym $mod+n exec "/usr/bin/nemo"
 bindsym $mod+s exec "/usr/bin/emacs"
 bindsym Print exec "scrot ~/%Y-%m-%d-%T-screenshot.png"
+bindsym F1 exec redshift -P -O 2000
+bindsym F2 exec redshift -P -O 6500
 
 # Screenshots
 #bindsym Print exec --no-startup-id maim "~/$(date)"
@@ -324,5 +326,4 @@ bindsym F10 exec rofi -show window -line-padding 4 \
                 -lines 6 -padding 50 -hide-scrollbar \
                 -show-icons -drun-icon-theme "Arc-X-D" -font "Droid Sans Regular 10"                
                 
-
 
