@@ -28,6 +28,7 @@ done
 | nmcli radio wifi off                              | turn wifi off                                 |
 | /etc/profile.d                                    | has all bash script files that run on login   |
 |                                                   |                                               |
+| pacman -S base-devel                              | build essentials                              |
 |---------------------------------------------------+-----------------------------------------------|
 
 

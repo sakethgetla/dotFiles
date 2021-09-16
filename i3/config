@@ -289,6 +289,7 @@ bindsym F2 exec redshift -P -O 6500
 # display output to HDMI or built-in display
 bindsym F3 exec xrandr --output HDMI-2 --auto && xrandr --output eDP-1 --off
 bindsym F4 exec xrandr --output HDMI-2 --off && xrandr --output eDP-1 --auto
+bindsym F5 exec xrandr --output HDMI-2 --auto && xrandr --output eDP-1 --auto
 
 # Screenshots
 #bindsym Print exec --no-startup-id maim "~/$(date)"
