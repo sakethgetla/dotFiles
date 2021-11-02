@@ -19,6 +19,7 @@ done
 | systemctl enable unit                             | enable a unit                                 |
 | systemctl disable unit                            | disable a unit                                |
 |                                                   |                                               |
+| timedatectl set-ntp true                          | enable ntp. set the correct time.             |
 | timedatectl set-local-rtc 1 --adjust-system-clock | set system time to local time                 |
 | makepkg                                           | used after cloning mongodb-bin                |
 | xrdb -merge ~/.Xresources                         | change xterm theme.                           |
@@ -26,11 +27,33 @@ done
 | nmcli device                                      | See a list of network devices and their state |
 | nmcli device wifi list                            | List nearby Wi-Fi networks                    |
 | nmcli radio wifi off                              | turn wifi off                                 |
+| sudo nmcli --ask device wifi connect ssid         | connect to ssid/wifi                          |
+|                                                   |                                               |
 | /etc/profile.d                                    | has all bash script files that run on login   |
 |                                                   |                                               |
 | pacman -S base-devel                              | build essentials                              |
 |---------------------------------------------------+-----------------------------------------------|
 
+|-------------------+---------------------------|
+| pacman installs   | discription               |
+|-------------------+---------------------------|
+| *Core*            |                           |
+| base-devel        | build essentials          |
+| clang             | C compiler                |
+|                   |                           |
+|-------------------+---------------------------|
+| *apps*            |                           |
+| kdenlive          | video editor              |
+| pcmanFM           | file manager              |
+| deepin-screenshot | screenshot                |
+| nmcli             | network manager           |
+| qtbrowser         | web browser               |
+|                   |                           |
+|-------------------+---------------------------|
+| *themes*          |                           |
+| lxappearance      | gtk themer, materia theme |
+| qt5ct             | qt themer                 |
+|-------------------+---------------------------|
 
 # paste in .bashrc
 # command line script template

@@ -24,6 +24,7 @@ STARTED USING EMACS with doom (emacs with vim keybindings):<2020-10-01 Thu>
 | M-x bookmark-set      | set bookmark                               |
 |                       |                                            |
 |                       | M-x treemacs-remove-project-from-workspace |
+| M-x lsp               | import project to lsp                      |
 |-----------------------+--------------------------------------------|
 
 

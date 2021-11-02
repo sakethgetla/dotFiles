@@ -41,8 +41,13 @@
 (setq org-journal-date-format "%A, %d %B %Y")
 (require 'org-journal)
 
+;;(require 'ccls)
 
-(add-to-list 'auto-mode-alist '("\\/.*\\.tsx\\'" . rjsx-mode))
+(add-hook 'c-mode-hook 'lsp)
+(add-hook 'c++-mode-hook 'lsp)
+
+;;(add-to-list 'auto-mode-alist '("\\/.*\\.tsx\\'" . rjsx-mode))
+;;(add-to-list 'auto-mode-alist '("\\/.*\\.cpp\\'" . lsp))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

@@ -11,6 +11,14 @@ xrandr --output HDMI-2 --scale 1.20x1.20
 xrandr --output HDMI-2 --mode 1280x1024
 xrandr --output HDMI-2 --mode 1920x1080i
 
+# extend display (have to be in eDP-1 mode)
+xrandr --output HDMI-2 --auto --right-of eDP-1
+
+# turn off laptop screen and turn on hdmi
+xrandr --output HDMI-2 --auto && xrandr --output eDP-1 --off
+# vise-versa
+xrandr --output HDMI-2 --off && xrandr --output eDP-1 --auto
+
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.2
 
 
