@@ -24,6 +24,9 @@ bindsym $mod+q kill
 # installed.
 bindsym $mod+i exec --no-startup-id i3-dmenu-desktop
 
+exec --no-startup-id "sh startup.sh"
+
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down

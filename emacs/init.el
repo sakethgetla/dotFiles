@@ -134,6 +134,7 @@
 (add-hook 'org-mode-hook 'evil-org-mode)
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-to-list 'auto-mode-alist '("\\/.*\\.tsx\\'" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\/.*\\.js\\'" . lsp))
  
 (load-theme 'gruvbox-dark-hard t)
  

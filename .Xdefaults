@@ -1,5 +1,5 @@
 xterm*selectToClipboard: true
-XTerm*faceName:    DejaVu Sans Mono:pixelsize=13
+XTerm*faceName:    DejaVu Sans Mono:pixelsize=5
 XTerm*background:  black
 XTerm*foreground:  #eeeeee
 XTerm*color0:      #000000

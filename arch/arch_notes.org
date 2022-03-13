@@ -15,9 +15,9 @@ done
 |---------------------------------------------------+-----------------------------------------------|
 | systemctl                                         | list active services                          |
 | systemctl status                                  |                                               |
-| systemctl is-enabled unit                         | check if a unit is enabled                    |
-| systemctl enable unit                             | enable a unit                                 |
-| systemctl disable unit                            | disable a unit                                |
+| systemctl is-enabled <unit>                       | check if a unit is enabled                    |
+| systemctl enable <unit>                           | enable a unit                                 |
+| systemctl disable <unit>                          | disable a unit                                |
 |                                                   |                                               |
 | timedatectl set-ntp true                          | enable ntp. set the correct time.             |
 | timedatectl set-local-rtc 1 --adjust-system-clock | set system time to local time                 |
@@ -27,7 +27,7 @@ done
 | nmcli device                                      | See a list of network devices and their state |
 | nmcli device wifi list                            | List nearby Wi-Fi networks                    |
 | nmcli radio wifi off                              | turn wifi off                                 |
-| sudo nmcli --ask device wifi connect ssid         | connect to ssid/wifi                          |
+| sudo nmcli --ask device wifi connect <ssid>       | connect to ssid/wifi                          |
 |                                                   |                                               |
 | /etc/profile.d                                    | has all bash script files that run on login   |
 |                                                   |                                               |
