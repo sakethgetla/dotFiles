@@ -1,23 +1,22 @@
-kfjksef
 
-laptop screen = eDP2
-desktop screen = HDMI-2
+laptop screen = eDP1
+desktop screen = HDMI2
 
 # change display scale
 xrandr --output eDP1 --scale 1.25x1.25  
-xrandr --output HDMI-2 --scale 1.20x1.20
+xrandr --output HDMI2 --scale 1.20x1.20
 
 # change resolution so the corners are not being cut
-xrandr --output HDMI-2 --mode 1280x1024
-xrandr --output HDMI-2 --mode 1920x1080i
+xrandr --output HDMI2 --mode 1280x1024
+xrandr --output HDMI2 --mode 1920x1080i
 
-# extend display (have to be in eDP-1 mode)
-xrandr --output HDMI-2 --auto --right-of eDP-1
+# extend display (have to be in eDP1 mode)
+xrandr --output HDMI2 --auto --right-of eDP1
 
 # turn off laptop screen and turn on hdmi
-xrandr --output HDMI-2 --auto && xrandr --output eDP-1 --off
+xrandr --output HDMI2 --auto && xrandr --output eDP1 --off
 # vise-versa
-xrandr --output HDMI-2 --off && xrandr --output eDP-1 --auto
+xrandr --output HDMI2 --off && xrandr --output eDP1 --auto
 
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.2
 
@@ -91,3 +90,18 @@ lsblk command
 ssh-keygen -t ecdsa -b 521
 
 #
+
+
+* ssh Commands
+
+#copy file
+sudo scp -r lab4/ [zid]@cse.unsw.edu.au:~
+sudo scp -r lab4/ [zid]@cse.unsw.edu.au:~/comp1521 .
+
+#connect to
+sudo ssh [zid]@cse.unsw.edu.au
+
+#connect to *special*
+sshfs [zid]@cse.unsw.edu.au: ~/docs/unswMachine
+fusermount -u /home/a/docs/unswMachine
+
