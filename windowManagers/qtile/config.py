@@ -67,6 +67,7 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "f", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
@@ -86,16 +87,16 @@ for i in groups:
                 desc="Switch to group {}".format(i.name),
             ),
             # mod1 + shift + letter of group = switch to & move focused window to group
-            Key(
-                [mod, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(i.name),
-            ),
+            # Key(
+            #     [mod, "shift"],
+            #     i.name,
+            #     lazy.window.togroup(i.name, switch_group=True),
+            #     desc="Switch to & move focused window to group {}".format(i.name),
+            # ),
             # Or, use below if you prefer not to switch to that group.
             # # mod1 + shift + letter of group = move focused window to group
-            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-            #     desc="move focused window to group {}".format(i.name)),
+            Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
+                desc="move focused window to group {}".format(i.name)),
         ]
     )
 
@@ -143,7 +144,7 @@ screens = [
                 widget.Sep(),
 
                 widget.BatteryIcon(),
-                widget.Battery(notify_below=10),
+                widget.Battery(notify_below=65),
                 # iroenst
                 widget.Sep(),
 
@@ -151,6 +152,10 @@ screens = [
                 widget.Volume(fmt='Vol: {}'),
                 # widget.Volume(),
                 widget.Sep(),
+
+                # widget.check_updates(),
+                # widget.Bluetooth(),
+                # widget.Sep(),
                 # widget.TextBox("default config", name="default"),
                 # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 widget.Systray(),

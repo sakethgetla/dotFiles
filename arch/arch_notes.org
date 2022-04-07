@@ -26,7 +26,8 @@ done
 |                                                   |                                               |
 | nmcli device                                      | See a list of network devices and their state |
 | nmcli device wifi list                            | List nearby Wi-Fi networks                    |
-| nmcli radio wifi off                              | turn wifi off                                 |
+| nmcli radio wifi [ off / on ]                     | turn wifi off                                 |
+| nmcli networking [ off / on ]                     | turn all networking off                       |
 | sudo nmcli --ask device wifi connect <ssid>       | connect to ssid/wifi                          |
 |                                                   |                                               |
 | /etc/profile.d                                    | has all bash script files that run on login   |
