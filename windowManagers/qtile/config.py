@@ -28,8 +28,9 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from libqtile.extension import RunCommand
 
-mod = "mod1"
+mod = "mod4"
 terminal = guess_terminal()
 
 keys = [
@@ -56,7 +57,16 @@ keys = [
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
 
     Key([mod], "s", lazy.spawn("emacs"), desc="start emacs"),
-    Key([mod], "t", lazy.spawn("qutebrowser"), desc="start emacs"),
+    Key([mod], "t", lazy.spawn("qutebrowser"), desc="start qutebrowser"),
+
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 -q set Master 2dB+"), desc="raise volume"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 -q set Master 2dB-"), desc="lower volume"),
+    Key([], "XF86AudioMute", lazy.spawn("amixer -c 0 -q set Master toggle"), desc="mute volume"),
+    Key([], "XF86AudioMute", lazy.spawn("amixer -c 0 -q set Master toggle"), desc="mute volume"),
+
+    #Key([], "F4", lazy.spawn(RunCommand( command="xrandr --output HDMI2 --auto && xrandr --output eDP1 --off" )), desc="off laptop screen, on moniter"),
+    Key([], "F4", RunCommand( command="xrandr --output HDMI2 --auto && xrandr --output eDP1 --off" ), desc="off laptop screen, on moniter"),
+
 
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
