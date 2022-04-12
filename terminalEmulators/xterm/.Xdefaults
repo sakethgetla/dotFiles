@@ -5,7 +5,9 @@
 ! Every shell is a login shell by default (for inclusion of all necessary environment variables)
 
 !xterm*faceName: DejaVu Sans Mono
+!xterm*faceName: Noto
 xterm*faceName: Monospace
+!xterm*faceName: Roboto
 !xterm*font:     *-fixed-*-*-*-18-*
 xterm*faceSize: 11
 xterm*loginshell: true
@@ -18,7 +20,7 @@ xterm*VT100.Translations: #override \
 
 !URxvt.letterSpace: -1
 !XTerm*visualBell:true
-xset -b off
+xset -b 
 
 ! I like a LOT of scrollback...
 xterm*savelines: 10000

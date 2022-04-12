@@ -58,6 +58,7 @@ keys = [
 
     Key([mod], "s", lazy.spawn("emacs"), desc="start emacs"),
     Key([mod], "t", lazy.spawn("qutebrowser"), desc="start qutebrowser"),
+    Key([mod], "n", lazy.spawn("nemo"), desc="start file manager"),
 
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 -q set Master 2dB+"), desc="raise volume"),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 -q set Master 2dB-"), desc="lower volume"),
@@ -65,7 +66,7 @@ keys = [
     Key([], "XF86AudioMute", lazy.spawn("amixer -c 0 -q set Master toggle"), desc="mute volume"),
 
     #Key([], "F4", lazy.spawn(RunCommand( command="xrandr --output HDMI2 --auto && xrandr --output eDP1 --off" )), desc="off laptop screen, on moniter"),
-    Key([], "F4", RunCommand( command="xrandr --output HDMI2 --auto && xrandr --output eDP1 --off" ), desc="off laptop screen, on moniter"),
+    #Key([], "F4", RunCommand( command="xrandr --output HDMI2 --auto && xrandr --output eDP1 --off" ), desc="off laptop screen, on moniter"),
 
 
     # Toggle between split and unsplit sides of stack.
