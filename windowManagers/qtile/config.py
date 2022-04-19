@@ -24,7 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from libqtile import bar, layout, widget
+from libqtile import bar, layout, widget, qtile
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -65,7 +65,11 @@ keys = [
     Key([], "XF86AudioMute", lazy.spawn("amixer -c 0 -q set Master toggle"), desc="mute volume"),
     Key([], "XF86AudioMute", lazy.spawn("amixer -c 0 -q set Master toggle"), desc="mute volume"),
 
-    #Key([], "F4", lazy.spawn(RunCommand( command="xrandr --output HDMI2 --auto && xrandr --output eDP1 --off" )), desc="off laptop screen, on moniter"),
+    Key([], "F3", lazy.spawn("xrandr --output eDP1 --auto"), desc="on laptop screen"),
+    Key([], "F4", lazy.spawn("xrandr --output eDP1 --off"), desc="off laptop screen"),
+    #Key([mod], "a", lazy.spawn("xterm htop"), desc="off laptop screen"),
+
+    # Key([], "F4", lazy.spawn("xrandr --output HDMI2 --off && xrandr --output eDP1 --auto"), desc="off laptop screen, on moniter"),
     #Key([], "F4", RunCommand( command="xrandr --output HDMI2 --auto && xrandr --output eDP1 --off" ), desc="off laptop screen, on moniter"),
 
 
@@ -152,7 +156,15 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
+
                 widget.Net(),
+                widget.Sep(),
+
+                 widget.CheckUpdates(),
+                 # widget.CheckUpdates(distro="Arch"),
+                # widget.CheckUpdates(
+                #     # mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('xterm -e sudo pacman -Syu')}
+                # ),
                 widget.Sep(),
 
                 widget.NetGraph(),
@@ -174,7 +186,7 @@ screens = [
                 # widget.TextBox("default config", name="default"),
                 # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 widget.Systray(),
-                widget.Clock(format="%d-%m-%Y %a %I:%M %p"),
+                widget.Clock(format="%d-%m-%Y %a | %I:%M %p"),
                 # widget.QuickExit(),
             ],
             24,
