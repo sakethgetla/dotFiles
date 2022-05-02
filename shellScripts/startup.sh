@@ -1,9 +1,7 @@
 #!/bin/bash
 
-i3-msg "workspace 1; append_layout /home/dawes/.i3/workspace-1.json"
-i3-msg "workspace 1; exec emacs"
-i3-msg "workspace 1; exec qutebrowser"
-i3-msg "workspace 1; exec xterm"
+echo start up
 
-#setxkbmap -option caps:swapescape
-#xmodmap ~/.xmodmap
+startx
+
+# location /etc/profile.d

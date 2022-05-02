@@ -58,7 +58,11 @@ keys = [
 
     Key([mod], "s", lazy.spawn("emacs"), desc="start emacs"),
     Key([mod], "t", lazy.spawn("qutebrowser"), desc="start qutebrowser"),
+    Key([mod], "p", lazy.spawn("chromium"), desc="start file manager"),
     Key([mod], "n", lazy.spawn("nemo"), desc="start file manager"),
+
+    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 3"), desc="decrease brightness"),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 3"), desc="raise brightness"),
 
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 -q set Master 2dB+"), desc="raise volume"),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 -q set Master 2dB-"), desc="lower volume"),
