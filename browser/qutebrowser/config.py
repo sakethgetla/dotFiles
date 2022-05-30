@@ -149,6 +149,7 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 # Type: Bool
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
+# config.set("colors.webpage.darkmode.enabled", True)
 # Editor (and arguments) to use for the `edit-*` commands. The following
 # placeholders are defined:  * `{file}`: Filename of the file to be
 # edited. * `{line}`: Line in which the caret is found in the text. *
