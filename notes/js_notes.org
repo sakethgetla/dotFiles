@@ -12,6 +12,51 @@
 | npm list -g                                       | list globally installed modules.               |
 |---------------------------------------------------+------------------------------------------------|
 
+*typescript*
+|---------------------------------------------+----------|
+| command                                     | function |
+|---------------------------------------------+----------|
+| npm init -y                                 |          |
+| npm i --save-dev typescript ts-node nodemon |          |
+| npx tsc --init                              |          |
+|                                             |          |
+
+
+optional tsconfig
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "rootDir": "./",
+    "strict": true,
+    "esModuleInterop": true
+  }
+}
+setting target as es6 helps to support es6 code
+setting declaration true generates corresponding '.d.ts' file
+setting sourceMap true generates corresponding '.map' file
+outDir redirects output structure to the directory
+rootDir specifies the root directory of input files
+setting strict true enables all strict type-checking options
+
+package.json
+{
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "build": "tsc"
+  },
+}
+
+execute npm run start to start application without compile
+execute npm run build then node dist/index.js to compile and run applcation as javascript
+
+https://dev.to/rajat19/create-a-new-node-js-project-in-typescript-nao
+https://www.digitalocean.com/community/tutorials/setting-up-a-node-project-with-typescript
 
 scripts:
     "server": "nodemon server/index.js",

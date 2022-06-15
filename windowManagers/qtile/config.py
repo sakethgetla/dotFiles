@@ -62,7 +62,7 @@ keys = [
     Key([mod], "n", lazy.spawn("nemo"), desc="start file manager"),
 
     Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 3"), desc="decrease brightness"),
-    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 3"), desc="raise brightness"),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 1"), desc="raise brightness"),
 
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 -q set Master 2dB+"), desc="raise volume"),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 -q set Master 2dB-"), desc="lower volume"),
@@ -71,7 +71,7 @@ keys = [
 
     Key([], "F3", lazy.spawn("xrandr --output eDP1 --auto"), desc="on laptop screen"),
     Key([], "F4", lazy.spawn("xrandr --output eDP1 --off"), desc="off laptop screen"),
-    Key([], "Print", lazy.spawn(" xwd -silent -root -out  screenshot.xwd"), desc="off laptop screen"),
+    Key([], "Print", lazy.spawn("xwd -silent -root -out  screenshot.xwd"), desc="off laptop screen"),
     #Key([mod], "a", lazy.spawn("xterm htop"), desc="off laptop screen"),
 
     # Key([], "F4", lazy.spawn("xrandr --output HDMI2 --off && xrandr --output eDP1 --auto"), desc="off laptop screen, on moniter"),

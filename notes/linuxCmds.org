@@ -69,6 +69,9 @@ example :
 sha256sum [FILE]
 sha256sum ubuntu-mate-16.10-desktop-amd64.iso
 
+# show the sha256 fingerprint
+ssh-keygen -l -f .ssh/id_rsa.pub
+
 dd comand
     # can be used to write zero to the whole drive.
     # make sure data is unrecoverable
