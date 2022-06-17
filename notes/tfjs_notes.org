@@ -1,0 +1,27 @@
+#+title: Tfjs Notes
+
+
+|----------------------------------------+-----------------------------|
+| *function*                             | *code*                      |
+|----------------------------------------+-----------------------------|
+| create tensor                          | tf.tensor(array)            |
+|                                        | tf.tensor2d(array, [shape]) |
+|                                        | tf.zeros([shape])           |
+|----------------------------------------+-----------------------------|
+| convert tensor to array                | t.dataSyce()                |
+| /can only be used in a async function/ | await t.array()             |
+|----------------------------------------+-----------------------------|
+| destructure a tensor                   | t.reshape([-1])             |
+|                                        | t.unstack()[0]              |
+|----------------------------------------+-----------------------------|
+| print tensor                           | tensor.print()              |
+|                                        |                             |
+| get index of maxvalue                  | t.argmax()                  |
+|----------------------------------------+-----------------------------|
+| copy weights of model                  | model.getWeights()          |
+| set weights of model                   | model.setWeights(weights)   |
+|----------------------------------------+-----------------------------|
+| reshpe tensor                          | t.reshape([shape])          |
+|----------------------------------------+-----------------------------|
+| concat tensor                          | t.concat(tensors)           |
+| concat tensor2d                        | t.concat2d(tensors)         |

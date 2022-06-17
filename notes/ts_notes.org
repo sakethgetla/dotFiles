@@ -20,6 +20,25 @@
 | npm i --save-dev typescript ts-node nodemon |          |
 | npx tsc --init                              |          |
 |                                             |          |
+|                                             |          |
+
+
+|------------------------+------------------------------------|
+| *function*             | *code*                             |
+|------------------------+------------------------------------|
+| clone array            | array = structuredClone(array1)    |
+|                        | array = [...array1]                |
+|------------------------+------------------------------------|
+| init array with value. | array = new Array(len).fill(value) |
+| defign 2d num array    | let a: Array<Array<number>>        |
+|                        | let a: number[][]                  |
+|------------------------+------------------------------------|
+| add value to end       | a.push(value)                      |
+| remove first value     | a.shift()                          |
+| add value to front     | a.unshift(value)                   |
+| remove last value      | a.pop()                            |
+
+
 
 
 optional tsconfig
