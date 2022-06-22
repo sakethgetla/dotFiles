@@ -1,0 +1,25 @@
+#+title: Cpp Notes
+
+
+
+|----------------------------+-----------------------------------------------------------|
+| command                    | function                                                  |
+|----------------------------+-----------------------------------------------------------|
+| unordered_map<int, int> m; | map stored in a hashtable. #include<unordered_map>        |
+|----------------------------+-----------------------------------------------------------|
+| map<int, int>m             | map stored in a self balancing bianry tree. #include<map> |
+|----------------------------+-----------------------------------------------------------|
+| string a = "tt"            | init string #include<string>                              |
+| a.append("string")         | add string                                                |
+| a += "string"              |                                                           |
+|----------------------------+-----------------------------------------------------------|
+| vector<int>v               | dynamic array, resize easily. #include<vector>            |
+| v.push_back(num)           | append num to vector v.                                   |
+|----------------------------+-----------------------------------------------------------|
+| &variable                  | get the address of where the variable is stored.          |
+| *pointer                   | get the value that the pointer is pointing to.            |
+|----------------------------+-----------------------------------------------------------|
+
+
+ *compile*
+ g++ a.cpp -o a.out && ./a.out
