@@ -2,24 +2,40 @@
 
 
 
-|----------------------------+-----------------------------------------------------------|
-| command                    | function                                                  |
-|----------------------------+-----------------------------------------------------------|
-| unordered_map<int, int> m; | map stored in a hashtable. #include<unordered_map>        |
-|----------------------------+-----------------------------------------------------------|
-| map<int, int>m             | map stored in a self balancing bianry tree. #include<map> |
-|----------------------------+-----------------------------------------------------------|
-| string a = "tt"            | init string #include<string>                              |
-| a.append("string")         | add string                                                |
-| a += "string"              |                                                           |
-|----------------------------+-----------------------------------------------------------|
-| vector<int>v               | dynamic array, resize easily. #include<vector>            |
-| v.push_back(num)           | append num to vector v.                                   |
-|----------------------------+-----------------------------------------------------------|
-| &variable                  | get the address of where the variable is stored.          |
-| *pointer                   | get the value that the pointer is pointing to.            |
-|----------------------------+-----------------------------------------------------------|
+|----------------------------+--------------------------------------------------|
+| command                    | function                                         |
+|----------------------------+--------------------------------------------------|
+| unordered_map<int, int> m; | map stored in a hashtable.                       |
+| map.find(key) == map.end() | check if key exists in map. if key not found     |
+|                            | it returns an iterator to end.                   |
+|----------------------------+--------------------------------------------------|
+| map<int, int>m             | map stored in a self balancing bianry tree.      |
+|----------------------------+--------------------------------------------------|
+| string a = "tt"            | init string                                      |
+| a.append("string")         | add string                                       |
+| a += "string"              |                                                  |
+|----------------------------+--------------------------------------------------|
+| vector<int>v               | dynamic array, resize easily.                    |
+| v.push_back(num)           | append num to vector v.                          |
+| v.size()                   | get the length of vetor.                         |
+|----------------------------+--------------------------------------------------|
+| &variable                  | get the address of where the variable is stored. |
+| *pointer                   | get the value that the pointer is pointing to.   |
+|----------------------------+--------------------------------------------------|
 
+
+|--------------------------+----------------------------|
+| import                   | function                   |
+|--------------------------+----------------------------|
+| STL                      | standard template libarary |
+| #include <cstdlib>       |                            |
+| #include <vector>        |                            |
+| #include <iostream>      | cout, cin                  |
+| #include <string>        |                            |
+| #include <unordered_map> |                            |
+| #include <map>           |                            |
+|                          |                            |
+|--------------------------+----------------------------|
 
  *compile*
  g++ a.cpp -o a.out && ./a.out

@@ -149,6 +149,12 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 # Type: Bool
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
+config.set('content.javascript.enabled', True, 'qute://*/*')
+
+config.set('content.blocking.hosts.lists', [ "file:///home/dawes/Downloads/blockList"])
+# config.set('content.blocking.whitelist', [ "file:///home/dawes/Downloads/whiteList"])
+config.set('content.blocking.whitelist', ["https://www.youtube.com/embed/*", "https://www.youtube.com/watch?v=*"])
+
 # config.set("colors.webpage.darkmode.enabled", True)
 # Editor (and arguments) to use for the `edit-*` commands. The following
 # placeholders are defined:  * `{file}`: Filename of the file to be
