@@ -10,6 +10,7 @@
 |                            | it returns an iterator to end.                   |
 |----------------------------+--------------------------------------------------|
 | map<int, int>m             | map stored in a self balancing bianry tree.      |
+| typedef int pair[2]        | defign new type 'pair' as int[2]                 |
 |----------------------------+--------------------------------------------------|
 | string a = "tt"            | init string                                      |
 | a.append("string")         | add string                                       |
@@ -17,10 +18,13 @@
 |----------------------------+--------------------------------------------------|
 | vector<int>v               | dynamic array, resize easily.                    |
 | v.push_back(num)           | append num to vector v.                          |
-| v.size()                   | get the length of vetor.                         |
+| v.size()                   | get the length of vector.                        |
+| v.back()                   | get the last element of vector.                  |
 |----------------------------+--------------------------------------------------|
 | &variable                  | get the address of where the variable is stored. |
 | *pointer                   | get the value that the pointer is pointing to.   |
+| pointer->variable          | equaliant of *pointer.variable.                  |
+| a[++i] vs a[i++]           | add 1 then get index of a, get index than add 1  |
 |----------------------------+--------------------------------------------------|
 
 
@@ -39,3 +43,5 @@
 
  *compile*
  g++ a.cpp -o a.out && ./a.out
+ clang++ a.cpp @flags -o a.out && ./a.out
+ clang++ a.cpp @<file with flags> -o a.out && ./a.out
