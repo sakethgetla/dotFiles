@@ -1,27 +1,41 @@
 #+title: Tfjs Notes
 
 
-|----------------------------------------+-----------------------------|
-| *function*                             | *code*                      |
-|----------------------------------------+-----------------------------|
-| create tensor                          | tf.tensor(array)            |
-|                                        | tf.tensor2d(array, [shape]) |
-|                                        | tf.zeros([shape])           |
-|----------------------------------------+-----------------------------|
-| convert tensor to array                | t.dataSyce()                |
-| /can only be used in a async function/ | await t.array()             |
-|----------------------------------------+-----------------------------|
-| destructure a tensor                   | t.reshape([-1])             |
-|                                        | t.unstack()[0]              |
-|----------------------------------------+-----------------------------|
-| print tensor                           | tensor.print()              |
-|                                        |                             |
-| get index of maxvalue                  | t.argmax()                  |
-|----------------------------------------+-----------------------------|
-| copy weights of model                  | model.getWeights()          |
-| set weights of model                   | model.setWeights(weights)   |
-|----------------------------------------+-----------------------------|
-| reshpe tensor                          | t.reshape([shape])          |
-|----------------------------------------+-----------------------------|
-| concat tensor                          | t.concat(tensors)           |
-| concat tensor2d                        | t.concat2d(tensors)         |
+|-----------------------------+----------------------------------------|
+| *CODE*                      | *FUNCTION*                             |
+|-----------------------------+----------------------------------------|
+| *CREATE TENSORS*            |                                        |
+| tf.tensor(array)            | create tensor                          |
+| tf.tensor2d(array, [shape]) |                                        |
+| tf.zeros([shape])           |                                        |
+| tf.diag(tf.ones([size]))    | create identity matrix of size         |
+|-----------------------------+----------------------------------------|
+| *MATH*                      |                                        |
+| tf.sum(t, axis)             |                                        |
+| tf.matMul(t1, t2)           |                                        |
+| tf.add(t1, t2)              |                                        |
+| tf.dot(t1, t2)              |                                        |
+|                             |                                        |
+|-----------------------------+----------------------------------------|
+| t.dataSync()                | convert tensor to array                |
+| await t.array()             | /can only be used in a async function/ |
+| t.print()                   | print tensor t                         |
+|-----------------------------+----------------------------------------|
+| tf.transpose(t1)            | transpose t1                           |
+| t.reshape([-1])             | destructure a tensor                   |
+| t.unstack()[0]              |                                        |
+| t.reshape([shape])          | reshpe tensor                          |
+|                             |                                        |
+| t.concat(tensors)           | concat tensor                          |
+| t.concat2d(tensors)         | concat tensor2d                        |
+|-----------------------------+----------------------------------------|
+|                             |                                        |
+| t.argmax()                  | get index of maxvalue                  |
+|-----------------------------+----------------------------------------|
+| model.getWeights()          | copy weights of model                  |
+| model.setWeights(weights)   | set weights of model                   |
+|-----------------------------+----------------------------------------|
+
+* dont import the whole tfjs package.
+import '@tensorflow/tfjs-backend-cpu';
+import * as tf from '@tensorflow/tfjs-core';

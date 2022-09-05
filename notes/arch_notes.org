@@ -30,8 +30,9 @@ done
 | nmcli networking [ off / on ]                     | turn all networking off                        |
 | nmcli connection show                             | list on-disk profiles. saved connnections      |
 | nmcli connection delete <ssid>                    | delete a saved connection                      |
-| sudo nmcli --ask device wifi connect <ssid>       | connect to ssid/wifi.                          |
+| sudo nmcli --ask device wifi connect <ssid>       | connect to ssid/wifi                           |
 | nmcli connection up id <ssid>                     | connnect to known wifi.                        |
+| nmcli connection down id <ssid>                   | disconnnect from <ssid> wifi.                  |
 |                                                   |                                                |
 | /etc/profile.d                                    | has all bash script files that run on login    |
 |                                                   |                                                |

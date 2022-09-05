@@ -1,0 +1,72 @@
+#+title: Solid Notes
+
+
+
+|---------------------------------------+----------|
+| command                               | function |
+|---------------------------------------+----------|
+| npx degit solidjs/templates/ts my-app |          |
+| npm i --save-dev gh-pages             |          |
+| npx tsc --init                        |          |
+|                                       |          |
+|                                       |          |
+|                                       |          |
+
+
+
+
+in package.json
+"scripts": {
+  "deploy": "gh-pages -d dist"
+}
+
+* to deploy with gh-pages
+1. npm run build
+2. go into /dist/index.html
+3. change paths of
+    <link rel="shortcut icon" type="image/ico" href="/assets/favicon.0e726a38.ico" />
+    <script type="module" crossorigin src="/assets/index.1d38957d.js"></script>
+    *to*
+    <link rel="shortcut icon" type="image/ico" href="/QLearningGames/assets/favicon.0e726a38.ico" />
+    <script type="module" crossorigin src="/QLearningGames/assets/index.1d38957d.js"></script>
+4. npm run deploy
+
+* Building blocks
+ 1. Components
+ 2. Reactive Primites
+
+
+** Components
+functions that take props object and return JSX elements.
+return only 1 jsx element.
+
+
+light wight
+
+** Reactive Primites
+together they form auto-tracking sync engine (whats that?)
+*** Siginal
+conerstone of reactivity.
+when it is changed solid automatically updates everything that uses it.
+#+begin_src js
+
+import { createSignal, createEffect, createMemo } from 'solid-js';
+const [getCount, setCount] = creteSignal(0);
+
+#+end_src
+
+*derivied signals:*
+functions that act like signals because they call a signal inside them.
+
+*** Effects
+observers that run when a signal variable changes.
+#+begin_src js
+
+import { createSignal, createEffect, createMemo } from 'solid-js';
+createEffect(() => {
+  // run code everytime a signal changes
+})
+#+end_src
+
+*** Memos
+cache values to save time, make it more efficient.
