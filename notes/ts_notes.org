@@ -38,6 +38,22 @@ can get SSL for free with "Let's Encrypt"
 | remove first value     | a.shift()                          |
 | add value to front     | a.unshift(value)                   |
 | remove last value      | a.pop()                            |
+|------------------------+------------------------------------|
+
+
+
+*making a website from scratch*
+adding npm modules with npm use package parcel
+
+$ npm install --save-dev parcel
+
+in package.json
+
+  "source": "index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
 
 
 
