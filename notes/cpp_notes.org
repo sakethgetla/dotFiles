@@ -2,41 +2,49 @@
 
 
 
-|----------------------------------------------+--------------------------------------------------|
-| command                                      | function                                         |
-|----------------------------------------------+--------------------------------------------------|
-| unordered_map<int, int> m;                   | map stored in a hashtable.                       |
-| map.find(key) == map.end()                   | check if key exists in map. if key not found     |
-|                                              | it returns an iterator to end.                   |
-|----------------------------------------------+--------------------------------------------------|
-| map<int, int>m                               | map stored in a self balancing bianry tree.      |
-| typedef int pair[2]                          | defign new type 'pair' as int[2]                 |
-|----------------------------------------------+--------------------------------------------------|
-| string a = "tt"                              | init string                                      |
-| a.append("string")                           | add string                                       |
-| a += "string"                                |                                                  |
-|----------------------------------------------+--------------------------------------------------|
-| vector<int>v                                 | dynamic array, resize easily.                    |
-| vector<vector<int>> v(3, vector<int>(4, 1)); | init a 3x4 matix fill with 1.                    |
-| v.push_back(num)                             | append num to vector v.                          |
-| v.size()                                     | get the length of vector.                        |
-| v.back()                                     | get the last element of vector.                  |
-| v1.insert(v1.end(), v.begin(), v.end())      | append v to v1. v1 += v;                         |
-|----------------------------------------------+--------------------------------------------------|
-| &variable                                    | get the address of where the variable is stored. |
-| *pointer                                     | get the value that the pointer is pointing to.   |
-| pointer->variable                            | equaliant of *pointer.variable.                  |
-| a[++i] vs a[i++]                             | add 1 then get index of a, get index than add 1  |
-|                                              |                                                  |
-| func(vector<T> &var)                         | why '&'? get the addr of var, dont make a copy.  |
-|                                              |                                                  |
-|                                              |                                                  |
-|----------------------------------------------+--------------------------------------------------|
+|----------------------------------------------+------------------------------------------------------|
+| command                                      | function                                             |
+|----------------------------------------------+------------------------------------------------------|
+| unordered_map<int, int> m;                   | map stored in a hashtable.                           |
+| umap.erase(key)                              | erase key.                                           |
+| map.find(key) == map.end()                   | .find() check if key exists in map. if key not found |
+|                                              | it returns an iterator to end.                       |
+|                                              |                                                      |
+|----------------------------------------------+------------------------------------------------------|
+| map<int, int>m                               | map stored in a self balancing bianry tree.          |
+| typedef int pair[2]                          | defign new type 'pair' as int[2]                     |
+|----------------------------------------------+------------------------------------------------------|
+| string a = "tt"                              | init string                                          |
+| a.append("string")                           | add string                                           |
+| a += "string"                                |                                                      |
+|----------------------------------------------+------------------------------------------------------|
+| vector<int>v                                 | dynamic array, resize easily.                        |
+| vector<vector<int>> v(3, vector<int>(4, 1)); | init a 3x4 matix fill with 1.                        |
+| v.push_back(num)                             | append num to vector v.                              |
+| v.size()                                     | get the length of vector.                            |
+| v.back()                                     | get the last element of vector.                      |
+| v1.insert(v1.end(), v.begin(), v.end())      | append v to v1. v1 += v;                             |
+|----------------------------------------------+------------------------------------------------------|
+| &variable                                    | get the address of where the variable is stored.     |
+| *pointer                                     | get the value that the pointer is pointing to.       |
+| pointer->variable                            | equaliant of *pointer.variable.                      |
+| a[++i] vs a[i++]                             | add 1 then get index of a, get index than add 1      |
+|                                              |                                                      |
+| func(vector<T> &var)                         | why '&'? get the addr of var, dont make a copy.      |
+|                                              |                                                      |
+|                                              |                                                      |
+|----------------------------------------------+------------------------------------------------------|
 
 *gdb*
-|---------+----------|
-| command | function |
-|---------+----------|
+|---------------------+-----------------------|
+| command             | function              |
+|---------------------+-----------------------|
+| clang++ -g -o a.out | copile for debugging  |
+| gbd ./a.out         | run the file with gdb |
+| (gdb) r             | run                   |
+| b <line>            | break point at 14     |
+| p <variable>        | print variable        |
+|---------------------+-----------------------|
 
 
 |--------------------------+----------------------------|

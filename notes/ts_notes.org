@@ -24,21 +24,24 @@ can get SSL for free with "Let's Encrypt"
 |                                             |          |
 
 
-|------------------------+------------------------------------|
-| *function*             | *code*                             |
-|------------------------+------------------------------------|
-| clone array            | array = structuredClone(array1)    |
-|                        | array = [...array1]                |
-|------------------------+------------------------------------|
-| init array with value. | array = new Array(len).fill(value) |
-| defign 2d num array    | let a: Array<Array<number>>        |
-|                        | let a: number[][]                  |
-|------------------------+------------------------------------|
-| add value to end       | a.push(value)                      |
-| remove first value     | a.shift()                          |
-| add value to front     | a.unshift(value)                   |
-| remove last value      | a.pop()                            |
-|------------------------+------------------------------------|
+|------------------------------------+------------------------|
+| *code*                             | *function*             |
+|------------------------------------+------------------------|
+| array = structuredClone(array1)    | clone array            |
+| array = [...array1]                |                        |
+|------------------------------------+------------------------|
+| array = new Array(len).fill(value) | init array with value. |
+| let a: Array<Array<number>>        | defign 2d num array    |
+| let a: number[][]                  |                        |
+|------------------------------------+------------------------|
+| a.push(value)                      | add value to end       |
+| a.shift()                          | remove first value     |
+| a.unshift(value)                   | add value to front     |
+| a.pop()                            | remove last value      |
+|------------------------------------+------------------------|
+
+
+
 
 
 
