@@ -24,21 +24,25 @@ can get SSL for free with "Let's Encrypt"
 |                                             |          |
 
 
-|------------------------------------+------------------------|
-| *code*                             | *function*             |
-|------------------------------------+------------------------|
-| array = structuredClone(array1)    | clone array            |
-| array = [...array1]                |                        |
-|------------------------------------+------------------------|
-| array = new Array(len).fill(value) | init array with value. |
-| let a: Array<Array<number>>        | defign 2d num array    |
-| let a: number[][]                  |                        |
-|------------------------------------+------------------------|
-| a.push(value)                      | add value to end       |
-| a.shift()                          | remove first value     |
-| a.unshift(value)                   | add value to front     |
-| a.pop()                            | remove last value      |
-|------------------------------------+------------------------|
+|------------------------------------+--------------------------------|
+| *code*                             | *function*                     |
+|------------------------------------+--------------------------------|
+| *Arrays*                           |                                |
+| array = structuredClone(array1)    | clone array                    |
+| array = [...array1]                |                                |
+|------------------------------------+--------------------------------|
+| array = new Array(len).fill(value) | init array with value.         |
+| let a: Array<Array<number>>        | defign 2d num array            |
+| let a: number[][]                  |                                |
+|------------------------------------+--------------------------------|
+| a.push(value)                      | add value to end               |
+| a.shift()                          | remove first value             |
+| a.unshift(value)                   | add value to front             |
+| a.pop()                            | remove last value              |
+|------------------------------------+--------------------------------|
+| *Strings*                          |                                |
+| s = s.slice(0, s.lenght-1)         | remove last char from string s |
+|------------------------------------+--------------------------------|
 
 
 
