@@ -1,0 +1,20 @@
+
+
+
+|---------------------------------------------------+---------------------|
+| COMMAND                                           | INFO                |
+|---------------------------------------------------+---------------------|
+| npx create-react-app my-app --template typescript | create ts react app |
+|                                                   |                     |
+|---------------------------------------------------+---------------------|
+
+Q. cant use component life cycle in functional components?
+
+in js classes that call the constructor should call 'super'.
+  eg. super(props)
+
+state of a component is immutable/ unchangeable
+  we have to create a new obj in state
+  we can use this.setState({name: value}) to pass in values of things we want to change
+
+array.slice() returns a new copy of array

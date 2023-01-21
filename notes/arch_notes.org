@@ -26,11 +26,11 @@ done
 |                                                   |                                                |
 | nmcli device                                      | See a list of network devices and their state  |
 | nmcli device wifi list                            | List nearby Wi-Fi networks                     |
+| sudo nmcli --ask device wifi connect <ssid>       | connect to ssid/wifi                           |
 | nmcli radio wifi [ off / on ]                     | turn wifi off                                  |
 | nmcli networking [ off / on ]                     | turn all networking off                        |
 | nmcli connection show                             | list on-disk profiles. saved connnections      |
 | nmcli connection delete <ssid>                    | delete a saved connection                      |
-| sudo nmcli --ask device wifi connect <ssid>       | connect to ssid/wifi                           |
 | nmcli connection up id <ssid>                     | connnect to known wifi.                        |
 | nmcli connection down id <ssid>                   | disconnnect from <ssid> wifi.                  |
 |                                                   |                                                |

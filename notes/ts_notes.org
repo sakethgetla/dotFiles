@@ -24,25 +24,39 @@ can get SSL for free with "Let's Encrypt"
 |                                             |          |
 
 
-|------------------------------------+--------------------------------|
-| *code*                             | *function*                     |
-|------------------------------------+--------------------------------|
-| *Arrays*                           |                                |
-| array = structuredClone(array1)    | clone array                    |
-| array = [...array1]                |                                |
-|------------------------------------+--------------------------------|
-| array = new Array(len).fill(value) | init array with value.         |
-| let a: Array<Array<number>>        | defign 2d num array            |
-| let a: number[][]                  |                                |
-|------------------------------------+--------------------------------|
-| a.push(value)                      | add value to end               |
-| a.shift()                          | remove first value             |
-| a.unshift(value)                   | add value to front             |
-| a.pop()                            | remove last value              |
-|------------------------------------+--------------------------------|
-| *Strings*                          |                                |
-| s = s.slice(0, s.lenght-1)         | remove last char from string s |
-|------------------------------------+--------------------------------|
+|----------------------------------------+--------------------------------|
+| *code*                                 | *function*                     |
+|----------------------------------------+--------------------------------|
+| *Arrays*                               |                                |
+| array = structuredClone(array1)        | clone array                    |
+| array = [...array1]                    |                                |
+|----------------------------------------+--------------------------------|
+| array = new Array(len).fill(value)     | init array with value.         |
+| let a: Array<Array<number>>            | defign 2d num array            |
+| let a: number[][]                      |                                |
+|----------------------------------------+--------------------------------|
+| a.push(value)                          | add value to end               |
+| a.unshift(value)                       | add value to front             |
+| a.shift()                              | remove first value             |
+| a.pop()                                | remove last value              |
+|----------------------------------------+--------------------------------|
+| *Strings*                              |                                |
+| s = s.slice(0, s.lenght-1)             | remove last char from string s |
+| var char = s.charAt(0)                 | get char a index 0.            |
+|----------------------------------------+--------------------------------|
+| *Loops*                                |                                |
+| for ( var edge of edges ){...}         |                                |
+| for ( var index in edges ){...}        |                                |
+|----------------------------------------+--------------------------------|
+| *Set*                                  |                                |
+| var s: Set<number> = new Set<number>() | create set.                    |
+| s.add(value)                           |                                |
+|                                        |                                |
+|----------------------------------------+--------------------------------|
+| *Map*                                  |                                |
+| var map = new Map<number, number>()    |                                |
+| map.set(key, value)                    | map.set(2, 3)                  |
+|----------------------------------------+--------------------------------|
 
 
 
