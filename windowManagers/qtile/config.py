@@ -58,7 +58,7 @@ keys = [
 
     Key([mod], "s", lazy.spawn("emacs"), desc="start emacs"),
     Key([mod], "t", lazy.spawn("qutebrowser"), desc="start qutebrowser"),
-    Key([mod], "p", lazy.spawn("brave"), desc="start file manager"),
+    Key([mod], "p", lazy.spawn("firefox"), desc="start file manager"),
     Key([mod], "n", lazy.spawn("nemo"), desc="start file manager"),
 
     Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 3"), desc="decrease brightness"),
@@ -69,7 +69,12 @@ keys = [
     Key([], "XF86AudioMute", lazy.spawn("amixer -c 0 -q set Master toggle"), desc="mute volume"),
     Key([], "XF86AudioMute", lazy.spawn("amixer -c 0 -q set Master toggle"), desc="mute volume"),
 
-    Key([], "F3", lazy.spawn("xrandr --output eDP1 --auto"), desc="on laptop screen"),
+
+     
+
+    Key([], "F1", lazy.spawn("xrandr --output eDP-1 --auto --scale 1x1 --rotate normal --pos 0x0 --output DP-3-1 --off --scale 1x1 --rotate normal --left-of eDP-1"), desc="on laptop screen, off hdmi"),
+    Key([], "F2", lazy.spawn("xrandr --output eDP-1 --off --scale 1x1 --rotate normal --pos 0x0 --output DP-3-1 --auto --scale 1.2x1.2 --rotate normal --left-of eDP-1 --primary"), desc="off laptop screen and make scale up HDMI display"),
+    Key([], "F3", lazy.spawn("xrandr --output eDP-1 --auto --scale 1x1 --rotate normal --pos 0x0 --output DP-3-1 --auto --scale 1x1 --rotate normal --left-of eDP-1 --primary"), desc="on laptop & HDMI screens"),
     Key([], "F4", lazy.spawn("xrandr --output eDP1 --off"), desc="off laptop screen"),
     Key([], "Print", lazy.spawn("xwd -silent -root -out  screenshot.xwd"), desc="off laptop screen"),
     #Key([mod], "a", lazy.spawn("xterm htop"), desc="off laptop screen"),
