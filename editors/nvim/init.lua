@@ -259,7 +259,8 @@ vim.keymap.set("n", "<leader>wl", "<C-w><C-l>")
 vim.keymap.set("n", "<leader>wj", "<C-w><C-j>")
 vim.keymap.set("n", "<leader>wk", "<C-w><C-k>")
 vim.keymap.set("n", "<leader>ww", vim.cmd.w)
-vim.keymap.set("n", "<leader>wq", vim.cmd.q)
+vim.keymap.set("n", "<leader>qq", vim.cmd.q)
+vim.keymap.set("n", "<leader>qa", vim.cmd.qa)
 
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git);
 vim.keymap.set("n", "<leader>mf", vim.lsp.buf.format)
