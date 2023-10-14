@@ -58,7 +58,7 @@ keys = [
 
     Key([mod], "s", lazy.spawn("emacs"), desc="start emacs"),
     Key([mod], "t", lazy.spawn("qutebrowser"), desc="start qutebrowser"),
-    Key([mod], "p", lazy.spawn("firefox"), desc="start file manager"),
+    Key([mod], "p", lazy.spawn("brave"), desc="start file manager"),
     Key([mod], "n", lazy.spawn("nemo"), desc="start file manager"),
 
     Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 3"), desc="decrease brightness"),

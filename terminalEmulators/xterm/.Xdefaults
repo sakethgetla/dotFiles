@@ -4,10 +4,11 @@
 
 ! Every shell is a login shell by default (for inclusion of all necessary environment variables)
 
-xterm*faceName: DejaVu Sans Mono
-!xterm*faceName: Noto
-!xterm*faceName: Monospace
-!xterm*faceName: Roboto
+! xterm*faceName: DejaVu Sans Mono
+xterm*faceName: otf-droid-nerd
+! xterm*faceName: Noto
+! xterm*faceName: Monospace
+! xterm*faceName: Roboto
 xterm*font:     *-fixed-*-*-*-18-*
 xterm*faceSize: 11
 xterm*loginshell: true
