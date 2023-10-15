@@ -49,8 +49,8 @@ require('material').setup({
     },
 
     high_visibility = {
-        lighter = false, -- Enable higher contrast text for lighter style
-        darker = false -- Enable higher contrast text for darker style
+        lighter = true, -- Enable higher contrast text for lighter style
+        darker = true, -- Enable higher contrast text for darker style
     },
 
     lualine_style = "default", -- Lualine style ( can be 'stealth' or 'default' )
@@ -64,13 +64,15 @@ require('material').setup({
 
 
 -- set default color
-vim.g.material_style = "deep ocean"
--- vim.g.material_style = "darker"
+-- vim.g.material_style = "deep ocean"
+vim.g.material_style = "darker"
 -- vim.g.material_style = "palenight"
 -- vim.g.material_style = "lighter"
 
--- local colorScheme = require 'material.functions' 
--- vim.keymap.set('n', '<leader>cc', colorScheme.toggle_style())
+local colorScheme = require('material.functions')
+-- require('material.functions').toggle_style() 
+
+vim.keymap.set('n', '<leader>cc', colorScheme.find_style)
 
 -- Apply the colorscheme
 vim.cmd 'colorscheme material'

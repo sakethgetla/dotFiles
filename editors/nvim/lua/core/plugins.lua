@@ -19,14 +19,30 @@ local plugins = {
   'nvim-lualine/lualine.nvim',
   'nvim-treesitter/nvim-treesitter',
   {
-    'nvim-telescope/telescope.nvim', branch = '0.1.x',
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
-  "williamboman/mason.nvim",
-  "williamboman/mason-lspconfig.nvim",
-  "neovim/nvim-lspconfig",
+  'williamboman/mason.nvim',
+  'williamboman/mason-lspconfig.nvim',
+  'neovim/nvim-lspconfig',
+  -- 'linrongbin16/gitlinker.nvim',
+
+  -- AUTO COMPLETE
+  'hrsh7th/nvim-cmp',
+  'hrsh7th/cmp-nvim-lsp',
+
+  -- snippet
+  "L3MON4D3/LuaSnip",
+    'saadparwaiz1/cmp_luasnip',
+  "rafamadriz/friendly-snippets",
+
+  -- COQ
+  -- 'ms-jpq/coq_nvim',
+  -- 'ms-jpq/coq.artifacts',
+  -- 'ms-jpq/coq.thirdparty',
 }
- 
+
 local opts = {}
 
-require("lazy").setup(plugins, opts)
+require('lazy').setup(plugins, opts)
