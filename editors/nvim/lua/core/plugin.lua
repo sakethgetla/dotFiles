@@ -17,7 +17,15 @@ local plugins = {
   'nvim-tree/nvim-web-devicons',
   'marko-cerovac/material.nvim',
   'nvim-lualine/lualine.nvim',
-  'nvim-treesitter/nvim-treesitter',
+
+  -- 'ts_context_commentstring',
+    {
+    'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'JoosepAlviste/nvim-ts-context-commentstring',
+    },
+  },
+
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
@@ -34,13 +42,72 @@ local plugins = {
 
   -- snippet
   "L3MON4D3/LuaSnip",
-    'saadparwaiz1/cmp_luasnip',
+  'saadparwaiz1/cmp_luasnip',
   "rafamadriz/friendly-snippets",
 
   -- COQ
   -- 'ms-jpq/coq_nvim',
   -- 'ms-jpq/coq.artifacts',
   -- 'ms-jpq/coq.thirdparty',
+
+  -- comments
+  {
+    'numToStr/Comment.nvim',
+  },
+  'ts_context_commentstring',
+
+
+  -- Git related plugins
+  'tpope/vim-fugitive',
+  'tpope/vim-rhubarb',
+
+  -- notes
+  {
+    'renerocksai/telekasten.nvim',
+    dependencies = {
+      'nvim-telescope/telescope.nvim',
+      'nvim-lua/plenary.nvim'
+    }
+  },
+
+  {
+    -- Adds git related signs to the gutter, as well as utilities for managing changes
+    'lewis6991/gitsigns.nvim',
+    opts = {
+      -- See `:help gitsigns.txt`
+      signs = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+      },
+      on_attach = function(bufnr)
+        vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
+
+        -- don't override the built-in and fugitive keymaps
+        local gs = package.loaded.gitsigns
+        vim.keymap.set({ 'n', 'v' }, ']c', function()
+          if vim.wo.diff then
+            return ']c'
+          end
+          vim.schedule(function()
+            gs.next_hunk()
+          end)
+          return '<Ignore>'
+        end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
+        vim.keymap.set({ 'n', 'v' }, '[c', function()
+          if vim.wo.diff then
+            return '[c'
+          end
+          vim.schedule(function()
+            gs.prev_hunk()
+          end)
+          return '<Ignore>'
+        end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
+      end,
+    },
+  },
 }
 
 local opts = {}

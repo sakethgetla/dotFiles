@@ -14,6 +14,9 @@ vim.opt.shiftwidth = 2
 vim.opt.shiftround = true
 vim.opt.expandtab = true
 
+-- Save undo history
+vim.o.undofile = true
+
 -- search
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
@@ -48,8 +51,8 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 
--- column
-vim.opt.colorcolumn = "80"
+-- -- column
+-- vim.opt.colorcolumn = "80"
 
 
 vim.opt.updatetime = 50

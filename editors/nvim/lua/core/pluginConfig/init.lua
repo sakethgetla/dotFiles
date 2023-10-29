@@ -6,4 +6,6 @@ require("core/pluginConfig.treeSitter")
 require("core/pluginConfig.devIcons")
 require("core/pluginConfig.lsp")
 require("core/pluginConfig.autoComplete")
-
+require("core/pluginConfig.comment")
+require("core/pluginConfig.git")
+require("core/pluginConfig.notes")

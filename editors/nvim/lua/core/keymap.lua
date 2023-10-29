@@ -2,7 +2,7 @@ vim.keymap.set('n', '<leader>ww', vim.cmd.write)
 vim.keymap.set('n', '<leader>qa', vim.cmd.quitall)
 vim.keymap.set('n', '<leader>qq', vim.cmd.quit)
 
--- vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
+vim.keymap.set('n', '<leader>r', ':nohlsearch<CR>')
 
 vim.keymap.set("n", "<leader>h", "<C-w><C-h>")
 vim.keymap.set("n", "<leader>l", "<C-w><C-l>")
