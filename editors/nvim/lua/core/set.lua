@@ -56,3 +56,8 @@ vim.opt.isfname:append("@-@")
 
 
 vim.opt.updatetime = 50
+
+
+-- Keep signcolumn on by default
+vim.wo.signcolumn = 'yes'
+
