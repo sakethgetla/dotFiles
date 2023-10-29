@@ -28,6 +28,8 @@ local plugins = {
     },
   },
 
+  -- Useful plugin to show you pending keybinds.
+  { 'folke/which-key.nvim', opts = {} },
 
   -- {
   --   'nvim-telescope/telescope.nvim',
@@ -61,6 +63,9 @@ local plugins = {
   'williamboman/mason-lspconfig.nvim',
   'neovim/nvim-lspconfig',
   -- 'linrongbin16/gitlinker.nvim',
+
+  -- Additional lua configuration, makes nvim stuff amazing!
+  'folke/neodev.nvim',
 
   -- AUTO COMPLETE
   'hrsh7th/nvim-cmp',
