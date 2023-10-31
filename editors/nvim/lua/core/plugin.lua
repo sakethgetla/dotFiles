@@ -81,6 +81,56 @@ local plugins = {
   -- 'ms-jpq/coq.artifacts',
   -- 'ms-jpq/coq.thirdparty',
 
+  -- surround
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  },
+
+  {
+    'm4xshen/autoclose.nvim',
+    config = function()
+      require("autoclose").setup({
+        -- Configuration here, or leave empty to use defaults
+        keys = {
+          ["("] = { escape = false, close = true, pair = "()" },
+          ["["] = { escape = false, close = true, pair = "[]" },
+          ["{"] = { escape = false, close = true, pair = "{}" },
+          ["<"] = { escape = false, close = true, pair = "<>" },
+
+          [">"] = { escape = true, close = false, pair = "<>" },
+          [")"] = { escape = true, close = false, pair = "()" },
+          ["]"] = { escape = true, close = false, pair = "[]" },
+          ["}"] = { escape = true, close = false, pair = "{}" },
+
+          ['"'] = { escape = true, close = true, pair = '""' },
+          ["'"] = { escape = true, close = true, pair = "''" },
+          ["`"] = { escape = true, close = true, pair = "``" },
+        },
+        options = {
+          disabled_filetypes = { "text" },
+          disable_when_touch = false,
+          touch_regex = "[%w(%[{]",
+          pair_spaces = false,
+          auto_indent = true,
+          disable_command_mode = false,
+        },
+      })
+    end
+  },
+
+  -- {
+  --   'windwp/nvim-autopairs',
+  --   event = "InsertEnter",
+  --   opts = {} -- this is equalent to setup({}) function
+  -- },
+
   -- comments
   {
     'numToStr/Comment.nvim',
@@ -116,26 +166,26 @@ local plugins = {
       on_attach = function(bufnr)
         vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
 
-        -- don't override the built-in and fugitive keymaps
-        local gs = package.loaded.gitsigns
-        vim.keymap.set({ 'n', 'v' }, ']c', function()
-          if vim.wo.diff then
-            return ']c'
-          end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
-        vim.keymap.set({ 'n', 'v' }, '[c', function()
-          if vim.wo.diff then
-            return '[c'
-          end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
+        -- -- don't override the built-in and fugitive keymaps
+        -- local gs = package.loaded.gitsigns
+        -- vim.keymap.set({ 'n', 'v' }, ']c', function()
+        --   if vim.wo.diff then
+        --     return ']c'
+        --   end
+        --   vim.schedule(function()
+        --     gs.next_hunk()
+        --   end)
+        --   return '<Ignore>'
+        -- end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
+        -- vim.keymap.set({ 'n', 'v' }, '[c', function()
+        --   if vim.wo.diff then
+        --     return '[c'
+        --   end
+        --   vim.schedule(function()
+        --     gs.prev_hunk()
+        --   end)
+        --   return '<Ignore>'
+        -- end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
       end,
     },
   },
