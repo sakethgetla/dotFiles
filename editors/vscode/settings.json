@@ -1,0 +1,51 @@
+{
+  // "extensions.experimental.affinity": {
+  //   "asvetliakov.vscode-neovim": 1
+  // },
+  "terminal.external.osxExec": "Kitty.app",
+  "editor.minimap.enabled": false,
+  "zenMode.hideLineNumbers": false,
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "editor.lineNumbers": "relative",
+  "workbench.editor.enablePreview": false,
+  "explorer.confirmDelete": false,
+  "git.confirmSync": false,
+  "whichkey.delay": 0,
+  "whichkey.sortOrder": "alphabetically",
+  "whichkey.bindings": [
+    {
+      "key": ";",
+      "name": "commands",
+      "type": "command",
+      "command": "workbench.action.showCommands"
+    }
+  ],
+  "window.customTitleBarVisibility": "never",
+  "terminal.explorerKind": "external",
+  "terminal.external.linuxExec": "Kitty.app",
+  // "vim.easymotion": true,
+  // "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  // "vim.useCtrlKeys": true,
+  // "vim.hlsearch": true,
+  // "vim.insertModeKeyBindings": [],
+  // "vim.normalMiteodeKeyBindings": [
+  //   {
+  //     "before": [
+  //       ":"
+  //     ],
+  //     "commands": [
+  //       "workbench.action.showCommands"
+  //     ],
+  //     "silent": true
+  //   }
+  // ],
+  // "vim.normalModeKeyBindingsNonRecursive": [
+  // ],
+  // "vim.leader": "<space>",
+  // "vim.handleKeys": {
+  //   "<C-a>": false,
+  //   "<C-f>": false
+  // }
+}

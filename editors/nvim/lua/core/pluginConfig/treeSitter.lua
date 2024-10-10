@@ -4,9 +4,9 @@ require 'nvim-treesitter.configs'.setup {
   -- :h nvim-treesitter-modlues
   ensure_installed = { "c", "vim", "lua", "query" },
 
-  context_commentstring = {
-    enable = true,
-  },
+  -- context_commentstring = {
+  --   enable = true,
+  -- },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
