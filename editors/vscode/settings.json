@@ -3,7 +3,6 @@
   //   "asvetliakov.vscode-neovim": 1
   // },
   "terminal.external.osxExec": "Kitty.app",
-  "editor.minimap.enabled": false,
   "zenMode.hideLineNumbers": false,
   "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.fontFamily": "MesloLGS NF",
@@ -27,6 +26,9 @@
   // "vim.easymotion": true,
   // "vim.incsearch": true,
   "vim.useSystemClipboard": true,
+  "vim.foldfix": true,
+  "vim.highlightedyank.enable": true,
+  "vim.hlsearch": true,
   // "vim.useCtrlKeys": true,
   // "vim.hlsearch": true,
   // "vim.insertModeKeyBindings": [],
