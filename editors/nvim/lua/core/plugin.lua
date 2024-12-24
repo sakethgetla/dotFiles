@@ -135,7 +135,8 @@ local plugins = {
   {
     'numToStr/Comment.nvim',
   },
-  'ts_context_commentstring',
+  -- 'ts_context_commentstring',
+  'JoosepAlviste/nvim-ts-context-commentstring',
 
 
   -- Git related plugins

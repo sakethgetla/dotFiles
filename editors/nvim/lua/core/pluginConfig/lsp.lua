@@ -69,21 +69,21 @@ local servers = {
   -- gopls = {},
   pyright = {},
   -- rust_analyzer = {},
-  yamlls = {},
-  jsonls = {},
-  bashls = {},
-  grammarly = {},
-  dockerls = {},
+  -- yamlls = {},
+  -- jsonls = {},
+  -- bashls = {},
+  -- grammarly = {},
+  -- dockerls = {},
   -- yaml_language_server = {},
-  sqlls = {},
+  -- sqlls = {},
   -- tsserver = {},
-  html = { filetypes = { 'html' } },
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
+  -- html = { filetypes = { 'html' } },
+  -- lua_ls = {
+  --   Lua = {
+  --     workspace = { checkThirdParty = false },
+  --     telemetry = { enable = false },
+  --   },
+  -- },
 }
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
