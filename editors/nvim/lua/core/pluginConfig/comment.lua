@@ -1,5 +1,6 @@
 -- require('ts_context_commentstring').setup {}
 require('Comment').setup({
+-- require('ts_context_commentstring').setup({
   ---Add a space b/w comment and the line
     padding = true,
     ---Whether the cursor should stay at its position
@@ -38,7 +39,7 @@ require('Comment').setup({
         extra = true,
     },
     ---Function to call before (un)comment
-    pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+    -- pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
 
     ---Function to call after (un)comment
     post_hook = nil,

@@ -13,7 +13,7 @@ vim.keymap.set("n", "<leader>k", "<C-w><C-k>")
 -- vim.keymap.set('n', '<leader>tt', nvim-tree-api.tree.toggle)
 -- vim.keymap.set('n', '<leader>tt', api.tree.toggle)
 
--- copy to clipboard, need to have xclip installed
+-- copy to clipboard, requirments xclip
 vim.keymap.set({ "v", "n" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
