@@ -1,0 +1,181 @@
+{
+  "main": {
+    "id": "b10f6cfab646e428",
+    "type": "split",
+    "children": [
+      {
+        "id": "0e2df075b82bad2c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "725be77515f5b115",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "xrandr.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "xrandr"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "88ad315d5a0bd7ee",
+    "type": "split",
+    "children": [
+      {
+        "id": "3050d101783faf4d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "04c2a27bc6ba8b9d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "ce603dd46886d86b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "b20e4ff8795b0679",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "1303c7716cf00de6",
+    "type": "split",
+    "children": [
+      {
+        "id": "8c0995d710d5fdd9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "18c176e6383e3568",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "test.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for test"
+            }
+          },
+          {
+            "id": "e79aaca36349e583",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "test.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from test"
+            }
+          },
+          {
+            "id": "a2ea4c18d7594a4c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "9dfb5ee7f99239ff",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "test.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of test"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "725be77515f5b115",
+  "lastOpenFiles": [
+    "todo.md",
+    "TODO.md",
+    "credit-cards.md",
+    "configFileFormats.md",
+    "fonts.md",
+    "linux.md",
+    "mortgage.md",
+    "options.md",
+    "shells.md",
+    "xrandr.md",
+    "test.md",
+    "test.md~",
+    "Untitled"
+  ]
+}
