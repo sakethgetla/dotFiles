@@ -122,3 +122,4 @@ export NVM_DIR="$HOME/.nvm"
 
 # vim key bindings
 bindkey -v
+source /usr/share/nvm/init-nvm.sh
