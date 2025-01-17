@@ -1,5 +1,5 @@
 require('telekasten').setup({
-  home = vim.fn.expand("~/tt/notes"), -- Put the name of your notes directory here
+  home = vim.fn.expand("/mnt/data/notes"), -- Put the name of your notes directory here
 })
 
 -- Launch panel if nothing is typed after <leader>z

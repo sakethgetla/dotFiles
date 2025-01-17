@@ -123,3 +123,6 @@ export NVM_DIR="$HOME/.nvm"
 # vim key bindings
 bindkey -v
 source /usr/share/nvm/init-nvm.sh
+
+# swap capslock and esc
+setxkbmap -option caps:swapescape

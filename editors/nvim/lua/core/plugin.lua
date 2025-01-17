@@ -59,8 +59,8 @@ local plugins = {
   },
 
 
-  'williamboman/mason.nvim',
-  'williamboman/mason-lspconfig.nvim',
+  -- 'williamboman/mason.nvim',
+  -- 'williamboman/mason-lspconfig.nvim',
   'neovim/nvim-lspconfig',
   -- 'linrongbin16/gitlinker.nvim',
 
@@ -70,6 +70,8 @@ local plugins = {
   -- AUTO COMPLETE
   'hrsh7th/nvim-cmp',
   'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
 
   -- snippet
   "L3MON4D3/LuaSnip",

@@ -11,12 +11,14 @@
             "id": "725be77515f5b115",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "Pasted image 20250101172910.png"
+                "file": "reactNotes.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "Pasted image 20250101172910"
+              "icon": "lucide-file",
+              "title": "reactNotes"
             }
           }
         ]
@@ -162,10 +164,18 @@
   },
   "active": "725be77515f5b115",
   "lastOpenFiles": [
-    "dones/drones.md",
-    "Pasted image 20250101172910.png",
-    "dones",
+    "reactNotes.md~",
+    "arch_notes.md",
+    "bucket_list.md",
+    "configFileFormats.md",
+    "distraction_list.md",
+    "endeavouros.md",
+    "docker_notes.md",
+    "ts_notes.md",
     "reactNotes.md",
+    "Pasted image 20250101172910.png",
+    "dones/drones.md",
+    "dones",
     "yay.md~",
     "yay.md",
     "Pasted image 20241227214846.png",
@@ -174,9 +184,6 @@
     "todo.md",
     "neovim_notes.md",
     "options.md",
-    "configFileFormats.md",
-    "bucket_list.md",
-    "arch_notes.md",
     "arch_notes.md~",
     "linux.md",
     "linuxCmds.md",
