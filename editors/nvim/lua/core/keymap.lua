@@ -26,3 +26,8 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- delete to void register
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+
+
+
+-- vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition)
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition)

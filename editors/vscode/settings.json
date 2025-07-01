@@ -1,7 +1,8 @@
-{
+  {
   // "extensions.experimental.affinity": {
   //   "asvetliakov.vscode-neovim": 1
   // },
+  "workbench.colorTheme": "Default High Contrast",
   "terminal.external.osxExec": "Kitty.app",
   "zenMode.hideLineNumbers": false,
   "terminal.integrated.defaultProfile.osx": "zsh",

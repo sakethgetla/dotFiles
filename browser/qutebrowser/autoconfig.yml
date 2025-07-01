@@ -8,9 +8,16 @@ config_version: 2
 settings:
   colors.webpage.bg:
     global: black
+  colors.webpage.darkmode.algorithm:
+    global: brightness-rgb
   colors.webpage.darkmode.enabled:
     global: true
   colors.webpage.preferred_color_scheme:
     global: dark
+  content.javascript.clipboard:
+    https://chatgpt.com: access-paste
+    https://hub.docker.com: access-paste
   tabs.position:
     global: top
+  window.hide_decoration:
+    global: false
