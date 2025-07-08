@@ -18,6 +18,13 @@ local plugins = {
   'marko-cerovac/material.nvim',
   'nvim-lualine/lualine.nvim',
 
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+  --   ft = { "markdown" },
+  --   build = function() vim.fn["mkdp#util#install"]() end,
+  -- },
+
 
    {
     "folke/lazydev.nvim",
@@ -40,24 +47,24 @@ local plugins = {
       })
     end,
   },
-  { -- optional blink completion source for require statements and module annotations
-    "saghen/blink.cmp",
-    opts = {
-      sources = {
-        -- add lazydev to your completion providers
-        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-        providers = {
-          lazydev = {
-            name = "LazyDev",
-            module = "lazydev.integrations.blink",
-            -- make lazydev completions top priority (see `:h blink.cmp`)
-            score_offset = 100,
-          },
-        },
-      },
-    },
-  },
-
+  -- { -- optional blink completion source for require statements and module annotations
+  --   "saghen/blink.cmp",
+  --   opts = {
+  --     sources = {
+  --       -- add lazydev to your completion providers
+  --       default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+  --       providers = {
+  --         lazydev = {
+  --           name = "LazyDev",
+  --           module = "lazydev.integrations.blink",
+  --           -- make lazydev completions top priority (see `:h blink.cmp`)
+  --           score_offset = 100,
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
+  --
 
 
   -- 'ts_context_commentstring',
@@ -103,7 +110,36 @@ local plugins = {
 
   -- 'williamboman/mason.nvim',
   -- 'williamboman/mason-lspconfig.nvim',
+  {
+    "mason-org/mason.nvim",
+    opts = {
+        ui = {
+            icons = {
+                package_installed = "✓",
+                package_pending = "➜",
+                package_uninstalled = "✗"
+            }
+        }
+    }
+  },
+  --
+  --
+  --
+  --
   'neovim/nvim-lspconfig',
+  {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {
+          ensure_installed = { "lua_ls", "rust_analyzer", "marksman" },
+    },
+    dependencies = {
+        { "mason-org/mason.nvim", opts = {} },
+        "neovim/nvim-lspconfig",
+    },
+  },
+
+
+
   -- 'linrongbin16/gitlinker.nvim',
 
   -- Additional lua configuration, makes nvim stuff amazing!
@@ -203,13 +239,48 @@ local plugins = {
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
-  -- notes
+  -- -- notes
+  -- {
+  --   'renerocksai/telekasten.nvim',
+  --   dependencies = {
+  --     'nvim-telescope/telescope.nvim',
+  --     'nvim-lua/plenary.nvim'
+  --   }
+  -- },
+
   {
-    'renerocksai/telekasten.nvim',
+    "epwalsh/obsidian.nvim",
+    version = "*",  -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = "markdown",
+    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+    -- event = {
+    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
+    --   -- refer to `:h file-pattern` for more examples
+    --   "BufReadPre path/to/my-vault/*.md",
+    --   "BufNewFile path/to/my-vault/*.md",
+    -- },
     dependencies = {
-      'nvim-telescope/telescope.nvim',
-      'nvim-lua/plenary.nvim'
-    }
+      -- Required.
+      "nvim-lua/plenary.nvim",
+
+      -- see below for full list of optional dependencies 👇
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "notes",
+          path = "/mnt/data/notes",
+        },
+        -- {
+        --   name = "work",
+        --   path = "~/vaults/work",
+        -- },
+      },
+
+      -- see below for full list of options 👇
+    },
   },
 
   {

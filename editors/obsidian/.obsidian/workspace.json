@@ -11,10 +11,14 @@
             "id": "fc25ead5b1f4fe9d",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "1751960092-VKWC.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "1751960092-VKWC"
             }
           }
         ]
@@ -49,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "test",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -70,7 +74,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -90,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "test.md",
+                "file": "1751960092-VKWC.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,7 +105,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for test"
+              "title": "Backlinks for 1751960092-VKWC"
             }
           },
           {
@@ -146,8 +151,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -156,11 +160,35 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "workspaces:Manage workspace layouts": false
     }
   },
   "active": "fc25ead5b1f4fe9d",
   "lastOpenFiles": [
+    "zsh.md",
+    "1751960092-VKWC.md",
+    "typescript-arrays.md",
+    "yarn.md~",
+    "typescript-data-structures.md",
+    "typescript-queues.md",
+    "typescript.md",
+    "camping.md",
+    "projects.md",
+    "ancestry-tree-project.md",
+    "asyncGenerators.md",
+    "authentication.md",
+    "neovim.md",
+    "Untitled.canvas",
+    "corepack.md",
+    "camping.md~",
+    "pasted_img_20250708153237.png",
+    "pasted_img_20250708153727.png",
+    "pasted_img_20250708153404.png",
+    "session_cookie.png",
+    "brightness-control.md",
+    "auto-mounting-partition.md",
+    "6_monthPlan.md",
     "python.md~",
     "docker.md~",
     "programming.md~",
@@ -170,7 +198,6 @@
     "html.md~",
     "hobbies.md~",
     "projects.md~",
-    "projects.md",
     "homebrew.md",
     "investments.md",
     "job-list.md",
@@ -178,26 +205,8 @@
     "work/subscripions-sync.md",
     "work/sfmcCbTemplate.md",
     "sql.md",
-    "cooking.md~",
-    "health.md~",
     "weight-lifting.md",
     "fitness.md",
-    "snowplow.md",
-    "work/typescriptNotes.md",
-    "kitty.md~",
-    "kitty.md",
-    "vs-code.md",
-    "neovim.md",
-    "learning-methods.md",
-    "work/keyboard-layouts.md",
-    "keyboard-layouts.md",
-    "bluetooth.md",
-    "work/test-psql.md",
-    "wallpapers.md",
-    "typescript-data-structures.md",
-    "typescript-queues.md",
-    "typescript-arrays.md",
-    "Untitled.canvas",
     "Pasted image 20250101172910.png",
     "Pasted image 20241227214846.png",
     "Pasted image 20241227214838.png"

@@ -6,14 +6,16 @@
 
 config_version: 2
 settings:
+  colors.completion.match.fg:
+    global: '#ff4444'
   colors.webpage.bg:
     global: black
   colors.webpage.darkmode.algorithm:
     global: brightness-rgb
   colors.webpage.darkmode.enabled:
-    global: true
+    global: false
   colors.webpage.preferred_color_scheme:
-    global: dark
+    global: light
   content.javascript.clipboard:
     https://chatgpt.com: access-paste
     https://hub.docker.com: access-paste

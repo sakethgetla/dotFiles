@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- cusor cant go lower than 8 lines
+-- cusor cant go lower than 8 lines from the bottom and top
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
@@ -61,3 +61,6 @@ vim.opt.updatetime = 50
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
 
+-- -- fold
+-- vim.wo.foldmethod = 'expr'
+-- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
