@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1751960092-VKWC.md",
+                "file": "1751965546-YEEM.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1751960092-VKWC"
+              "title": "1751965546-YEEM"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "test",
+                "query": "cookie",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "1751960092-VKWC.md",
+                "file": "1751965546-YEEM.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,7 +105,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 1751960092-VKWC"
+              "title": "Backlinks for 1751965546-YEEM"
             }
           },
           {
@@ -166,8 +166,13 @@
   },
   "active": "fc25ead5b1f4fe9d",
   "lastOpenFiles": [
-    "zsh.md",
+    "1751965971-test2.md",
+    "2025-07-08.md",
+    "Untitled 2.canvas",
+    "1751965546-YEEM.md",
+    "Untitled 1.canvas",
     "1751960092-VKWC.md",
+    "zsh.md",
     "typescript-arrays.md",
     "yarn.md~",
     "typescript-data-structures.md",
@@ -204,9 +209,6 @@
     "todo.md",
     "work/subscripions-sync.md",
     "work/sfmcCbTemplate.md",
-    "sql.md",
-    "weight-lifting.md",
-    "fitness.md",
     "Pasted image 20250101172910.png",
     "Pasted image 20241227214846.png",
     "Pasted image 20241227214838.png"
