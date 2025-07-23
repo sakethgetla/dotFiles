@@ -4,21 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "3512b5663becbd9e",
+        "id": "cd502eb21b2001f4",
         "type": "tabs",
         "children": [
           {
-            "id": "fc25ead5b1f4fe9d",
+            "id": "7e3c6abdc5dc6d00",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "1751965546-YEEM.md",
-                "mode": "source",
-                "source": false
+                "file": "assets/imgs/osi-model.png"
               },
-              "icon": "lucide-file",
-              "title": "1751965546-YEEM"
+              "icon": "lucide-image",
+              "title": "osi-model"
             }
           }
         ]
@@ -53,8 +51,8 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "cookie",
-                "matchingCase": false,
+                "query": "dige",
+                "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
                 "extraContext": false,
@@ -74,8 +72,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -95,17 +92,17 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "1751965546-YEEM.md",
+                "file": "zsh.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
-                "showSearch": false,
+                "showSearch": true,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 1751965546-YEEM"
+              "title": "Backlinks for zsh"
             }
           },
           {
@@ -114,12 +111,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "test.md",
-                "linksCollapsed": false,
+                "file": "virtualenv.md",
+                "linksCollapsed": true,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from test"
+              "title": "Outgoing links from virtualenv"
             }
           },
           {
@@ -141,17 +138,22 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "test.md"
+                "file": "virtualenv.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of test"
+              "title": "Outline of virtualenv"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -164,51 +166,53 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "fc25ead5b1f4fe9d",
+  "active": "7e3c6abdc5dc6d00",
   "lastOpenFiles": [
-    "1751965971-test2.md",
-    "2025-07-08.md",
-    "Untitled 2.canvas",
-    "1751965546-YEEM.md",
-    "Untitled 1.canvas",
-    "1751960092-VKWC.md",
-    "zsh.md",
-    "typescript-arrays.md",
+    "digestion.md",
+    "lymphatic-system.md",
+    "biology.md~",
+    "protein-supplements.md~",
+    "peptides.md",
+    "lymphatic-system.md~",
+    "osi-model.md",
+    "assets/imgs/osi-model.png",
+    "osi-model.md~",
+    "virtualenv.md",
+    "vpn.md",
+    "browser-cookie.md~",
+    "browser-cookie.md",
     "yarn.md~",
-    "typescript-data-structures.md",
-    "typescript-queues.md",
-    "typescript.md",
-    "camping.md",
-    "projects.md",
-    "ancestry-tree-project.md",
-    "asyncGenerators.md",
-    "authentication.md",
-    "neovim.md",
-    "Untitled.canvas",
-    "corepack.md",
-    "camping.md~",
-    "pasted_img_20250708153237.png",
+    "authentication.md~",
+    "authorization.md",
+    "session_cookie.png",
+    "session_cookie.md",
+    "session_cookie 1.png",
+    "hashing.md~",
     "pasted_img_20250708153727.png",
     "pasted_img_20250708153404.png",
-    "session_cookie.png",
-    "brightness-control.md",
+    "pasted_img_20250708153237.png",
+    "Untitled 2.canvas",
+    "Untitled 1.canvas",
+    "Untitled.canvas",
+    "zsh.md~",
+    "authorization.md~",
+    "note-taking.md",
+    "zsh.md",
+    "jwt-json-web-token.md",
+    "hashing.md",
+    "browser cookie.md",
+    "test-one.md",
+    "authentication.md",
+    "1751967140-authorization.md",
+    "auth.md",
+    "1751966701-authen.md",
+    "1751966190-browser-cookie.md",
     "auto-mounting-partition.md",
-    "6_monthPlan.md",
-    "python.md~",
-    "docker.md~",
-    "programming.md~",
-    "work/docker.md~",
-    "docker.md",
-    "todo.md~",
-    "html.md~",
-    "hobbies.md~",
-    "projects.md~",
-    "homebrew.md",
-    "investments.md",
-    "job-list.md",
-    "todo.md",
-    "work/subscripions-sync.md",
-    "work/sfmcCbTemplate.md",
+    "bash.md",
+    "asyncGenerators.md",
+    "ancestry-tree-project.md",
+    "2025-07-08.md",
+    "1751965971-test2.md",
     "Pasted image 20250101172910.png",
     "Pasted image 20241227214846.png",
     "Pasted image 20241227214838.png"

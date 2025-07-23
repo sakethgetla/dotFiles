@@ -9,7 +9,7 @@ settings:
   colors.completion.match.fg:
     global: '#ff4444'
   colors.webpage.bg:
-    global: black
+    global: white
   colors.webpage.darkmode.algorithm:
     global: brightness-rgb
   colors.webpage.darkmode.enabled:
@@ -18,7 +18,10 @@ settings:
     global: light
   content.javascript.clipboard:
     https://chatgpt.com: access-paste
+    https://github.com: access-paste
     https://hub.docker.com: access-paste
+  content.notifications.enabled:
+    https://www.pcmag.com: false
   tabs.position:
     global: top
   window.hide_decoration:

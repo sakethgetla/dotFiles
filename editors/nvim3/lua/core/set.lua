@@ -54,6 +54,9 @@ vim.opt.isfname:append("@-@")
 -- -- column
 -- vim.opt.colorcolumn = "80"
 
+-- line width
+vim.opt.textwidth = 80
+
 
 vim.opt.updatetime = 50
 
@@ -64,3 +67,14 @@ vim.wo.signcolumn = 'yes'
 -- -- fold
 -- vim.wo.foldmethod = 'expr'
 -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+
+-- spell
+vim.cmd [[autocmd FileType * setlocal spell spelllang=en_us]] 
+-- better to add "autocmd FileType *" 
+-- because it triggers command every time a new files is opened 
+-- unlike the following command
+   -- vim.cmd ':setlocal spell spelllang=en_us'
+
+
+vim.g.lazyvim_prettier_needs_config = false
+

@@ -1,4 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -113,13 +114,16 @@ local plugins = {
   {
     "mason-org/mason.nvim",
     opts = {
+          ensure_installed = {
+            "prettier",
+      },
         ui = {
             icons = {
                 package_installed = "✓",
                 package_pending = "➜",
                 package_uninstalled = "✗"
             }
-        }
+        },
     }
   },
   --
@@ -130,7 +134,11 @@ local plugins = {
   {
     "mason-org/mason-lspconfig.nvim",
     opts = {
-          ensure_installed = { "lua_ls", "rust_analyzer", "marksman" },
+          -- ensure_installed = {
+          --   "lua_ls",
+          --   "rust_analyzer",
+          --   "marksman",
+          -- },
     },
     dependencies = {
         { "mason-org/mason.nvim", opts = {} },

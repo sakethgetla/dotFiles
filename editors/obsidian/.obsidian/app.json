@@ -3,5 +3,6 @@
   "attachmentFolderPath": "/",
   "showLineNumber": true,
   "rightToLeft": false,
-  "strictLineBreaks": false
+  "strictLineBreaks": false,
+  "promptDelete": false
 }
