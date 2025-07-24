@@ -8,8 +8,10 @@ require("core.settings")
 
 -- plugins already impored in config.lazy
 -- import all files in pluginsConfig
+
+require("pluginsConfig.autoComplete")
+require("pluginsConfig.fuzzyFind")
+require("pluginsConfig.image")
+require("pluginsConfig.notes")
 require("pluginsConfig.tree")
 require("pluginsConfig.treeSitter")
-require("pluginsConfig.fuzzyFind")
-require("pluginsConfig.notes")
-require("pluginsConfig.image")
