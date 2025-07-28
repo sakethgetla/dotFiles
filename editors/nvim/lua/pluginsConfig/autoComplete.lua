@@ -96,13 +96,16 @@ cmp.setup({
 vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition)
 
 
--- require("mason-lspconfig").setup {
---     ensure_installed = {
---             "lua_ls",
---             "rust_analyzer",
---                  "marksman",
---             -- "eslint",
---             -- "prettier",
---     },
--- }
+require("mason-lspconfig").setup {
+    ensure_installed = {
+            "lua_ls",
+            "rust_analyzer",
+            "marksman",
+            "pylsp",
+            "ts_ls",
+            -- "pyright",
+            -- "eslint",
+            -- "prettier",
+    },
+}
 
