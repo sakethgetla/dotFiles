@@ -38,8 +38,6 @@
 --   hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }, -- render image files as images when opened
 -- })
 
-
-
 ---@class snacks.image.Config
 ---@field enabled? boolean enable image viewer
 ---@field wo? vim.wo|{} options for windows showing the image
