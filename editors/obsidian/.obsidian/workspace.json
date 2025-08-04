@@ -11,12 +11,10 @@
             "id": "7e3c6abdc5dc6d00",
             "type": "leaf",
             "state": {
-              "type": "image",
-              "state": {
-                "file": "assets/imgs/osi-model.png"
-              },
-              "icon": "lucide-image",
-              "title": "osi-model"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -168,6 +166,7 @@
   },
   "active": "7e3c6abdc5dc6d00",
   "lastOpenFiles": [
+    "assets/imgs/osi-model.png",
     "digestion.md",
     "lymphatic-system.md",
     "biology.md~",
@@ -175,7 +174,6 @@
     "peptides.md",
     "lymphatic-system.md~",
     "osi-model.md",
-    "assets/imgs/osi-model.png",
     "osi-model.md~",
     "virtualenv.md",
     "vpn.md",
@@ -212,7 +210,6 @@
     "asyncGenerators.md",
     "ancestry-tree-project.md",
     "2025-07-08.md",
-    "1751965971-test2.md",
     "Pasted image 20250101172910.png",
     "Pasted image 20241227214846.png",
     "Pasted image 20241227214838.png"

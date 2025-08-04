@@ -10,9 +10,9 @@ require("core.settings")
 -- import all files in pluginsConfig
 
 -- require("pluginsConfig.autoComplete")
-require("pluginsConfig.fuzzyFind")
+-- require("pluginsConfig.fuzzyFind")
 -- require("pluginsConfig.image")
-require("pluginsConfig.notes")
+-- require("pluginsConfig.notes")
 require("pluginsConfig.tree")
 require("pluginsConfig.treeSitter")
 require("pluginsConfig.git")

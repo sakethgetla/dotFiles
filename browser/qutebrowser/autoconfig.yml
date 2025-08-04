@@ -6,10 +6,17 @@
 
 config_version: 2
 settings:
+  aliases:
+    global:
+      q: close
+      qa: quit
+      w: session-save
+      wq: quit --save
+      wqa: quit --save
   colors.completion.match.fg:
     global: '#ff4444'
   colors.webpage.bg:
-    global: white
+    global: black
   colors.webpage.darkmode.algorithm:
     global: brightness-rgb
   colors.webpage.darkmode.enabled:
@@ -19,8 +26,10 @@ settings:
   content.javascript.clipboard:
     https://chatgpt.com: access-paste
     https://github.com: access-paste
+    https://grok.com: access-paste
     https://hub.docker.com: access-paste
   content.notifications.enabled:
+    https://www.hdfcbank.com: false
     https://www.pcmag.com: false
   tabs.position:
     global: top
