@@ -59,6 +59,8 @@ vim.opt.textwidth = 80
 
 vim.opt.updatetime = 50
 
+-- helps with markdown?
+vim.opt.conceallevel = 1
 
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
@@ -77,4 +79,3 @@ vim.cmd [[autocmd FileType * setlocal spell spelllang=en_us]]
 
 -- vim.g.lazyvim_prettier_needs_config = false
 
-vim.opt.conceallevel = 1

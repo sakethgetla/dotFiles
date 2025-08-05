@@ -18,8 +18,9 @@ return {
 				markdown = {
 					-- https://github.com/OXY2DEV/markview.nvim?tab=readme-ov-file#-usage
 					-- headings = presets.headings.slanted,
-					-- tables = presets.tables.single,
-					tables = presets.tables.double,
+					-- tables = presets.tables.none,
+					tables = presets.tables.single,
+					-- tables = presets.tables.double,
 					list_items = {
 						marker_minus = {
 							add_padding = false,
@@ -51,8 +52,7 @@ return {
 		},
 		keys = {
 			{ "<leader>nf", ":ObsidianQuickSwitch<CR>", desc = "" },
-			{ "<leader>os", ":ObsidianSearch<CR>", desc = "Obsidian Search" },
-			{ "<leader>ng", ":ObsidianSearch<CR>", desc = "" },
+			{ "<leader>ng", ":ObsidianSearch<CR>", desc = "Obsidian Search" },
 			{ "<leader>no", ":ObsidianFollowLink<CR>", desc = "" },
 			{ "<leader>nn", ":ObsidianNew<CR>", desc = "" },
 			{ "<leader>nb", ":ObsidianBacklinks<CR>", desc = "" },
@@ -87,7 +87,6 @@ return {
 			},
 		},
 	},
-
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
