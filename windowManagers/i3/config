@@ -211,9 +211,9 @@ bindsym F1 exec --no-startup-id ~/.config/i3/scripts/keyhint-2
 
 # moniter
 # bindsym F3 exec --no-startup-id 
-bindsym F2 exec --no-startup-id xrandr --output DP-1 --auto && xrandr --output eDP-1 --auto
-bindsym F3 exec --no-startup-id xrandr --output eDP-1 --auto && xrandr --output DP-1 --off
-bindsym F4 exec --no-startup-id xrandr --output DP-1 --auto && xrandr --output eDP-1 --off
+bindsym F2 exec --no-startup-id sh /mnt/data/dotFiles/shellScripts/startup.zsh laptop
+bindsym F3 exec --no-startup-id sh /mnt/data/dotFiles/shellScripts/startup.zsh mnl
+bindsym F4 exec --no-startup-id sh /mnt/data/dotFiles/shellScripts/startup.zsh moniter
 
 # Backlight control
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight +10 && notify-send "Brightness - $(xbacklight -get | cut -d '.' -f 1)%"
@@ -488,7 +488,7 @@ for_window [class="Pamac-manager"] floating enable
 for_window [window_role="About"] floating enable
 
 # set border of floating window
-for_window [class="urxvt"] border pixel 1
+for_window [class="urxvt"] border pixel 2
 
 # set size of floating window
 #for_window [window_role="(?i)GtkFileChooserDialog"] resize set 640 480 #to set size of file choose dialog
