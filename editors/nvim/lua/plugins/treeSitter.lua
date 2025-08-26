@@ -11,6 +11,8 @@ return {
 			require("nvim-treesitter.configs").setup({
 				-- A list of parser names, or "all" (the listed parsers MUST always be installed)
 				ensure_installed = {
+          -- list of parsers
+          -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/lua/nvim-treesitter/parsers.lua
 					"c",
 					"lua",
 					"vim",
@@ -23,6 +25,7 @@ return {
 					"latex",
 					"typst",
 					"yaml",
+          "bash",
 				},
 
 				-- Install parsers synchronously (only applied to `ensure_installed`)

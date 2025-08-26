@@ -16,4 +16,3 @@ require("core.settings")
 require("pluginsConfig.tree")
 require("pluginsConfig.treeSitter")
 require("pluginsConfig.git")
-

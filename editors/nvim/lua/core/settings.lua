@@ -7,11 +7,15 @@ vim.opt.showcmd = true
 -- vim.opt.cursorline = true
 -- vim.opt.autoread = true
 
--- use spaces for tabs and whatnot
-vim.opt.tabstop = 2
+-- makes vim display [tab] as 2 spaces but shiftwidth actually inserts spaces
+-- vim.opt.tabstop = 2 
+-- vim.opt.softtabstop = 2
+
+-- use spaces for tabs 
 vim.opt.shiftwidth = 2
 vim.opt.shiftround = true
 vim.opt.expandtab = true
+
 
 -- Save undo history
 vim.o.undofile = true
@@ -78,4 +82,5 @@ vim.cmd [[autocmd FileType * setlocal spell spelllang=en_us]]
 
 
 -- vim.g.lazyvim_prettier_needs_config = false
+
 

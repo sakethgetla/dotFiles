@@ -8,6 +8,9 @@ return {
 	-- opts = {},
 	-- keymaps = {
 	-- },
+	files = {
+		no_ignore = false, -- respect ".gitignore"  by default
+	},
 	config = function()
 		local fzf = require("fzf-lua")
 

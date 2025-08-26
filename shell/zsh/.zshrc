@@ -121,6 +121,8 @@ bindkey -v
 # swap capslock and esc
 # setxkbmap -option caps:swapescape
 
+# like 'rm' but sends to trash rather than permanent delete
+alias rmt="trash-put"
 
 
 source /usr/share/nvm/init-nvm.sh
