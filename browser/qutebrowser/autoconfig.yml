@@ -25,9 +25,11 @@ settings:
     global: light
   content.javascript.clipboard:
     https://chatgpt.com: access-paste
+    https://code.visualstudio.com: access-paste
     https://github.com: access-paste
     https://grok.com: access-paste
     https://hub.docker.com: access-paste
+    https://mui.com: access-paste
   content.notifications.enabled:
     https://www.hdfcbank.com: false
     https://www.pcmag.com: false
