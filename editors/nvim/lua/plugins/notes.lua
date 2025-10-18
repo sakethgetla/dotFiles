@@ -65,7 +65,7 @@ return {
 			workspaces = {
 				{
 					name = "notes",
-					path = "/mnt/data/notes",
+					path = "~/me/notes",
 				},
 			},
 			-- Optional, customize how note IDs are generated given an optional title.
