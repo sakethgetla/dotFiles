@@ -49,6 +49,8 @@ return {
 		ft = "markdown",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+	                "ibhagwan/fzf-lua",
 		},
 		keys = {
 			{ "<leader>nf", ":ObsidianQuickSwitch<CR>", desc = "" },
@@ -58,6 +60,7 @@ return {
 			{ "<leader>nb", ":ObsidianBacklinks<CR>", desc = "" },
 			{ "<leader>nI", ":ObsidianPasteImg<CR>", desc = "" },
 			{ "<leader>nr", ":ObsidianRename<CR>", desc = "" },
+			{ "<leader>cw", ":ObsidianWorkspace<CR>", desc = "change workspaces" },
 		},
 
 		opts = {
@@ -66,6 +69,10 @@ return {
 				{
 					name = "notes",
 					path = "~/me/notes",
+				},
+				{
+					name = "workNotes",
+					path = "~/wk/workNotes",
 				},
 			},
 			-- Optional, customize how note IDs are generated given an optional title.
@@ -84,6 +91,26 @@ return {
 			statusline = {
 				enabled = true,
 				format = "{{backlinks}} backlinks",
+			},
+			picker = {
+				-- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
+                                name = "fzf-lua",
+
+				-- name = "telescope.nvim",
+				-- Optional, configure key mappings for the picker. These are the defaults.
+				-- Not all pickers support all mappings.
+				note_mappings = {
+					-- Create a new note from your query.
+					new = "<C-x>",
+					-- Insert a link to the selected note.
+					insert_link = "<C-l>",
+				},
+				tag_mappings = {
+					-- Add tag(s) to current note.
+					tag_note = "<C-x>",
+					-- Insert a tag at the current location.
+					insert_tag = "<C-l>",
+				},
 			},
 		},
 	},

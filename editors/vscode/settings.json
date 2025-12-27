@@ -28,14 +28,16 @@
     "vim.easymotion": true,
     "vim.incsearch": true,
     "vim.useSystemClipboard": true,
-    "vim.useCtrlKeys": true,
+    // "vim.useCtrlKeys": true,
+	//    "vim.useComm"
     "vim.hlsearch": true,
-    "vim.insertModeKeyBindings": [
-      // {
-      //   "before": ["j", "j"],
-      //   "after": ["<Esc>"]
-      // }
-    ],
+	// "vim.map-",
+    // "vim.insertModeKeyBindings": [
+    //   // {
+    //   //   "before": ["j", "j"],
+    //   //   "after": ["<Esc>"]
+    //   // }
+    // ],
     "vim.normalModeKeyBindingsNonRecursive": [
       {
         "before": [
@@ -47,6 +49,15 @@
           "d"
         ]
       },
+	//   {
+	// 	"before": [
+	// 		"<C-e>"
+	// 	],
+	// 	"after": [
+	// 		// "<D-e>",
+	// 		"M-e"
+	// 	]
+	//   },
       {
         "before": [
           "<C-n>"
@@ -73,10 +84,15 @@
     // To improve performance
     "extensions.experimental.affinity": {
       "vscodevim.vim": 1
-    },
-    "workbench.editor.showTabs": "single",
+	},
     "editor.minimap.enabled": false,
     "github.copilot.nextEditSuggestions.enabled": true,
     "workbench.secondarySideBar.defaultVisibility": "hidden",
-    "workbench.activityBar.location": "hidden"
+	"workbench.activityBar.location": "hidden",
+	"workbench.colorTheme": "Default Light Modern",
+	"git.ignoreRebaseWarning": true,
+	"workbench.editor.showTabs": "single",
+	"diffEditor.ignoreTrimWhitespace": false,
+	"git.blame.editorDecoration.enabled": false,
+	"cursor.cpp.enablePartialAccepts": true
   }

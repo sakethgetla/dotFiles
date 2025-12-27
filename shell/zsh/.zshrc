@@ -122,7 +122,24 @@ bindkey -v
 # setxkbmap -option caps:swapescape
 
 # like 'rm' but sends to trash rather than permanent delete
-alias rmt="trash-put"
+# alias rmt="trash-put"
+alias rmt="trash"
 
 
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# # The next line updates PATH for the Google Cloud SDK.
+# if [ -f '/Users/sakethgetla/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/sakethgetla/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+#
+# The next line enables shell command completion for gcloud.
+# if [ -f '/Users/sakethgetla/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/sakethgetla/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/sakethgetla/Downloads/google-cloud-sdk 2/path.zsh.inc' ]; then . '/Users/sakethgetla/Downloads/google-cloud-sdk 2/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/sakethgetla/Downloads/google-cloud-sdk 2/completion.zsh.inc' ]; then . '/Users/sakethgetla/Downloads/google-cloud-sdk 2/completion.zsh.inc'; fi
