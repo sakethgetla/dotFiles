@@ -20,7 +20,7 @@ settings:
   colors.webpage.darkmode.algorithm:
     global: brightness-rgb
   colors.webpage.darkmode.enabled:
-    global: true
+    global: false
   colors.webpage.preferred_color_scheme:
     global: light
   content.javascript.clipboard:
