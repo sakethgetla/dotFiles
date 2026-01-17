@@ -88,7 +88,6 @@
     "editor.minimap.enabled": false,
     "github.copilot.nextEditSuggestions.enabled": true,
     "workbench.secondarySideBar.defaultVisibility": "hidden",
-	"workbench.activityBar.location": "hidden",
 	"workbench.colorTheme": "Default Light Modern",
 	"git.ignoreRebaseWarning": true,
 	"workbench.editor.showTabs": "single",

@@ -142,54 +142,54 @@
 		"command": "workbench.action.showAllEditors",
 		"when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
 	},
-	{
-		"key": "ctrl-h",
-		"command": "workbench.action.navigateLeft"
-	},
-	{
-		"key": "ctrl-l",
-		"command": "workbench.action.navigateRight"
-	},
-	{
-		"key": "ctrl-k",
-		"command": "workbench.action.navigateUp"
-	},
-	{
-		"key": "ctrl-j",
-		"command": "workbench.action.navigateDown"
-	},
+	// {
+	// 	"key": "ctrl-h",
+	// 	"command": "workbench.action.navigateLeft"
+	// },
+	// {
+	// 	"key": "ctrl-l",
+	// 	"command": "workbench.action.navigateRight"
+	// },
+	// {
+	// 	"key": "ctrl-k",
+	// 	"command": "workbench.action.navigateUp"
+	// },
+	// {
+	// 	"key": "ctrl-j",
+	// 	"command": "workbench.action.navigateDown"
+	// },
 	{
 		"key": "space ,",
 		"command": "workbench.action.showAllEditors",
 		"when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
 	},
-	{
-		"key": "space e",
-		"command": "runCommands",
-		"args": {
-			"commands": [
-				"workbench.action.toggleSidebarVisibility",
-				"workbench.files.action.focusFilesExplorer"
-			]
-		},
-		"when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus) && !sideBarFocus"
-	},
-	{
-		"key": "space e",
-		"command": "runCommands",
-		"args": {
-			"commands": [
-				"workbench.action.toggleSidebarVisibility",
-				"workbench.action.focusActiveEditorGroup"
-			]
-		},
-		"when": "sideBarFocus && !inputFocus"
-	},
-	{
-		"key": "space e",
-		"when": "vim.mode == 'Normal' && editorTextFocus && foldersViewVisible",
-		"command": "workbench.action.toggleSidebarVisibility"
-	},
+	// {
+	// 	"key": "space e",
+	// 	"command": "runCommands",
+	// 	"args": {
+	// 		"commands": [
+	// 			"workbench.action.toggleSidebarVisibility",
+	// 			"workbench.files.action.focusFilesExplorer"
+	// 		]
+	// 	},
+	// 	"when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus) && !sideBarFocus"
+	// },
+	// {
+	// 	"key": "space e",
+	// 	"command": "runCommands",
+	// 	"args": {
+	// 		"commands": [
+	// 			"workbench.action.toggleSidebarVisibility",
+	// 			"workbench.action.focusActiveEditorGroup"
+	// 		]
+	// 	},
+	// 	"when": "sideBarFocus && !inputFocus"
+	// },
+	// {
+	// 	"key": "space e",
+	// 	"when": "vim.mode == 'Normal' && editorTextFocus && foldersViewVisible",
+	// 	"command": "workbench.action.toggleSidebarVisibility"
+	// },
 	{
 		"key": "tab",
 		"command": "workbench.action.nextEditorInGroup",
@@ -221,11 +221,6 @@
 		"key": "shift-k",
 		"command": "editor.action.showHover",
 		"when": "vim.mode == 'Normal' && editorTextFocus"
-	},
-	{
-		"key": "shift-y",
-		"command": "copyRelativeFilePath",
-		"when": "vim.mode == 'Normal' && !editorFocus"
 	},
 	{
 		"key": "space c a",
@@ -299,6 +294,12 @@
 		"command": "filesExplorer.paste",
 		"when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
 	},
+	{ 
+		"key": "shift-y",
+		"command": "copyRelativeFilePath",
+		// "when": "vim.mode == 'Normal' && !editorFocus && !inputFocus"
+		"when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+	},
 	{
 		"key": "x",
 		"command": "filesExplorer.cut",
@@ -341,11 +342,11 @@
 		"command": "explorer.openAndPassFocus",
 		"when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceIsFolder && !inputFocus"
 	},
-	{
-		"key": "ctrl-enter",
-		"command": "workbench.action.toggleZenMode",
-		"when": "vim.mode == 'Normal' && !isAuxiliaryWindowFocusedContext"
-	},
+	// {
+	// 	"key": "ctrl-enter",
+	// 	"command": "workbench.action.toggleZenMode",
+	// 	"when": "vim.mode == 'Normal' && !isAuxiliaryWindowFocusedContext"
+	// },
 	{
 		"key": "enter",
 		"command": "list.toggleExpand",

@@ -16,9 +16,10 @@ case $config in
     xrandr --output DisplayPort-9 --off
     ;;
 
-  mnl | moniterAndLaptop)
+  moniterAndLaptop | mnl)
     print 'moniter and laptop config'
-    setxkbmap -layout us 
+    # setxkbmap -layout us 
+    setxkbmap -layout us -variant colemak_dh_ortho
     setxkbmap -option
     
     xrandr --output DisplayPort-8 --auto --primary
@@ -28,8 +29,8 @@ case $config in
 
   moniter | m)
     print 'moniter config'
-    setxkbmap -layout us 
     setxkbmap -option
+    setxkbmap -layout us -variant colemak_dh_ortho
     
     xrandr --output DisplayPort-8 --auto --primary
     xrandr --output eDP --off

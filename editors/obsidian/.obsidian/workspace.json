@@ -11,10 +11,14 @@
             "id": "7e3c6abdc5dc6d00",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "work/product-name.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "product-name"
             }
           }
         ]
@@ -155,6 +159,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Create new base": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -166,6 +171,10 @@
   },
   "active": "7e3c6abdc5dc6d00",
   "lastOpenFiles": [
+    "kubernetes.md~",
+    "minikube.md~",
+    "kubectl.md~",
+    "github-action-runner.md",
     "assets/imgs/osi-model.png",
     "digestion.md",
     "lymphatic-system.md",
@@ -192,8 +201,6 @@
     "Untitled 2.canvas",
     "Untitled 1.canvas",
     "Untitled.canvas",
-    "zsh.md~",
-    "authorization.md~",
     "note-taking.md",
     "zsh.md",
     "jwt-json-web-token.md",
@@ -209,7 +216,6 @@
     "bash.md",
     "asyncGenerators.md",
     "ancestry-tree-project.md",
-    "2025-07-08.md",
     "Pasted image 20250101172910.png",
     "Pasted image 20241227214846.png",
     "Pasted image 20241227214838.png"
