@@ -211,9 +211,9 @@ bindsym F1 exec --no-startup-id ~/.config/i3/scripts/keyhint-2
 
 # moniter
 # bindsym F3 exec --no-startup-id
-bindsym F2 exec --no-startup-id sh /mnt/data/dotFiles/shellScripts/startup.zsh laptop
-bindsym F3 exec --no-startup-id sh /mnt/data/dotFiles/shellScripts/startup.zsh mnl
-bindsym F4 exec --no-startup-id sh /mnt/data/dotFiles/shellScripts/startup.zsh moniter
+bindsym F2 exec --no-startup-id sh /mnt/config/dotFiles/shellScripts/startup.zsh laptop
+bindsym F3 exec --no-startup-id sh /mnt/config/dotFiles/shellScripts/startup.zsh mnl
+bindsym F4 exec --no-startup-id sh /mnt/config/dotFiles/shellScripts/startup.zsh moniter
 
 # Backlight control
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight +10 && notify-send "Brightness - $(xbacklight -get | cut -d '.' -f 1)%"
@@ -522,7 +522,8 @@ client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
 # (plus the system information i3status finds out, if available)
 bar {
     font pango: Noto Sans Regular 10
-    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    # status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    status_command i3status
     position top
     # position bottom
 
@@ -535,7 +536,7 @@ bar {
     # When strip_workspace_numbers is set to yes,
     # any workspace that has a name of the form
     # “[n][:][NAME]” will display only the name.
-    strip_workspace_numbers yes
+    # strip_workspace_numbers yes
     ##strip_workspace_name no
     
     colors {
@@ -556,11 +557,14 @@ bar {
 # Application menu handled by rofi: #
 #####################################
 
-## rofi bindings fancy application menu ($mod+d /F9 optional disabled)
+# rofi bindings fancy application menu ($mod+d /F9 optional disabled)
+# rofi themes https://github.com/newmanls/rofi-themes-collection?tab=readme-ov-file
 
 bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun \
--config ~/.config/rofi/rofidmenu.rasi
+-config ~/.config/rofi/config.rasi
 
-## rofi bindings for window menu ($mod+t /F10 optional disabled)
+# rofi bindings for window menu ($mod+t /F10 optional disabled)
 bindsym $mod+t exec --no-startup-id rofi -show window \
--config ~/.config/rofi/rofidmenu.rasi
+-config ~/.config/rofi/config.rasi
+
+# bindsym $mod+d exec --no-startup-id dmenu_run

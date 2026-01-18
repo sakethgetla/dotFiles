@@ -139,7 +139,10 @@ alias rmt="trash"
 # if [ -f '/Users/sakethgetla/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/sakethgetla/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/sakethgetla/Downloads/google-cloud-sdk 2/path.zsh.inc' ]; then . '/Users/sakethgetla/Downloads/google-cloud-sdk 2/path.zsh.inc'; fi
+# if [ -f '/Users/sakethgetla/Downloads/google-cloud-sdk 2/path.zsh.inc' ]; then . '/Users/sakethgetla/Downloads/google-cloud-sdk 2/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/sakethgetla/Downloads/google-cloud-sdk 2/completion.zsh.inc' ]; then . '/Users/sakethgetla/Downloads/google-cloud-sdk 2/completion.zsh.inc'; fi
+# if [ -f '/Users/sakethgetla/Downloads/google-cloud-sdk 2/completion.zsh.inc' ]; then . '/Users/sakethgetla/Downloads/google-cloud-sdk 2/completion.zsh.inc'; fi
+
+export BUN_INSTALL="$HOME/.bun" 
+export PATH="$BUN_INSTALL/bin:$PATH"
