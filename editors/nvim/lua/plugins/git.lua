@@ -61,6 +61,37 @@
 return {
 	{ "tpope/vim-fugitive" },
 	{
+		-- Git worktree switcher using fzf-lua (no plugin needed, just keymaps)
+		"nvim-lua/plenary.nvim",
+		config = function()
+			vim.keymap.set("n", "<leader>gw", function()
+				local fzf = require("fzf-lua")
+				local handle = io.popen("git worktree list")
+				if not handle then return end
+				local result = handle:read("*a")
+				handle:close()
+
+				local worktrees = {}
+				for line in result:gmatch("[^\n]+") do
+					table.insert(worktrees, line)
+				end
+
+				fzf.fzf_exec(worktrees, {
+					prompt = "Git Worktrees> ",
+					actions = {
+						["default"] = function(selected)
+							local path = selected[1]:match("^(%S+)")
+							if path then
+								vim.cmd("cd " .. path)
+								vim.notify("Switched to " .. path)
+							end
+						end,
+					},
+				})
+			end, { desc = "[G]it [W]orktrees" })
+		end,
+	},
+	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
 			local gitsigns = require("gitsigns")

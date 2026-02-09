@@ -26,9 +26,9 @@ vim.opt.incsearch = true
 
 -- vim.cmd [[ set noswapfile ]]
 
--- --Line numbers_
-vim.wo.relativenumber = true
-vim.wo.number = true
+-- Line numbers
+vim.opt.relativenumber = true
+vim.opt.number = true
 
 
 -- Case insensitive searching UNLESS /C or capital in search
@@ -66,8 +66,7 @@ vim.opt.updatetime = 50
 -- helps with markdown?
 vim.opt.conceallevel = 1
 
--- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
+-- Keep signcolumn on by default (already set above with vim.opt.signcolumn)
 
 -- -- fold
 -- vim.wo.foldmethod = 'expr'

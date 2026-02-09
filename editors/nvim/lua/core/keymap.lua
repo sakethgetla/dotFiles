@@ -17,6 +17,19 @@ vim.keymap.set("n", "<leader>k", "<C-w><C-k>")
 vim.keymap.set({ "v", "n" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
+-- copy file path with line range (for referencing code)
+vim.keymap.set("v", "<leader>yp", function()
+  local start_line = vim.fn.line("v")
+  local end_line = vim.fn.line(".")
+  if start_line > end_line then
+    start_line, end_line = end_line, start_line
+  end
+  local path = vim.fn.fnamemodify(vim.fn.expand("%"), ":.")
+  local reference = path .. ":" .. start_line .. "-" .. end_line
+  vim.fn.setreg("+", reference)
+  vim.notify("Copied: " .. reference)
+end)
+
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")

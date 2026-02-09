@@ -80,10 +80,6 @@
     "vim.handleKeys": {
       "<C-a>": false,
       "<C-f>": false
-    },
-    // To improve performance
-    "extensions.experimental.affinity": {
-      "vscodevim.vim": 1
 	},
     "editor.minimap.enabled": false,
     "github.copilot.nextEditSuggestions.enabled": true,

@@ -17,7 +17,11 @@ return {
 
 		vim.keymap.set({ "n" }, "<leader><leader>", fzf.buffers, { silent = true, desc = "open buffers" })
 
-		vim.keymap.set({ "n" }, "<leader>sf", fzf.files, { silent = true, desc = "[S]earch [F]iles" })
+		vim.keymap.set({ "n" }, "<leader>sf", function()
+			fzf.files({
+				cmd = "rg --files --hidden --no-ignore --glob '!node_modules'",
+			})
+		end, { silent = true, desc = "[S]earch [F]iles" })
 
 		vim.keymap.set({ "n" }, "<leader>sg", fzf.live_grep, { silent = true, desc = "[S]earch live [g]rep" })
 

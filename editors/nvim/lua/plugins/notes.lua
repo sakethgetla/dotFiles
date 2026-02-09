@@ -64,6 +64,12 @@ return {
 		},
 
 		opts = {
+			-- Disable default mappings (gf, <leader>ch, <cr>) to prevent insert mode interference
+			mappings = {},
+			-- Disable completion to prevent it from searching files while typing in code blocks
+			completion = {
+				nvim_cmp = false,
+			},
 			ui = { enable = false },
 			workspaces = {
 				{

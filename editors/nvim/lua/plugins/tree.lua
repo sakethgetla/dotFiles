@@ -24,6 +24,28 @@ return {
   ---@module "neo-tree"
   ---@type neotree.Config?
   opts = {
-    -- add options here
+    window = {
+      mappings = {
+        ["y"] = function(state)
+          local node = state.tree:get_node()
+          local filepath = node:get_id()
+          local filename = node.name
+          local modify = vim.fn.fnamemodify
+
+          local results = {
+            filepath,
+            modify(filepath, ":."),
+            filename,
+          }
+
+          vim.ui.select(results, { prompt = "Choose to copy:" }, function(choice)
+            if choice then
+              vim.fn.setreg("+", choice)
+              vim.notify("Copied: " .. choice)
+            end
+          end)
+        end,
+      },
+    },
   },
 }
