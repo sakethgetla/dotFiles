@@ -7,11 +7,8 @@ vim.opt.showcmd = true
 -- vim.opt.cursorline = true
 -- vim.opt.autoread = true
 
--- makes vim display [tab] as 2 spaces but shiftwidth actually inserts spaces
--- vim.opt.tabstop = 2 
--- vim.opt.softtabstop = 2
-
--- use spaces for tabs 
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.shiftround = true
 vim.opt.expandtab = true
@@ -68,9 +65,10 @@ vim.opt.conceallevel = 1
 
 -- Keep signcolumn on by default (already set above with vim.opt.signcolumn)
 
--- -- fold
--- vim.wo.foldmethod = 'expr'
--- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- fold
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.wo.foldlevel = 99
 
 -- spell
 vim.cmd [[autocmd FileType * setlocal spell spelllang=en_us]] 

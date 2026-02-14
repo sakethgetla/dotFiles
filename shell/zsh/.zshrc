@@ -144,6 +144,9 @@ alias rmt="trash"
 # The next line enables shell command completion for gcloud.
 # if [ -f '/Users/sakethgetla/Downloads/google-cloud-sdk 2/completion.zsh.inc' ]; then . '/Users/sakethgetla/Downloads/google-cloud-sdk 2/completion.zsh.inc'; fi
 
-export BUN_INSTALL="$HOME/.bun" 
+export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+
+export EDITOR='nvim'

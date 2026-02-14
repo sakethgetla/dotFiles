@@ -24,6 +24,17 @@ return {
   ---@module "neo-tree"
   ---@type neotree.Config?
   opts = {
+    filesystem = {
+      filtered_items = {
+        visible = true,        -- show dotfiles
+        hide_dotfiles = false,  -- don't hide dotfiles
+        hide_gitignored = false,
+        never_show = {
+          "node_modules",
+          ".git",
+        },
+      },
+    },
     window = {
       mappings = {
         ["y"] = function(state)
