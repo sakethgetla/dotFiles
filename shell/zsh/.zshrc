@@ -120,6 +120,7 @@ bindkey -v
 
 # swap capslock and esc
 # setxkbmap -option caps:swapescape
+# setxkbmap -option ctrl:swap_lalt_lctl
 
 # like 'rm' but sends to trash rather than permanent delete
 # alias rmt="trash-put"

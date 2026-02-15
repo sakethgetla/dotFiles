@@ -1,93 +1,79 @@
-  {
-    "terminal.external.osxExec": "Kitty.app",
-    "emmet.showSuggestionsAsSnippets": true,
-    "editor.snippetSuggestions": "bottom",
-    "zenMode.hideLineNumbers": false,
-    "terminal.integrated.defaultProfile.osx": "zsh",
-    "terminal.integrated.fontFamily": "MesloLGS NF",
-    "editor.lineNumbers": "relative",
-    "workbench.editor.enablePreview": false,
-    "explorer.confirmDelete": false,
-    "git.confirmSync": false,
-    // "whichkey.delay": 0,
-    "keyboard.dispatch": "keyCode",
-    // "whichkey.sortOrder": "alphabetically",
-    // "whichkey.bindings": [
+{
+  "terminal.external.osxExec": "Kitty.app",
+  "emmet.showSuggestionsAsSnippets": true,
+  "editor.snippetSuggestions": "bottom",
+  "zenMode.hideLineNumbers": false,
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "editor.lineNumbers": "relative",
+  "workbench.editor.enablePreview": false,
+  "explorer.confirmDelete": false,
+  "git.confirmSync": false,
+  // "whichkey.delay": 0,
+  "keyboard.dispatch": "keyCode",
+  // "whichkey.sortOrder": "alphabetically",
+  // "whichkey.bindings": [
+  //   {
+  //     "key": ";",
+  //     "name": "commands",
+  //     "type": "command",
+  //     "command": "workbench.action.showCommands"
+  //   }
+  // ],
+  "window.customTitleBarVisibility": "windowed",
+  "terminal.explorerKind": "external",
+  "terminal.external.linuxExec": "Kitty.app",
+  // "vim.easymotion": true,
+  // "vim.incsearch": true,
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  // "vim.useCtrlKeys": true,
+  //    "vim.useComm"
+  "vim.hlsearch": true,
+  // "vim.map-",
+  // "vim.insertModeKeyBindings": [
+  //   // {
+  //   //   "before": ["j", "j"],
+  //   //   "after": ["<Esc>"]
+  //   // }
+  // ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "d"],
+      "after": ["d", "d"]
+    },
     //   {
-    //     "key": ";",
-    //     "name": "commands",
-    //     "type": "command",
-    //     "command": "workbench.action.showCommands"
-    //   }
-    // ],
-    "window.customTitleBarVisibility": "windowed",
-    "terminal.explorerKind": "external",
-    "terminal.external.linuxExec": "Kitty.app",
-    // "vim.easymotion": true,
-    // "vim.incsearch": true,
-    "vim.easymotion": true,
-    "vim.incsearch": true,
-    "vim.useSystemClipboard": true,
-    // "vim.useCtrlKeys": true,
-	//    "vim.useComm"
-    "vim.hlsearch": true,
-	// "vim.map-",
-    // "vim.insertModeKeyBindings": [
-    //   // {
-    //   //   "before": ["j", "j"],
-    //   //   "after": ["<Esc>"]
-    //   // }
-    // ],
-    "vim.normalModeKeyBindingsNonRecursive": [
-      {
-        "before": [
-          "<leader>",
-          "d"
-        ],
-        "after": [
-          "d",
-          "d"
-        ]
-      },
-	//   {
-	// 	"before": [
-	// 		"<C-e>"
-	// 	],
-	// 	"after": [
-	// 		// "<D-e>",
-	// 		"M-e"
-	// 	]
-	//   },
-      {
-        "before": [
-          "<C-n>"
-        ],
-        "commands": [
-          ":nohl"
-        ]
-      },
-      {
-        "before": [
-          "K"
-        ],
-        "commands": [
-          "lineBreakInsert"
-        ],
-        "silent": true
-      }
-    ],
-    "vim.leader": "<space>",
-    "vim.handleKeys": {
-      "<C-a>": false,
-      "<C-f>": false
-	},
-    "editor.minimap.enabled": false,
-    "github.copilot.nextEditSuggestions.enabled": true,
-    "workbench.secondarySideBar.defaultVisibility": "hidden",
-	"workbench.colorTheme": "Default Light Modern",
-	"git.ignoreRebaseWarning": true,
-	"workbench.editor.showTabs": "single",
-	"diffEditor.ignoreTrimWhitespace": false,
-	"git.blame.editorDecoration.enabled": false,
-	"cursor.cpp.enablePartialAccepts": true
-  }
+    // 	"before": [
+    // 		"<C-e>"
+    // 	],
+    // 	"after": [
+    // 		// "<D-e>",
+    // 		"M-e"
+    // 	]
+    //   },
+    {
+      "before": ["<C-n>"],
+      "commands": [":nohl"]
+    },
+    {
+      "before": ["K"],
+      "commands": ["lineBreakInsert"],
+      "silent": true
+    }
+  ],
+  "vim.leader": "<space>",
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false
+  },
+  "editor.minimap.enabled": false,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "workbench.colorTheme": "Default Light Modern",
+  "git.ignoreRebaseWarning": true,
+  "workbench.editor.showTabs": "single",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "git.blame.editorDecoration.enabled": false,
+  "cursor.cpp.enablePartialAccepts": true
+}
