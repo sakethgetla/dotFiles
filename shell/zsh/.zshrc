@@ -151,3 +151,6 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 export EDITOR='nvim'
+
+# Sentry auth token for source map uploads
+export SENTRY_AUTH_TOKEN=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
