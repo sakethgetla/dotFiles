@@ -523,7 +523,7 @@ client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
 bar {
     font pango: Noto Sans Regular 10
     # status_command i3blocks -c ~/.config/i3/i3blocks.conf
-    status_command i3status
+    status_command ~/.config/i3/scripts/i3status-kb
     position top
     # position bottom
 

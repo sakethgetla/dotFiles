@@ -8,5 +8,6 @@ BLUR="5x4"
 $SCREENSHOT
 convert $PICTURE -blur $BLUR $PICTURE
 # magick $PICTURE -blur $BLUR $PICTURE
+setxkbmap -layout us
 i3lock -i $PICTURE
 rm $PICTURE

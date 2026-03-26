@@ -7,5 +7,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-setxkbmap -option caps:swapescape
-setxkbmap -option ctrl:swap_lalt_lctl
+# setxkbmap -option caps:swapescape
+# setxkbmap -option ctrl:swap_lalt_lctl
+
+export GTK_THEME=Adwaita-dark
+export QT_QPA_PLATFORMTHEME=qt5ct

@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Wraps i3status JSON output and prepends keyboard layout indicator
+
+first=true
+i3status | while read -r line; do
+    if [[ $line == '{"version":'* ]] || [[ $line == '[' ]]; then
+        echo "$line"
+        continue
+    fi
+
+    layout=$(setxkbmap -query 2>/dev/null | awk '/variant/{print $2}')
+    if [ -z "$layout" ]; then
+        layout=$(setxkbmap -query 2>/dev/null | awk '/layout/{print $2}')
+    fi
+
+    # Volume indicator (PipeWire/PulseAudio via pactl)
+    vol_pct=$(pactl get-sink-volume @DEFAULT_SINK@ 2>/dev/null | grep -oP '\d+%' | head -1)
+    vol_mute=$(pactl get-sink-mute @DEFAULT_SINK@ 2>/dev/null | grep -oP '(yes|no)')
+    if [ "$vol_mute" = "yes" ]; then
+        vol_text="VOL: mute"
+        vol_color="#bf616a"
+    else
+        vol_text="VOL: ${vol_pct:-?}"
+        vol_color="#88c0d0"
+    fi
+
+    kb_block="{\"full_text\":\"KB: $layout\",\"color\":\"#a3be8c\"}"
+    vol_block="{\"full_text\":\"$vol_text\",\"color\":\"$vol_color\"}"
+
+    # Strip leading comma if present
+    stripped="${line#,}"
+    # First line has no leading comma
+    if [ "$first" = true ]; then
+        echo "[$vol_block,$kb_block,${stripped#\[}" || exit 1
+        first=false
+    else
+        echo ",[$vol_block,$kb_block,${stripped#\[}" || exit 1
+    fi
+done

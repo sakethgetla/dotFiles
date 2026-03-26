@@ -18,12 +18,12 @@ case $config in
 
   moniterAndLaptop | mnl)
     print 'moniter and laptop config'
-    # setxkbmap -layout us 
-    setxkbmap -layout us -variant colemak_dh_ortho
-    setxkbmap -option
-    
-    xrandr --output DisplayPort-8 --auto --primary
-    xrandr --output eDP --auto --left-of DisplayPort-8
+    setxkbmap -layout us 
+    # setxkbmap -layout us -variant colemak_dh_ortho
+    # setxkbmap -option
+    # xrandr --output DisplayPort-8 --auto --primary
+    # xrandr --output eDP --auto --left-of DisplayPort-8
+
     # xrandr --output eDP --auto 
     ;;
 
