@@ -211,9 +211,9 @@ bindsym F1 exec --no-startup-id ~/.config/i3/scripts/keyhint-2
 
 # moniter
 # bindsym F3 exec --no-startup-id
-bindsym F2 exec --no-startup-id sh /mnt/config/dotFiles/shellScripts/startup.zsh laptop
-bindsym F3 exec --no-startup-id sh /mnt/config/dotFiles/shellScripts/startup.zsh mnl
-bindsym F4 exec --no-startup-id sh /mnt/config/dotFiles/shellScripts/startup.zsh moniter
+bindsym F2 exec --no-startup-id sh ~/me/dotFiles/shellScripts/startup.zsh laptop
+bindsym F3 exec --no-startup-id sh ~/me/dotFiles/shellScripts/startup.zsh mnl
+bindsym F4 exec --no-startup-id sh ~/me/dotFiles/shellScripts/startup.zsh moniter
 
 # Backlight control
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight +10 && notify-send "Brightness - $(xbacklight -get | cut -d '.' -f 1)%"
