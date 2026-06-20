@@ -66,9 +66,20 @@ vim.opt.conceallevel = 1
 -- Keep signcolumn on by default (already set above with vim.opt.signcolumn)
 
 -- fold
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.wo.foldlevel = 99
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldlevel = 99
+
+-- re-evaluate folds after treesitter parser attaches
+vim.api.nvim_create_autocmd('BufReadPost', {
+	callback = function()
+		vim.schedule(function()
+			if pcall(vim.treesitter.get_parser) then
+				vim.opt_local.foldmethod = 'expr'
+			end
+		end)
+	end,
+})
 
 -- spell
 vim.cmd [[autocmd FileType * setlocal spell spelllang=en_us]] 

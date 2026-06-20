@@ -137,6 +137,18 @@ return {
 				-- 	enable = false,
 				-- },
 			})
+
+			vim.keymap.set("n", "<leader>gb", function()
+				gitsigns.blame_line({ full = true })
+			end, { desc = "[G]it [B]lame line" })
+
+			vim.keymap.set("n", "<leader>gB", gitsigns.toggle_current_line_blame, {
+				desc = "[G]it toggle current-line [B]lame",
+			})
+
+			vim.keymap.set("n", "<leader>gF", function()
+				vim.cmd("Git blame")
+			end, { desc = "[G]it full-file blame" })
 		end,
 	},
 }

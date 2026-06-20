@@ -56,6 +56,12 @@ return {
             end
           end)
         end,
+        ["g"] = function(state)
+          local node = state.tree:get_node()
+          local path = node:get_id()
+          local dir = node.type == "directory" and path or vim.fn.fnamemodify(path, ":h")
+          require("fzf-lua").live_grep({ cwd = dir })
+        end,
       },
     },
   },

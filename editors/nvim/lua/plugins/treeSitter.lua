@@ -23,6 +23,7 @@ return {
 				"typst",
 				"yaml",
 				"bash",
+				"json",
 			},
 			sync_install = false,
 			auto_install = true,

@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+KITTY_CONF="$HOME/me/dotFiles/terminalEmulators/kitty/kitty.conf"
+LAUNCH_AGENTS="$HOME/Library/LaunchAgents"
+PLIST_LABEL="com.user.triage-watcher"
+PLIST="$LAUNCH_AGENTS/$PLIST_LABEL.plist"
+
+# legacy label from earlier kitty-dash naming; cleaned up if present
+LEGACY_LABEL="com.user.kitty-dash-watcher"
+LEGACY_PLIST="$LAUNCH_AGENTS/$LEGACY_LABEL.plist"
+
+say() { printf '==> %s\n' "$*"; }
+
+# 0. tear down legacy service if it exists
+if launchctl print "gui/$(id -u)/$LEGACY_LABEL" >/dev/null 2>&1; then
+    say "Removing legacy $LEGACY_LABEL"
+    launchctl bootout "gui/$(id -u)" "$LEGACY_PLIST" 2>/dev/null || true
+fi
+[ -f "$LEGACY_PLIST" ] && rm -f "$LEGACY_PLIST"
+
+# 1. venv + deps
+if [ ! -d "$ROOT/.venv" ]; then
+    say "Creating venv at $ROOT/.venv"
+    python3 -m venv "$ROOT/.venv"
+fi
+say "Installing deps"
+"$ROOT/.venv/bin/pip" install --quiet --upgrade pip
+"$ROOT/.venv/bin/pip" install --quiet -r "$ROOT/requirements.txt"
+
+# 2. ensure bin scripts are executable
+chmod +x "$ROOT/bin/triage" "$ROOT/bin/triage-watcher"
+
+# 3. render and install plist
+mkdir -p "$LAUNCH_AGENTS"
+say "Rendering $PLIST"
+sed -e "s|__BIN_PATH__|$ROOT/bin/triage-watcher|g" \
+    "$ROOT/launchd/$PLIST_LABEL.plist.template" > "$PLIST"
+
+# 4. (re)bootstrap launchd
+if launchctl print "gui/$(id -u)/$PLIST_LABEL" >/dev/null 2>&1; then
+    say "Restarting existing $PLIST_LABEL"
+    launchctl kickstart -k "gui/$(id -u)/$PLIST_LABEL"
+else
+    say "Bootstrapping $PLIST_LABEL"
+    launchctl bootstrap "gui/$(id -u)" "$PLIST"
+fi
+
+# 5. kitty.conf idempotent append
+if [ -f "$KITTY_CONF" ]; then
+    if ! grep -q "^# triage$" "$KITTY_CONF"; then
+        say "Appending triage block to $KITTY_CONF"
+        cat >> "$KITTY_CONF" << 'EOF'
+
+# triage
+allow_remote_control yes
+listen_on unix:/tmp/kitty-$KITTY_PID
+EOF
+        say "RESTART kitty (Cmd+Q and reopen) so allow_remote_control takes effect."
+    else
+        say "kitty.conf already has triage block."
+    fi
+else
+    say "WARNING: $KITTY_CONF not found; add this manually:"
+    cat << 'EOF'
+
+    # triage
+    allow_remote_control yes
+    listen_on unix:/tmp/kitty-$KITTY_PID
+
+EOF
+fi
+
+say "Done."
+say "Logs:    tail -f /tmp/triage-watcher.log"
+say "Dashboard: open a new kitty tab and run: $ROOT/bin/triage"

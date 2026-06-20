@@ -355,12 +355,7 @@
 	{
 		"key": "ctrl+i",
 		"command": "composerMode.agent"
-	},
-	// {
-	//   "key": "ctrl+f",
-	//   "command": "-actions.find",
-	//   "when": "editorFocus || editorIsOpen"
-	// }
+	}
 ]
 // [
 //   // Navigation

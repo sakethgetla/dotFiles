@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(dirname "$HERE")"
+cd "$ROOT"
+# Name this tab so the watcher excludes it from coloring.
+printf '\033]2;triage\007'
+exec "$ROOT/.venv/bin/python" -m triage.dashboard "$@"

@@ -70,10 +70,11 @@
   "editor.minimap.enabled": false,
   "github.copilot.nextEditSuggestions.enabled": true,
   "workbench.secondarySideBar.defaultVisibility": "hidden",
-  "workbench.colorTheme": "Default Light Modern",
+  "workbench.colorTheme": "Default Dark Modern",
   "git.ignoreRebaseWarning": true,
   "workbench.editor.showTabs": "single",
   "diffEditor.ignoreTrimWhitespace": false,
   "git.blame.editorDecoration.enabled": false,
-  "cursor.cpp.enablePartialAccepts": true
+"cursor.cpp.enablePartialAccepts": true,
+"window.autoDetectColorScheme": false
 }
