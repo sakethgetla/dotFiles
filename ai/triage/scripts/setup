@@ -30,24 +30,16 @@ say "Installing deps"
 "$ROOT/.venv/bin/pip" install --quiet -r "$ROOT/requirements.txt"
 
 # 2. ensure bin scripts are executable
-chmod +x "$ROOT/bin/triage" "$ROOT/bin/triage-watcher"
+chmod +x "$ROOT/bin/triage"
 
-# 3. render and install plist
-mkdir -p "$LAUNCH_AGENTS"
-say "Rendering $PLIST"
-sed -e "s|__BIN_PATH__|$ROOT/bin/triage-watcher|g" \
-    "$ROOT/launchd/$PLIST_LABEL.plist.template" > "$PLIST"
-
-# 4. (re)bootstrap launchd
+# 3. remove watcher launchd service if present (watcher now runs as dashboard subprocess)
 if launchctl print "gui/$(id -u)/$PLIST_LABEL" >/dev/null 2>&1; then
-    say "Restarting existing $PLIST_LABEL"
-    launchctl kickstart -k "gui/$(id -u)/$PLIST_LABEL"
-else
-    say "Bootstrapping $PLIST_LABEL"
-    launchctl bootstrap "gui/$(id -u)" "$PLIST"
+    say "Removing $PLIST_LABEL (watcher now owned by dashboard process)"
+    launchctl bootout "gui/$(id -u)" "$PLIST" 2>/dev/null || true
 fi
+[ -f "$PLIST" ] && rm -f "$PLIST"
 
-# 5. kitty.conf idempotent append
+# 4. kitty.conf idempotent append
 if [ -f "$KITTY_CONF" ]; then
     if ! grep -q "^# triage$" "$KITTY_CONF"; then
         say "Appending triage block to $KITTY_CONF"
@@ -73,5 +65,4 @@ EOF
 fi
 
 say "Done."
-say "Logs:    tail -f /tmp/triage-watcher.log"
 say "Dashboard: open a new kitty tab and run: $ROOT/bin/triage"

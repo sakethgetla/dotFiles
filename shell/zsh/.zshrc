@@ -152,5 +152,5 @@ export PATH="$HOME/bin:$PATH"
 
 export EDITOR='nvim'
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 source ~/.secrets

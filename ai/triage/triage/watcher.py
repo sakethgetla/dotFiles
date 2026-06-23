@@ -1,20 +1,24 @@
 from __future__ import annotations
 
 import argparse
+import fcntl
 import logging
 import os
 import signal
 import sys
 import time
 from datetime import datetime, timezone
+from pathlib import Path
 
-from . import codex, kitty
+from . import codex, kitty, summaries
 from . import state as state_module
 from .classifier import classify, tail_jsonl
 from .state import DashboardState, SessionRow, State
+from .summaries import SummaryEntry, SummaryManager
 
 POLL_INTERVAL_SEC = 1.5
 DASHBOARD_TAB_TITLE = "triage"
+LOCK_PATH = Path.home() / ".triage" / "watcher.lock"
 
 MARKER_GREEN = "🟢"
 MARKER_YELLOW = "🟡"
@@ -68,7 +72,7 @@ def now_iso() -> str:
     )
 
 
-def tick(last_markers: dict[int, str]) -> dict[int, str]:
+def tick(last_markers: dict[int, str], mgr: SummaryManager) -> dict[int, str]:
     sessions: list[SessionRow] = []
     tab_states: dict[int, list[State]] = {}
     tab_raw_titles: dict[int, str] = {}
@@ -78,25 +82,40 @@ def tick(last_markers: dict[int, str]) -> dict[int, str]:
         log.debug("kitty @ ls returned nothing; skipping tick")
         return last_markers
 
+    manual = summaries.drain_regen_requests()
+    cache = summaries.load_cache()
+    cache_dirty = False
+    for path, src_at, text in mgr.drain_completed():
+        if text:
+            cache[path] = SummaryEntry(
+                summary=text,
+                generated_at=now_iso(),
+                source_last_event_at=src_at,
+            )
+            cache_dirty = True
+            log.info("summary refreshed for %s", os.path.basename(path))
+
     for tab_id, tab_title, window_id, _window_pid, fg_procs in kitty.iter_tab_windows(
         ls_out
     ):
         original_title = _strip_marker(tab_title)
-        if original_title == DASHBOARD_TAB_TITLE:
-            continue
+        in_triage_tab = original_title == DASHBOARD_TAB_TITLE
         codex_pid = codex.find_codex_in_foreground(fg_procs)
         if codex_pid is None:
             continue
         session_path = codex.jsonl_for_pid(codex_pid)
         if not session_path:
             # codex is launched but hasn't created a JSONL yet
-            # (no first prompt sent). Mark the tab green, no dashboard row.
-            tab_states.setdefault(tab_id, []).append(State.UNKNOWN)
-            tab_raw_titles[tab_id] = tab_title
+            # (no first prompt sent). Mark the tab as needs-you (UNKNOWN),
+            # but skip marker for the triage tab itself.
+            if not in_triage_tab:
+                tab_states.setdefault(tab_id, []).append(State.UNKNOWN)
+                tab_raw_titles[tab_id] = tab_title
             continue
         alive = codex.process_alive(codex_pid)
         tail = tail_jsonl(session_path)
         state, last_ev_type, last_ev_at = classify(tail, alive)
+        entry = cache.get(session_path)
         sessions.append(
             SessionRow(
                 tab_id=tab_id,
@@ -107,10 +126,36 @@ def tick(last_markers: dict[int, str]) -> dict[int, str]:
                 state=state,
                 last_event_type=last_ev_type,
                 last_event_at=last_ev_at,
+                summary=entry.summary if entry else None,
             )
         )
-        tab_states.setdefault(tab_id, []).append(state)
-        tab_raw_titles[tab_id] = tab_title
+        should_regen = session_path in manual or (
+            state == State.NEEDS_YOU
+            and last_ev_type == "task_complete"
+            and (entry is None or entry.source_last_event_at != (last_ev_at or ""))
+            and not mgr.attempted(session_path, last_ev_at or "")
+        )
+        if should_regen:
+            mgr.submit(session_path, last_ev_at or "")
+        if not in_triage_tab:
+            tab_states.setdefault(tab_id, []).append(state)
+            tab_raw_titles[tab_id] = tab_title
+
+    # Submit manual regen requests for historical (non-live) sessions that were
+    # not matched inside the kitty loop because they have no live window.
+    handled = {s.session_path for s in sessions}
+    for path in manual:
+        if path not in handled:
+            try:
+                mtime = os.path.getmtime(path)
+                src_at = (
+                    datetime.fromtimestamp(mtime, timezone.utc)
+                    .isoformat(timespec="milliseconds")
+                    .replace("+00:00", "Z")
+                )
+            except OSError:
+                src_at = ""
+            mgr.submit(path, src_at)
 
     # Aggregate per-tab marker (one marker per tab, even with multiple sessions).
     new_markers: dict[int, str] = {}
@@ -143,6 +188,12 @@ def tick(last_markers: dict[int, str]) -> dict[int, str]:
         )
     )
 
+    if cache_dirty:
+        try:
+            summaries.write_cache(cache)
+        except Exception:
+            log.exception("write_cache failed")
+
     return new_markers
 
 
@@ -153,6 +204,26 @@ def restore_all_titles() -> None:
         except Exception:
             pass
     _original_titles.clear()
+
+
+def acquire_singleton_lock(path: Path = LOCK_PATH):
+    """Take an exclusive flock so only one watcher runs at a time.
+
+    Returns the held file object on success (keep it alive for the process
+    lifetime), or None if another watcher already holds the lock. flock is
+    released automatically when the holder dies — including SIGKILL or a hard
+    crash — so there is no stale-pidfile problem to clean up.
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+    lock_file = open(path, "w")
+    try:
+        fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        lock_file.close()
+        return None
+    lock_file.write(str(os.getpid()))
+    lock_file.flush()
+    return lock_file
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -168,10 +239,26 @@ def main(argv: list[str] | None = None) -> int:
         format="%(asctime)s %(levelname)s %(name)s %(message)s",
         stream=sys.stdout,
     )
+    lock_file = acquire_singleton_lock()
+    if lock_file is None:
+        log.info("another triage watcher is already running; exiting")
+        return 0
     log.info("triage watcher starting (pid=%d, interval=%.2fs)", os.getpid(), args.interval)
 
     last_markers: dict[int, str] = {}
     stop = False
+    mgr = SummaryManager()
+
+    # Prune the summary cache once at startup so closed/stale sessions don't
+    # accumulate across reboots.
+    try:
+        cache = summaries.load_cache()
+        removed = summaries.prune_cache(cache)
+        if removed:
+            summaries.write_cache(cache)
+            log.info("pruned %d stale summary entries", removed)
+    except Exception:
+        log.exception("summary cache prune failed")
 
     def handle_sig(signum, _frame):
         nonlocal stop
@@ -184,7 +271,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         while not stop:
             try:
-                last_markers = tick(last_markers)
+                last_markers = tick(last_markers, mgr)
             except Exception:
                 log.exception("tick failed")
             slept = 0.0
@@ -192,6 +279,7 @@ def main(argv: list[str] | None = None) -> int:
                 time.sleep(0.1)
                 slept += 0.1
     finally:
+        mgr.shutdown()
         restore_all_titles()
         log.info("triage watcher stopped")
 

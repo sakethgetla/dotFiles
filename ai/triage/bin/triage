@@ -4,5 +4,8 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(dirname "$HERE")"
 cd "$ROOT"
 # Name this tab so the watcher excludes it from coloring.
+# OSC sets the window title; `set-tab-title` makes the tab title persistent
+# regardless of which pane is focused (so the watcher's check stays robust).
 printf '\033]2;triage\007'
+kitty @ set-tab-title triage 2>/dev/null || true
 exec "$ROOT/.venv/bin/python" -m triage.dashboard "$@"

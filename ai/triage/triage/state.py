@@ -24,6 +24,13 @@ class SessionRow:
     state: State
     last_event_type: str | None
     last_event_at: str | None
+    summary: str | None = None
+    # "live" (default) for watcher-discovered sessions; "historical" for rows
+    # the dashboard builds by scanning ~/.codex/sessions. Historical rows are
+    # in-memory only — they are never written through write_state().
+    kind: str = "live"
+    session_id: str | None = None  # codex UUID; resume target (historical only)
+    cwd: str | None = None         # session_meta cwd; launch dir (historical only)
 
 
 @dataclass
@@ -79,6 +86,10 @@ def read_state(path: Path = STATE_PATH) -> DashboardState | None:
                 state=State(s["state"]),
                 last_event_type=s.get("last_event_type"),
                 last_event_at=s.get("last_event_at"),
+                summary=s.get("summary"),
+                kind=s.get("kind", "live"),
+                session_id=s.get("session_id"),
+                cwd=s.get("cwd"),
             )
             for s in payload.get("sessions", [])
         ],

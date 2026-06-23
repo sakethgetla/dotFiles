@@ -111,6 +111,91 @@ def focus_window(window_id: int) -> None:
         pass
 
 
+def detach_window(window_id: int, target_tab: int | str) -> None:
+    """Move a kitty window (pane) into another tab.
+
+    target_tab is an existing tab id (int) → --target-tab id:M, or the literal
+    "new" → --target-tab new, which moves the window into a brand-new tab.
+
+    kitty @ detach-window --match id:N --target-tab (id:M | new)
+    """
+    target = "new" if target_tab == "new" else f"id:{target_tab}"
+    try:
+        _run(
+            "detach-window",
+            "--match", f"id:{window_id}",
+            "--target-tab", target,
+            timeout=2,
+        )
+    except subprocess.TimeoutExpired:
+        pass
+
+
+def close_window(window_id: int) -> None:
+    """Close a kitty window. A non-matching id is a harmless no-op."""
+    try:
+        _run("close-window", "--match", f"id:{window_id}", timeout=2)
+    except subprocess.TimeoutExpired:
+        pass
+
+
+def launch_window_in_tab(tab_id: int) -> int | None:
+    """Spawn a new pane (default shell) in the given tab; return its window id."""
+    try:
+        r = _run(
+            "launch",
+            "--type=window",
+            "--match", f"id:{tab_id}",
+            timeout=3,
+        )
+    except subprocess.TimeoutExpired:
+        return None
+    if r.returncode != 0:
+        return None
+    try:
+        return int(r.stdout.strip())
+    except ValueError:
+        return None
+
+
+def launch_command_in_tab(
+    tab_id: int,
+    cmd_args: list[str],
+    cwd: str | None = None,
+    hold: bool = False,
+    copy_env: bool = False,
+) -> int | None:
+    """Spawn a new pane in the given tab running cmd_args; return its window id.
+
+    hold=True keeps the pane open after the command exits (so an error from the
+    launched program stays visible instead of the pane vanishing). cwd sets the
+    working directory. copy_env=True copies the active window's environment into
+    the new pane — kitty otherwise execs the program directly under the server's
+    env (no shell, so .zshrc exports like $EDITOR are absent). The program and
+    its args are passed positionally last.
+
+    kitty @ launch --type=window --match id:N [--hold] [--copy-env] [--cwd D] <prog> [args...]
+    """
+    args = ["launch", "--type=window", "--match", f"id:{tab_id}"]
+    if hold:
+        args.append("--hold")
+    if copy_env:
+        args.append("--copy-env")
+    if cwd:
+        args.extend(["--cwd", cwd])
+    args.extend(cmd_args)
+    try:
+        r = _run(*args, timeout=3)
+    except subprocess.TimeoutExpired:
+        return None
+    if r.returncode != 0:
+        return None
+    try:
+        return int(r.stdout.strip())
+    except ValueError:
+        return None
+
+
 def iter_tab_windows(
     ls_output: list[dict],
 ) -> Iterator[tuple[int, str, int, int, list[dict]]]:

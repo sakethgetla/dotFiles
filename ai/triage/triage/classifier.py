@@ -31,9 +31,8 @@ def classify(
     a task_started and a task_complete the session is RUNNING whether the
     last event is a tool call or a reasoning chunk.
 
-    Mirrors arboretum (session_presence.rs:2358): wall-clock idle is never
-    a flip signal while the process is alive. A dead process always means
-    NEEDS_YOU regardless of last event.
+    Rule: wall-clock idle is never a flip signal while the process is alive.
+    A dead process always means NEEDS_YOU regardless of last event.
     """
     if not jsonl_tail:
         if not process_alive:
