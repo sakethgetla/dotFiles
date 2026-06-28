@@ -382,6 +382,121 @@ def test_mark_toggle_via_keypress(monkeypatch, tmp_path):
     asyncio.run(run())
 
 
+def test_refresh_data_serialized_by_lock(monkeypatch, tmp_path):
+    # The 0.5s interval and the direct refresh in key actions run on separate
+    # tasks; if their rebuilds overlap they interleave the clear+mount and crash
+    # with DuplicateIds. The lock must keep two refreshes mutually exclusive:
+    # stub the inner rebuild with a yielding body and assert it is never re-entered.
+    _patch_dashboard_io(monkeypatch, tmp_path, [_live_row()])
+
+    async def run():
+        app = TriageApp()
+        async with app.run_test() as pilot:
+            await pilot.pause()
+            inside = 0
+            overlapped = False
+
+            async def tracked() -> None:
+                nonlocal inside, overlapped
+                inside += 1
+                overlapped = overlapped or inside > 1
+                await asyncio.sleep(0)  # yield so a concurrent refresh could re-enter
+                inside -= 1
+
+            monkeypatch.setattr(app, "_refresh_data", tracked)
+            await asyncio.gather(app.refresh_data(), app.refresh_data())
+            assert overlapped is False  # would be True if the lock were removed
+
+    asyncio.run(run())
+
+
+def test_format_header_hidden_prepends_glyph():
+    from triage.hides import HIDE_GLYPH
+    assert HIDE_GLYPH not in TriageApp._format_header(_live_row(), hidden=False)
+    assert TriageApp._format_header(_live_row(), hidden=True).startswith(HIDE_GLYPH)
+    assert TriageApp._format_header(_hist_row("r"), hidden=True).startswith(HIDE_GLYPH)
+
+
+def test_hide_toggle_via_keypress(monkeypatch, tmp_path):
+    from triage import hides
+    from triage.hides import HIDE_GLYPH
+
+    hides_path = tmp_path / "hides.json"
+    monkeypatch.setattr(hides, "HIDES_PATH", hides_path)
+    rows = [
+        _needs_row("/s/a.jsonl", "2026-06-20T05:00:00.000Z", 1),
+        _needs_row("/s/b.jsonl", "2026-06-20T04:00:00.000Z", 2),
+    ]
+    _patch_dashboard_io(monkeypatch, tmp_path, rows)
+
+    def session_paths(lv):
+        return [c.row.session_path for c in lv.children if isinstance(c, dashboard.SessionItem)]
+
+    async def run():
+        app = TriageApp()
+        async with app.run_test() as pilot:
+            await pilot.pause()
+            lv = app.query_one("#sessions", ListView)
+            assert session_paths(lv) == ["/s/a.jsonl", "/s/b.jsonl"]
+            # Hide the second row → it drops out of the default view.
+            lv.index = 1
+            await pilot.press("h")
+            await pilot.pause()
+            assert session_paths(lv) == ["/s/a.jsonl"]
+            assert hides.load_hides(hides_path) == {"/s/b.jsonl"}
+            # Reveal hidden chats (H) → it returns, flagged with the glyph.
+            await pilot.press("H")
+            await pilot.pause()
+            assert session_paths(lv) == ["/s/a.jsonl", "/s/b.jsonl"]
+            assert app._show_hidden is True
+            hidden_item = next(
+                c for c in lv.children
+                if isinstance(c, dashboard.SessionItem) and c.row.session_path == "/s/b.jsonl"
+            )
+            assert HIDE_GLYPH in hidden_item._last_header
+            # Toggle reveal off → hidden chat is filtered out once more.
+            await pilot.press("H")
+            await pilot.pause()
+            assert session_paths(lv) == ["/s/a.jsonl"]
+            assert app._show_hidden is False
+
+    asyncio.run(run())
+
+
+def test_search_respects_hidden_mode(monkeypatch, tmp_path):
+    from triage import hides
+
+    hides_path = tmp_path / "hides.json"
+    monkeypatch.setattr(hides, "HIDES_PATH", hides_path)
+    rows = [
+        _needs_row("/s/apple.jsonl", "2026-06-20T05:00:00.000Z", 1),
+        _needs_row("/s/banana.jsonl", "2026-06-20T04:00:00.000Z", 2),
+    ]
+    rows[0].summary = "apple pie"
+    rows[1].summary = "banana split"
+    _patch_dashboard_io(monkeypatch, tmp_path, rows)
+    hides.toggle_hide("/s/banana.jsonl", hides_path)  # hide the matching chat
+
+    def session_paths(lv):
+        return [c.row.session_path for c in lv.children if isinstance(c, dashboard.SessionItem)]
+
+    async def run():
+        app = TriageApp()
+        async with app.run_test() as pilot:
+            await pilot.pause()
+            lv = app.query_one("#sessions", ListView)
+            # Normal mode: the hidden chat is unreachable via search.
+            app._search_query = "banana"
+            await app.refresh_data()
+            assert session_paths(lv) == []
+            # Reveal hidden chats → the same query now finds it.
+            app._show_hidden = True
+            await app.refresh_data()
+            assert session_paths(lv) == ["/s/banana.jsonl"]
+
+    asyncio.run(run())
+
+
 def test_marked_filter_shows_only_bookmarks(monkeypatch, tmp_path):
     from triage import marks
 
@@ -550,3 +665,37 @@ def test_regen_all_queues_every_visible_row(monkeypatch, tmp_path):
 
     asyncio.run(run())
     assert regen.read_text() == "/s/a.jsonl\n/s/b.jsonl\n/s/c.jsonl\n"
+
+
+def test_vim_top_bottom_jumps(monkeypatch, tmp_path):
+    rows = [
+        _needs_row("/s/a.jsonl", "2026-06-20T05:00:00.000Z", 1),
+        _needs_row("/s/b.jsonl", "2026-06-20T04:00:00.000Z", 2),
+        _needs_row("/s/c.jsonl", "2026-06-20T03:00:00.000Z", 3),
+    ]
+    _patch_dashboard_io(monkeypatch, tmp_path, rows)
+
+    def item_indices(lv):
+        return [i for i, c in enumerate(lv.children) if isinstance(c, dashboard.SessionItem)]
+
+    async def run():
+        app = TriageApp()
+        async with app.run_test() as pilot:
+            await pilot.pause()
+            lv = app.query_one("#sessions", ListView)
+            items = item_indices(lv)
+            # G jumps to the last selectable row.
+            await pilot.press("G")
+            await pilot.pause()
+            assert lv.index == items[-1]
+            # gg jumps back to the first selectable row.
+            await pilot.press("g", "g")
+            await pilot.pause()
+            assert lv.index == items[0]
+            # A lone g followed by an unrelated key does not jump.
+            lv.index = items[-1]
+            await pilot.press("g", "j")
+            await pilot.pause()
+            assert lv.index != items[0]
+
+    asyncio.run(run())

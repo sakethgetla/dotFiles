@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import atexit
 import os
 import subprocess
@@ -19,6 +20,7 @@ from textual.widgets import Footer, Header, Input, ListItem, ListView, Static
 from . import agentsearch
 from . import codex
 from . import history
+from . import hides
 from . import kitty
 from . import marks
 from . import state as state_module
@@ -229,6 +231,8 @@ class TriageApp(App):
         Binding("S", "regen_all", "regen all"),
         Binding("m", "toggle_mark", "mark"),
         Binding("M", "toggle_marked_filter", "bookmarks"),
+        Binding("h", "toggle_hide", "hide"),
+        Binding("H", "toggle_show_hidden", "show hidden"),
         Binding("d", "dismiss", "dismiss"),
         Binding("p", "preview", "preview"),
         Binding("n", "new_session", "new"),
@@ -236,14 +240,20 @@ class TriageApp(App):
         Binding("a", "ask", "ask"),
         Binding("j", "cursor_down", "down", show=False),
         Binding("k", "cursor_up", "up", show=False),
-        Binding("G", "cursor_top", "top", show=False),
+        Binding("G", "cursor_bottom", "bottom", show=False),
     ]
 
     _self_window_id: int | None = None
     _self_tab_id: int | None = None
+    _last_key: str | None = None
 
     def __init__(self) -> None:
         super().__init__()
+        # Serializes refresh_data: the 0.5s interval and the direct calls from
+        # key actions run on different tasks, so without this two refreshes can
+        # interleave at an await inside the clear+mount below and mount the same
+        # row ids twice (textual DuplicateIds crash).
+        self._refresh_lock = asyncio.Lock()
         self._watcher_proc: subprocess.Popen | None = None
         # session_path → prior summary text at moment of `s` press.
         # Cleared when the live summary differs (i.e. watcher regenerated it)
@@ -284,6 +294,12 @@ class TriageApp(App):
         self._marks: set[str] = set()
         # When True, the list is filtered to bookmarked chats only (toggled by M).
         self._marks_only: bool = False
+        # Hidden session paths, reloaded each refresh. Hidden chats are dropped
+        # from the list (and the search/ask pool) unless _show_hidden is on.
+        self._hides: set[str] = set()
+        # When True, hidden chats are revealed (with the 🚫 glyph) instead of
+        # filtered out (toggled by H).
+        self._show_hidden: bool = False
         # session_path → full transcript text (loaded in background)
         self._content_cache: dict[str, str] = {}
         self._content_executor: ThreadPoolExecutor = ThreadPoolExecutor(
@@ -318,7 +334,7 @@ class TriageApp(App):
 
     async def on_mount(self) -> None:
         self.title = "triage"
-        self.sub_title = "j/k move  ↵ swap  p preview  n new  d dismiss  s summary  m mark  M bookmarks  / search  a ask  r refresh  q quit"
+        self.sub_title = "j/k move  ↵ swap  p preview  n new  d dismiss  s summary  m mark  M bookmarks  h hide  H show-hidden  / search  a ask  r refresh  q quit"
         self._init_layout()
         self.set_interval(0.5, self.refresh_data)
         await self.refresh_data()
@@ -387,6 +403,12 @@ class TriageApp(App):
         return self._active_chat_win
 
     async def refresh_data(self) -> None:
+        # Hold the lock for the whole rebuild so a concurrent refresh (interval
+        # vs. action) can't interleave the clear+mount and double-mount rows.
+        async with self._refresh_lock:
+            await self._refresh_data()
+
+    async def _refresh_data(self) -> None:
         # Drain content-cache background jobs
         for path in list(self._content_futures):
             fut = self._content_futures[path]
@@ -407,6 +429,7 @@ class TriageApp(App):
             self._ask_future = None
 
         self._marks = marks.load_marks()
+        self._hides = hides.load_hides()
         ds = state_module.read_state()
         sessions = ds.sessions if ds else []
         needs = [s for s in sessions if s.state == State.NEEDS_YOU]
@@ -453,6 +476,13 @@ class TriageApp(App):
         self._refresh_counter += 1
         history_rows = [r for r in self._history_raw if r.session_path not in live_paths]
         display_history = history_rows[:HISTORY_DISPLAY_LIMIT]
+        # Drop hidden chats from every block (and the ask pool below) unless
+        # show-hidden mode is on. Done before the snapshot/search so search and
+        # ask only reach hidden chats while they're revealed.
+        if not self._show_hidden:
+            ordered = [s for s in ordered if s.session_path not in self._hides]
+            history_rows = [r for r in history_rows if r.session_path not in self._hides]
+            display_history = [r for r in display_history if r.session_path not in self._hides]
         # Snapshot the full candidate pool (live + full history) for the agent
         # search before any filtering or display-limiting narrows it.
         self._ask_pool = list(ordered) + list(history_rows)
@@ -518,6 +548,8 @@ class TriageApp(App):
         counts_text = f"[b red]NEEDS YOU {len(needs)}[/]   [b green]RUNNING {len(running)}[/]"
         if self._marks_only:
             counts_text += f"   [b]{marks.MARK_GLYPH} bookmarked only ({len(self._marks)})[/]"
+        if self._show_hidden:
+            counts_text += f"   [b]{hides.HIDE_GLYPH} showing hidden ({len(self._hides)})[/]"
         if self._ask_pending:
             counts_text += "   [b]🔎 searching…[/]"
         elif self._ask_results is not None:
@@ -537,6 +569,7 @@ class TriageApp(App):
                 s,
                 s.session_path in self._marks,
                 active_win is not None and s.window_id == active_win,
+                s.session_path in self._hides,
             )
 
         entries: list[tuple[str, SessionRow | None, str, bool]] = []
@@ -619,22 +652,27 @@ class TriageApp(App):
             lv.index = new_index
 
     @staticmethod
-    def _format_header(s: SessionRow, marked: bool = False, active: bool = False) -> str:
+    def _format_header(
+        s: SessionRow, marked: bool = False, active: bool = False, hidden: bool = False
+    ) -> str:
         # A bold title (the chat's headline) sits next to the status dot, with
         # idle time dimmed after it. Tab number/title are noise and omitted.
         # `active` ⇒ this chat is the one open in the right pane right now.
+        # `hidden` ⇒ flagged hidden; only ever rendered in show-hidden mode,
+        # since hidden rows are otherwise filtered out before this is called.
         mark = f"{marks.MARK_GLYPH} " if marked else ""
+        hide_glyph = f"{hides.HIDE_GLYPH} " if hidden else ""
         active_glyph = "[bold cyan]▶[/] " if active else ""
         title = f"[bold]{escape(s.title)}[/] " if s.title else ""
         if s.kind == "historical":
             # No live pid/window; a hollow ○ distinguishes it from live ●. Glyph
             # leads, then the bold title, then the dim age — same order as live.
-            return f"{active_glyph}{mark}[dim]○[/] {title}[dim]ran {humanize_age(s.last_event_at)} ago[/]"
+            return f"{active_glyph}{hide_glyph}{mark}[dim]○[/] {title}[dim]ran {humanize_age(s.last_event_at)} ago[/]"
         dot = "[red]●[/]" if s.state == State.NEEDS_YOU else "[green]●[/]"
         age = humanize_age(s.last_event_at)
         suffix = "" if s.state == State.NEEDS_YOU else " ago"
         verb = "idle" if s.state == State.NEEDS_YOU else "last ev"
-        return f"{active_glyph}{mark}{dot} {title}[dim]{verb} {age}{suffix}[/]"
+        return f"{active_glyph}{hide_glyph}{mark}{dot} {title}[dim]{verb} {age}{suffix}[/]"
 
     def action_search(self) -> None:
         search = self.query_one("#search", Input)
@@ -684,6 +722,14 @@ class TriageApp(App):
                 self._submit_ask(query)
 
     def on_key(self, event) -> None:
+        if event.key == "g":
+            if self._last_key == "g":
+                self._last_key = None
+                self.action_cursor_top()
+            else:
+                self._last_key = "g"
+            return
+        self._last_key = None
         if event.key == "escape":
             ask = self.query_one("#ask", Input)
             if ask.display:
@@ -736,6 +782,14 @@ class TriageApp(App):
         lv = self.query_one("#sessions", ListView)
         for i, child in enumerate(lv.children):
             if isinstance(child, SessionItem):
+                lv.index = i
+                break
+
+    def action_cursor_bottom(self) -> None:
+        """Move focus to the last selectable row (vim-style bottom jump)."""
+        lv = self.query_one("#sessions", ListView)
+        for i in range(len(lv.children) - 1, -1, -1):
+            if isinstance(lv.children[i], SessionItem):
                 lv.index = i
                 break
 
@@ -793,6 +847,21 @@ class TriageApp(App):
     async def action_toggle_marked_filter(self) -> None:
         """Toggle showing only bookmarked chats."""
         self._marks_only = not self._marks_only
+        await self.refresh_data()
+
+    async def action_toggle_hide(self) -> None:
+        """Hide/unhide the highlighted chat from the default list view."""
+        lv = self.query_one("#sessions", ListView)
+        child = lv.highlighted_child
+        if not isinstance(child, SessionItem):
+            return
+        hides.toggle_hide(child.row.session_path)
+        # repaint immediately so the row drops/returns before the next refresh tick
+        await self.refresh_data()
+
+    async def action_toggle_show_hidden(self) -> None:
+        """Toggle revealing hidden chats (with the 🚫 glyph) in the list."""
+        self._show_hidden = not self._show_hidden
         await self.refresh_data()
 
     @staticmethod

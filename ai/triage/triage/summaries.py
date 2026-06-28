@@ -71,7 +71,6 @@ SUMMARY_RETRY_PROMPT = (
     "Reply with 1 to 3 plain sentences only."
 )
 TRANSCRIPT_MAX_CHARS = 60_000
-SUMMARY_MAX_CHARS = 500
 # Recent tool/agent calls appended to the transcript so the model can ground the
 # "current status" in what the session actually did, not just what was said.
 ACTIONS_HEADER = "--- RECENT ACTIVITY (oldest first) ---"
@@ -371,22 +370,17 @@ def _looks_malformed(line: str) -> bool:
     return bool(_NUMBER_PREFIX.match(line) or _BULLET_PREFIX.match(line))
 
 
-def _sanitize(line: str, max_chars: int = SUMMARY_MAX_CHARS) -> str:
-    """Strip residual numbering/bullets/URLs, collapse to one paragraph, cap length.
+def _sanitize(line: str) -> str:
+    """Strip residual numbering/bullets/URLs and collapse to one paragraph.
 
-    Caps on a word boundary so an over-long recap ends cleanly with an ellipsis
-    instead of a chopped-off word/backtick. Final safety net after the model.
+    No length cap: the full recap is stored so the focused dashboard row can
+    expand to show all of it. The collapsed row clips lines visually (CSS), and
+    the prompt steers the model toward a few sentences, so the body stays sane.
     """
     line = _NUMBER_PREFIX.sub("", line)
     line = _BULLET_PREFIX.sub("", line)
     line = _URL.sub("", line)
-    text = " ".join(line.split())
-    if len(text) <= max_chars:
-        return text
-    cut = text[: max_chars - 1]
-    if " " in cut:
-        cut = cut[: cut.rfind(" ")]
-    return cut.rstrip(" ,;:—-`(") + "…"
+    return " ".join(line.split())
 
 
 def _split_title_summary(text: str) -> tuple[str, str]:

@@ -12,7 +12,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from triage import summaries
 from triage.summaries import (
-    SUMMARY_MAX_CHARS,
     SummaryEntry,
     SummaryManager,
     drain_regen_requests,
@@ -297,12 +296,15 @@ def test_looks_malformed_detects_list_shapes():
     assert not _looks_malformed("SCIM P1 garbled-upn issue — confirmed and fixed")
 
 
-def test_sanitize_strips_numbering_url_and_caps_length():
-    bad = "1. Reconfirm scope — refs https://slack.com/archives/abc " + "x" * 200
+def test_sanitize_strips_numbering_and_url_without_truncating():
+    tail = "x" * 600
+    bad = "1. Reconfirm scope — refs https://slack.com/archives/abc " + tail
     out = _sanitize(bad)
     assert not out.startswith("1.")
     assert "http" not in out
-    assert len(out) <= SUMMARY_MAX_CHARS
+    # No length cap: the full body is preserved and never ends with an ellipsis.
+    assert tail in out
+    assert not out.endswith("…")
 
 
 def test_sanitize_passes_clean_line_through():
