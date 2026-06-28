@@ -168,6 +168,8 @@ def build_history_rows(
         if path in live_paths:
             continue
         label = _label(path, meta, cache)
+        entry = cache.get(path)
+        title = entry.title if (entry and entry.title) else ""
         try:
             mtime_iso = (
                 datetime.fromtimestamp(os.path.getmtime(path), timezone.utc)
@@ -187,6 +189,7 @@ def build_history_rows(
                 last_event_type=None,
                 last_event_at=mtime_iso,
                 summary=label,
+                title=title,
                 kind="historical",
                 session_id=meta.session_id,
                 cwd=meta.cwd,

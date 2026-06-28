@@ -6,7 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from triage.classifier import classify, tail_jsonl
+from triage.classifier import classify, latest_user_message_at, tail_jsonl
 from triage.state import State
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -18,6 +18,27 @@ def load(name: str) -> list[dict]:
         for line in (FIXTURES / name).read_text().splitlines()
         if line.strip()
     ]
+
+
+def test_latest_user_message_at_returns_newest():
+    tail = [
+        {"type": "event_msg", "payload": {"type": "user_message", "message": "first"}, "timestamp": "T1"},
+        {"type": "event_msg", "payload": {"type": "task_started"}, "timestamp": "T2"},
+        {"type": "event_msg", "payload": {"type": "user_message", "message": "second"}, "timestamp": "T3"},
+        {"type": "event_msg", "payload": {"type": "task_started"}, "timestamp": "T4"},
+        {"type": "response_item", "payload": {"type": "function_call", "name": "shell"}, "timestamp": "T5"},
+    ]
+    # Newest user_message wins even with later non-user events after it.
+    assert latest_user_message_at(tail) == "T3"
+
+
+def test_latest_user_message_at_none_when_absent():
+    tail = [
+        {"type": "event_msg", "payload": {"type": "task_started"}, "timestamp": "T1"},
+        {"type": "response_item", "payload": {"type": "reasoning"}, "timestamp": "T2"},
+    ]
+    assert latest_user_message_at(tail) is None
+    assert latest_user_message_at([]) is None
 
 
 def test_task_complete_alive_is_needs_you():

@@ -16,7 +16,9 @@ from triage.summaries import (
     SummaryEntry,
     SummaryManager,
     drain_regen_requests,
+    extract_recent_messages,
     extract_transcript,
+    extract_user_messages,
     generate_summary_blocking,
     load_cache,
     prune_cache,
@@ -24,6 +26,9 @@ from triage.summaries import (
     _looks_malformed,
     _render_action,
     _sanitize,
+    _sanitize_title,
+    _split_title_summary,
+    _title_from_summary,
 )
 
 
@@ -109,6 +114,109 @@ def test_extract_transcript_tail_truncates(tmp_path):
 
 def test_extract_transcript_missing_file(tmp_path):
     assert extract_transcript(str(tmp_path / "nope.jsonl")) == ""
+
+
+def test_extract_recent_messages_roles_and_order(tmp_path):
+    p = _make_jsonl(tmp_path, [
+        {"type": "event_msg", "payload": {"type": "task_started"}},
+        {"type": "event_msg", "payload": {"type": "user_message", "message": "hi"}},
+        {"type": "response_item", "payload": {"type": "function_call", "name": "shell"}},
+        {"type": "event_msg", "payload": {"type": "agent_message", "message": "yo"}},
+        {"type": "event_msg", "payload": {"type": "user_message", "message": "more"}},
+    ])
+    assert extract_recent_messages(str(p)) == [
+        ("you", "hi"), ("codex", "yo"), ("you", "more"),
+    ]
+
+
+def test_extract_recent_messages_honors_max_messages(tmp_path):
+    # Alternate roles so collapsing doesn't merge them, then cap to the last 3.
+    lines = [
+        {"type": "event_msg", "payload": {
+            "type": "user_message" if i % 2 == 0 else "agent_message",
+            "message": f"m{i}",
+        }}
+        for i in range(10)
+    ]
+    pairs = extract_recent_messages(str(_make_jsonl(tmp_path, lines)), max_messages=3)
+    assert pairs == [("codex", "m7"), ("you", "m8"), ("codex", "m9")]
+
+
+def test_extract_recent_messages_collapses_same_role_runs(tmp_path):
+    p = _make_jsonl(tmp_path, [
+        {"type": "event_msg", "payload": {"type": "user_message", "message": "u1"}},
+        {"type": "event_msg", "payload": {"type": "agent_message", "message": "a1"}},
+        {"type": "event_msg", "payload": {"type": "agent_message", "message": "a2"}},
+        {"type": "event_msg", "payload": {"type": "agent_message", "message": "a3"}},
+        {"type": "event_msg", "payload": {"type": "user_message", "message": "u2"}},
+    ])
+    # The codex run a1/a2/a3 collapses to its last (a3); result alternates.
+    assert extract_recent_messages(str(p)) == [
+        ("you", "u1"), ("codex", "a3"), ("you", "u2"),
+    ]
+
+
+def test_extract_recent_messages_tail_read_drops_partial_line(tmp_path):
+    lines = [
+        {"type": "event_msg", "payload": {"type": "user_message", "message": "first-old"}},
+        {"type": "event_msg", "payload": {"type": "agent_message", "message": "kept"}},
+    ]
+    p = _make_jsonl(tmp_path, lines)
+    # Budget chosen so the seek lands 10 bytes into line 1: the partial first
+    # line is dropped, the whole second line survives, and it never raises.
+    max_bytes = p.stat().st_size - 10
+    pairs = extract_recent_messages(str(p), max_bytes=max_bytes)
+    assert ("you", "first-old") not in pairs
+    assert pairs == [("codex", "kept")]
+
+
+def test_extract_recent_messages_missing_file(tmp_path):
+    assert extract_recent_messages(str(tmp_path / "nope.jsonl")) == []
+
+
+def test_extract_user_messages_only_user_turns(tmp_path):
+    p = _make_jsonl(tmp_path, [
+        {"type": "event_msg", "payload": {"type": "task_started"}},
+        {"type": "event_msg", "payload": {"type": "user_message", "message": "first ask"}},
+        {"type": "response_item", "payload": {"type": "reasoning", "content": "think"}},
+        {"type": "response_item", "payload": {"type": "function_call", "name": "shell"}},
+        {"type": "event_msg", "payload": {"type": "agent_message", "message": "agent reply"}},
+        {"type": "event_msg", "payload": {"type": "user_message", "message": "second ask"}},
+        {"type": "event_msg", "payload": {"type": "task_complete"}},
+    ])
+    text = extract_user_messages(str(p))
+    # Only the two user messages, in order; no agent/reasoning/action content.
+    assert text == "first ask\nsecond ask"
+    assert "agent reply" not in text
+    assert "shell" not in text
+    assert "RECENT ACTIVITY" not in text
+
+
+def test_extract_user_messages_survives_compaction(tmp_path):
+    # JSONL is append-only: user_message events before a context_compacted
+    # marker remain in the file and must still be extracted.
+    p = _make_jsonl(tmp_path, [
+        {"type": "event_msg", "payload": {"type": "user_message", "message": "before"}},
+        {"type": "event_msg", "payload": {"type": "context_compacted"}},
+        {"type": "event_msg", "payload": {"type": "user_message", "message": "after"}},
+    ])
+    assert extract_user_messages(str(p)) == "before\nafter"
+
+
+def test_extract_user_messages_tail_truncates(tmp_path):
+    big = "x" * 5000
+    lines = [
+        {"type": "event_msg", "payload": {"type": "user_message", "message": big}}
+        for _ in range(20)
+    ]
+    lines.append({"type": "event_msg", "payload": {"type": "user_message", "message": "FINAL"}})
+    text = extract_user_messages(str(_make_jsonl(tmp_path, lines)), max_chars=10_000)
+    assert len(text) <= 10_000
+    assert text.endswith("FINAL")
+
+
+def test_extract_user_messages_missing_file(tmp_path):
+    assert extract_user_messages(str(tmp_path / "nope.jsonl")) == ""
 
 
 def test_load_cache_missing_returns_empty(tmp_path):
@@ -202,6 +310,62 @@ def test_sanitize_passes_clean_line_through():
     assert _sanitize(good) == good
 
 
+def test_split_title_summary_with_marker():
+    title, body = _split_title_summary("TITLE: Fix SCIM mapping\n\nThe body goes here.")
+    assert title == "Fix SCIM mapping"
+    assert body == "The body goes here."
+
+
+def test_split_title_summary_case_insensitive_and_inline():
+    # Marker need not be the very first line; match is case-insensitive and the
+    # marker line is removed from the body.
+    title, body = _split_title_summary("\ntitle: lower marker\nrest of summary")
+    assert title == "lower marker"
+    assert body == "rest of summary"
+
+
+def test_split_title_summary_no_marker():
+    title, body = _split_title_summary("Just a plain summary with no marker.")
+    assert title == ""
+    assert body == "Just a plain summary with no marker."
+
+
+def test_sanitize_title_strips_and_caps():
+    assert _sanitize_title('  "Quoted Title."  ') == "Quoted Title"
+    assert _sanitize_title("TITLE: leftover prefix") == "leftover prefix"
+    long = "word " * 30
+    out = _sanitize_title(long)
+    assert len(out) <= summaries.TITLE_MAX_CHARS
+    assert out.endswith("…")
+
+
+def test_title_from_summary_takes_first_words():
+    assert _title_from_summary("Fixing the watcher tick loop and more text here") == (
+        "Fixing the watcher tick loop and"
+    )
+
+
+def test_load_cache_drops_on_version_mismatch(tmp_path):
+    p = tmp_path / "summaries.json"
+    p.write_text(json.dumps({
+        "version": 1,
+        "entries": {"/a.jsonl": {
+            "summary": "old", "generated_at": "t", "source_last_event_at": "u"
+        }},
+    }))
+    # v1 file predates titles → dropped wholesale so the watcher regenerates.
+    assert load_cache(p) == {}
+
+
+def test_write_then_load_roundtrip_preserves_title(tmp_path):
+    p = tmp_path / "summaries.json"
+    cache = {"/x.jsonl": SummaryEntry(
+        summary="body", generated_at="g", source_last_event_at="s", title="Headline"
+    )}
+    write_cache(cache, p)
+    assert load_cache(p) == cache
+
+
 def test_generate_summary_retries_once_on_malformed(monkeypatch, tmp_path):
     p = _make_jsonl(tmp_path, [
         {"type": "event_msg", "payload": {"type": "user_message", "message": "hi"}},
@@ -210,12 +374,14 @@ def test_generate_summary_retries_once_on_malformed(monkeypatch, tmp_path):
 
     def fake_run(session_path, transcript, prompt):
         calls.append(prompt)
-        # First pass: list-shaped. Retry: clean.
-        return "1. a plan item" if len(calls) == 1 else "topic — done"
+        # First pass: body is list-shaped. Retry: clean title + body.
+        if len(calls) == 1:
+            return "TITLE: plan\n\n1. a plan item"
+        return "TITLE: the topic\n\ntopic — done"
 
     monkeypatch.setattr(summaries, "_run_codex_summary", fake_run)
     out = generate_summary_blocking(str(p))
-    assert out == "topic — done"
+    assert out == ("the topic", "topic — done")
     assert len(calls) == 2
     assert calls[0] == summaries.SUMMARY_PROMPT
     assert calls[1] == summaries.SUMMARY_RETRY_PROMPT
@@ -229,11 +395,26 @@ def test_generate_summary_no_retry_when_clean(monkeypatch, tmp_path):
 
     def fake_run(session_path, transcript, prompt):
         calls.append(prompt)
-        return "topic — already good"
+        return "TITLE: already good\n\ntopic — already good"
 
     monkeypatch.setattr(summaries, "_run_codex_summary", fake_run)
-    assert generate_summary_blocking(str(p)) == "topic — already good"
+    assert generate_summary_blocking(str(p)) == ("already good", "topic — already good")
     assert len(calls) == 1
+
+
+def test_generate_summary_derives_title_when_marker_missing(monkeypatch, tmp_path):
+    # Model ignored the TITLE format → title falls back to the summary's opening.
+    p = _make_jsonl(tmp_path, [
+        {"type": "event_msg", "payload": {"type": "user_message", "message": "hi"}},
+    ])
+
+    def fake_run(session_path, transcript, prompt):
+        return "Refactoring the watcher tick loop for clarity and speed."
+
+    monkeypatch.setattr(summaries, "_run_codex_summary", fake_run)
+    title, summary = generate_summary_blocking(str(p))
+    assert summary.startswith("Refactoring the watcher")
+    assert title == "Refactoring the watcher tick loop for"  # first 6 words
 
 
 def test_generate_summary_sanitizes_when_retry_still_malformed(monkeypatch, tmp_path):
@@ -242,12 +423,13 @@ def test_generate_summary_sanitizes_when_retry_still_malformed(monkeypatch, tmp_
     ])
 
     def fake_run(session_path, transcript, prompt):
-        return "1. still a list — https://x.com/y"
+        return "TITLE: list thing\n\n1. still a list — https://x.com/y"
 
     monkeypatch.setattr(summaries, "_run_codex_summary", fake_run)
-    out = generate_summary_blocking(str(p))
-    assert not out.startswith("1.")
-    assert "http" not in out
+    title, summary = generate_summary_blocking(str(p))
+    assert not summary.startswith("1.")
+    assert "http" not in summary
+    assert title == "list thing"
 
 
 def test_drain_regen_requests_consumes_and_deletes(tmp_path):

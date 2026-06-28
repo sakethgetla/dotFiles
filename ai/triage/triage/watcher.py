@@ -12,7 +12,7 @@ from pathlib import Path
 
 from . import codex, kitty, summaries
 from . import state as state_module
-from .classifier import classify, tail_jsonl
+from .classifier import classify, latest_user_message_at, tail_jsonl
 from .state import DashboardState, SessionRow, State
 from .summaries import SummaryEntry, SummaryManager
 
@@ -85,12 +85,14 @@ def tick(last_markers: dict[int, str], mgr: SummaryManager) -> dict[int, str]:
     manual = summaries.drain_regen_requests()
     cache = summaries.load_cache()
     cache_dirty = False
-    for path, src_at, text in mgr.drain_completed():
-        if text:
+    for path, src_at, result in mgr.drain_completed():
+        if result:
+            title, text = result
             cache[path] = SummaryEntry(
                 summary=text,
                 generated_at=now_iso(),
                 source_last_event_at=src_at,
+                title=title,
             )
             cache_dirty = True
             log.info("summary refreshed for %s", os.path.basename(path))
@@ -127,16 +129,20 @@ def tick(last_markers: dict[int, str], mgr: SummaryManager) -> dict[int, str]:
                 last_event_type=last_ev_type,
                 last_event_at=last_ev_at,
                 summary=entry.summary if entry else None,
+                title=entry.title if entry else "",
             )
         )
+        # Regenerate when the user sends a new message: the summary is built
+        # from the user's messages, so the newest user_message is the only
+        # event that changes it. Fires mid-turn, the moment a follow-up lands.
+        user_msg_at = latest_user_message_at(tail)
         should_regen = session_path in manual or (
-            state == State.NEEDS_YOU
-            and last_ev_type == "task_complete"
-            and (entry is None or entry.source_last_event_at != (last_ev_at or ""))
-            and not mgr.attempted(session_path, last_ev_at or "")
+            user_msg_at is not None
+            and (entry is None or entry.source_last_event_at != user_msg_at)
+            and not mgr.attempted(session_path, user_msg_at)
         )
         if should_regen:
-            mgr.submit(session_path, last_ev_at or "")
+            mgr.submit(session_path, user_msg_at or last_ev_at or "")
         if not in_triage_tab:
             tab_states.setdefault(tab_id, []).append(state)
             tab_raw_titles[tab_id] = tab_title

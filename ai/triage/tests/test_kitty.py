@@ -47,6 +47,18 @@ def test_launch_command_in_tab_omits_optional_flags(monkeypatch):
     argv = calls[0]
     assert "--hold" not in argv
     assert "--cwd" not in argv
+    assert "--next-to" not in argv
+    assert not any(str(a).startswith("--location") for a in argv)
+
+
+def test_launch_command_in_tab_placement_flags(monkeypatch):
+    calls = _capture(monkeypatch)
+    kitty.launch_command_in_tab(5, ["codex"], next_to=42, location="after")
+    argv = calls[0]
+    assert "--next-to" in argv and argv[argv.index("--next-to") + 1] == "id:42"
+    assert "--location=after" in argv
+    # placement flags precede the positional program
+    assert argv[-1] == "codex"
 
 
 def test_launch_command_in_tab_bad_stdout_returns_none(monkeypatch):
@@ -80,3 +92,26 @@ def test_close_window_builds_argv(monkeypatch):
     argv = calls[0]
     assert argv[0] == "close-window"
     assert argv[argv.index("--match") + 1] == "id:9"
+
+
+def test_neighbor_right_of_active_parses_match(monkeypatch):
+    # kitty @ ls --match neighbor:right returns the matching window subtree.
+    out = '[{"tabs":[{"id":1,"windows":[{"id":34}]}]}]'
+    monkeypatch.setattr(kitty, "_run", lambda *a, **k: _FakeProc(out, 0))
+    assert kitty.neighbor_right_of_active() == 34
+
+
+def test_neighbor_right_of_active_none_on_no_match(monkeypatch):
+    # rightmost pane → kitty errors "No matching windows" (nonzero returncode).
+    monkeypatch.setattr(kitty, "_run", lambda *a, **k: _FakeProc("", 1))
+    assert kitty.neighbor_right_of_active() is None
+
+
+def test_window_is_focused():
+    ls = [{"tabs": [{"id": 1, "windows": [
+        {"id": 10, "is_focused": True},
+        {"id": 11, "is_focused": False},
+    ]}]}]
+    assert kitty.window_is_focused(ls, 10) is True
+    assert kitty.window_is_focused(ls, 11) is False
+    assert kitty.window_is_focused(ls, 999) is False

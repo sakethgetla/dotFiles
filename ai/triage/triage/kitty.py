@@ -164,6 +164,8 @@ def launch_command_in_tab(
     cwd: str | None = None,
     hold: bool = False,
     copy_env: bool = False,
+    next_to: int | None = None,
+    location: str | None = None,
 ) -> int | None:
     """Spawn a new pane in the given tab running cmd_args; return its window id.
 
@@ -171,10 +173,14 @@ def launch_command_in_tab(
     launched program stays visible instead of the pane vanishing). cwd sets the
     working directory. copy_env=True copies the active window's environment into
     the new pane — kitty otherwise execs the program directly under the server's
-    env (no shell, so .zshrc exports like $EDITOR are absent). The program and
-    its args are passed positionally last.
+    env (no shell, so .zshrc exports like $EDITOR are absent). next_to (a window
+    id) + location (e.g. "after") place the new pane relative to a specific
+    window rather than the active one, so it lands directly beside the dashboard
+    regardless of other panes. The program and its args are passed positionally
+    last.
 
-    kitty @ launch --type=window --match id:N [--hold] [--copy-env] [--cwd D] <prog> [args...]
+    kitty @ launch --type=window --match id:N [--hold] [--copy-env] [--cwd D]
+        [--next-to id:W] [--location=L] <prog> [args...]
     """
     args = ["launch", "--type=window", "--match", f"id:{tab_id}"]
     if hold:
@@ -183,6 +189,10 @@ def launch_command_in_tab(
         args.append("--copy-env")
     if cwd:
         args.extend(["--cwd", cwd])
+    if next_to is not None:
+        args.extend(["--next-to", f"id:{next_to}"])
+    if location is not None:
+        args.append(f"--location={location}")
     args.extend(cmd_args)
     try:
         r = _run(*args, timeout=3)
@@ -194,6 +204,46 @@ def launch_command_in_tab(
         return int(r.stdout.strip())
     except ValueError:
         return None
+
+
+def neighbor_right_of_active() -> int | None:
+    """Window id of the pane spatially right of the *active* window, or None.
+
+    Resolved server-side via `kitty @ ls --match neighbor:right`, which skips
+    overlay windows. The `neighbors` field of a plain `ls` is unusable here: a
+    codex pane carries an overlay, and kitty reports the overlay's id there — an
+    id that isn't even listed as a real pane — so a client-side lookup just sees
+    a phantom neighbor. The match selector is relative to the active window, so
+    this is only meaningful when the caller knows it is active (the dashboard
+    while it holds focus).
+    """
+    try:
+        r = _run("ls", "--match", "neighbor:right", timeout=2)
+    except subprocess.TimeoutExpired:
+        return None
+    if r.returncode != 0 or not r.stdout.strip():
+        return None  # nonzero return also covers "No matching windows" (rightmost pane)
+    try:
+        data = json.loads(r.stdout)
+    except json.JSONDecodeError:
+        return None
+    for osw in data:
+        for tab in osw.get("tabs") or []:
+            for w in tab.get("windows") or []:
+                wid = w.get("id")
+                if isinstance(wid, int):
+                    return wid
+    return None
+
+
+def window_is_focused(ls_output: list[dict], window_id: int) -> bool:
+    """True if the given window currently holds keyboard focus."""
+    for osw in ls_output:
+        for tab in osw.get("tabs") or []:
+            for w in tab.get("windows") or []:
+                if w.get("id") == window_id:
+                    return bool(w.get("is_focused"))
+    return False
 
 
 def iter_tab_windows(

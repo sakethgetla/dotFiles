@@ -65,6 +65,22 @@ def classify(
     return (State.RUNNING, display_type, display_at)
 
 
+def latest_user_message_at(jsonl_tail: list[dict]) -> str | None:
+    """Timestamp of the most recent user_message event in the tail, or None.
+
+    Drives summary regeneration: the summary input is the user's messages, so a
+    new user_message is the only event that changes it. Triggering on this
+    (rather than task_complete) refreshes a chat's summary the moment a
+    follow-up is sent, mid-turn, instead of waiting for the agent to finish.
+    """
+    for ev in reversed(jsonl_tail):
+        if ev.get("type") != "event_msg":
+            continue
+        if (ev.get("payload") or {}).get("type") == "user_message":
+            return ev.get("timestamp")
+    return None
+
+
 TAIL_BYTES = 65536
 
 

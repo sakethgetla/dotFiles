@@ -211,9 +211,18 @@ def test_build_history_rows_dedup_against_live(tmp_path):
 
 def test_build_history_rows_label_cache_hit(tmp_path):
     p = _write_session(tmp_path / "2026" / "06" / "20", ROLLOUT, _meta())
-    cache = {str(p): SummaryEntry("CACHED SUMMARY", "g", "s")}
+    cache = {str(p): SummaryEntry("CACHED SUMMARY", "g", "s", title="Cached Title")}
     rows = build_history_rows(10, set(), cache, sessions_dir=tmp_path)
     assert rows[0].summary == "CACHED SUMMARY"
+    assert rows[0].title == "Cached Title"  # cached title surfaces on history rows
+
+
+def test_build_history_rows_no_title_on_cache_miss(tmp_path):
+    _write_session(tmp_path / "2026" / "06" / "20", ROLLOUT, _meta(), [
+        {"type": "event_msg", "payload": {"type": "user_message", "message": "do the thing"}},
+    ])
+    rows = build_history_rows(10, set(), {}, sessions_dir=tmp_path)
+    assert rows[0].title == ""  # no cache entry → no title
 
 
 def test_build_history_rows_label_repo_branch_prompt(tmp_path):

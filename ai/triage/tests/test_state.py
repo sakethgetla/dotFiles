@@ -27,6 +27,14 @@ def test_live_row_roundtrip_includes_defaults(tmp_path):
     assert row.kind == "live" and row.session_id is None and row.cwd is None
 
 
+def test_title_roundtrips(tmp_path):
+    p = tmp_path / "state.json"
+    row = _live_row()
+    row.title = "Fix SCIM mapping"
+    write_state(DashboardState("t", 1, [row]), p)
+    assert read_state(p).sessions[0].title == "Fix SCIM mapping"
+
+
 def test_read_state_tolerates_missing_new_keys(tmp_path):
     # Simulate a state.json written before the new fields existed.
     p = tmp_path / "state.json"
