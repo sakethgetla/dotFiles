@@ -307,8 +307,7 @@ bindsym $mod+p exec --no-startup-id /usr/local/bin/switch-audio-port
 ## App shortcuts
 bindsym $mod+w exec --no-startup-id /usr/bin/qutebrowser
 bindsym $mod+c exec --no-startup-id /usr/bin/code
-bindsym $mod+n exec --no-startup-id /usr/bin/thunar
-bindsym Print exec --no-startup-id scrot ~/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/$(date +"%Y-%m-%d-%T")-screenshot.png"
+bindsym Print exec --no-startup-id flameshot gui
 
 # Power Profiles menu switcher (rofi)
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
@@ -405,13 +404,10 @@ exec --no-startup-id dex --autostart --environment i3
 
 # configure multiple keyboard layouts and hotkey to switch (Alt+CAPSLOCK in this example)
 #exec --no-startup-id setxkbmap -layout 'us,sk' -variant altgr-intl,qwerty -option 'grp:alt_caps_toggle'
+exec --no-startup-id setxkbmap -option '' -layout us,us,us -variant ,colemak_dh_iso,colemak_dh_ortho -option grp:alt_shift_toggle,caps:swapescape,ctrl:swap_lalt_lctl
 
 # start conky:
 #exec_always --no-startup-id conky
-
-# start a script to setup displays
-# uncomment the next line, use arandr to setup displays and save the file as monitor:
-exec --no-startup-id ~/.screenlayout/monitor.sh
 
 # set wallpaper
 # exec --no-startup-id sleep 2 && nitrogen --restore
@@ -522,8 +518,8 @@ client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
 # (plus the system information i3status finds out, if available)
 bar {
     font pango: Noto Sans Regular 10
-    # status_command i3blocks -c ~/.config/i3/i3blocks.conf
-    status_command ~/.config/i3/scripts/i3status-kb
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    # status_command ~/.config/i3/scripts/i3status-kb
     position top
     # position bottom
 

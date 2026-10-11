@@ -1,0 +1,2 @@
+# X-Bows Lite keyboard: let the logged-in user access the config interface
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="320f", ATTRS{idProduct}=="5055", TAG+="uaccess"

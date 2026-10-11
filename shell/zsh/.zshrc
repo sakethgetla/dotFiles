@@ -145,12 +145,23 @@ alias rmt="trash"
 # The next line enables shell command completion for gcloud.
 # if [ -f '/Users/sakethgetla/Downloads/google-cloud-sdk 2/completion.zsh.inc' ]; then . '/Users/sakethgetla/Downloads/google-cloud-sdk 2/completion.zsh.inc'; fi
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
-export EDITOR='nvim'
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# use my users nvim config for sudo file edits.
+# sudoedit:  copy file to /tmp ──► nvim runs as YOU (your config, plugins) ──► copy back as root
+# sudo nvim: nvim runs as ROOT (root's config, plugins run with root rights)
+export SUDO_EDITOR="$(command -v nvim)"
+
+
+alias keyd='keyd.rvaiya'    # use whatever name dpkg showed
 
 # eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 source ~/.secrets

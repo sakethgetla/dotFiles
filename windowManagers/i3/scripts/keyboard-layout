@@ -1,5 +1,51 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
 
-KBD=$(/usr/bin/xkblayout-state print '%s')
-echo $KBD
+import ctypes
+import subprocess
+from ctypes import c_uint8, c_uint16, c_void_p, byref, Structure
 
+
+class XkbStateRec(Structure):
+    _fields_ = [
+        ("group",              c_uint8),
+        ("locked_group",       c_uint8),
+        ("base_group",         c_uint16),
+        ("latched_group",      c_uint16),
+        ("mods",               c_uint8),
+        ("base_mods",          c_uint8),
+        ("latched_mods",       c_uint8),
+        ("locked_mods",        c_uint8),
+        ("compat_state",       c_uint8),
+        ("grab_mods",          c_uint8),
+        ("compat_grab_mods",   c_uint8),
+        ("lookup_mods",        c_uint8),
+        ("compat_lookup_mods", c_uint8),
+        ("ptr_buttons",        c_uint16),
+    ]
+
+
+X11 = ctypes.CDLL("libX11.so.6")
+X11.XOpenDisplay.restype = c_void_p
+
+dpy = X11.XOpenDisplay(None)
+if not dpy:
+    raise SystemExit("cannot open display")
+
+state = XkbStateRec()
+X11.XkbGetState(c_void_p(dpy), 0x0100, byref(state))
+X11.XCloseDisplay(c_void_p(dpy))
+group = state.group
+
+q = subprocess.check_output(["setxkbmap", "-query"], text=True)
+fields = {}
+for line in q.splitlines():
+    key, _, val = line.partition(":")
+    fields[key.strip()] = val.strip()
+
+layouts  = fields.get("layout",  "us").split(",")
+variants = fields.get("variant", "").split(",")
+
+layout  = layouts[group]  if group < len(layouts)  else layouts[-1]
+variant = variants[group] if group < len(variants) else ""
+
+print(variant if variant else layout)

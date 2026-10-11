@@ -1,0 +1,9 @@
+# Mac X-Bows Lite layout: factory defaults plus these changes.
+# Apply:  ./xbows.py apply mac.layout     (switch back: ./xbows.py apply my.layout)
+#
+# Special slots (found by probing, factory value d0 a2 xx):
+#   @39 middle backspace   @40 middle enter   @35 middle ctrl
+#   @41 middle shift       @53 right space    @29 left space (plain space)
+@29 = rctrl   # left spacebar -> Ctrl. rctrl: same as Ctrl on macOS; keyd on Linux would turn lctrl into Alt
+@35 = lgui    # middle ctrl   -> Super / Cmd
+@41 = esc     # middle shift  -> Escape

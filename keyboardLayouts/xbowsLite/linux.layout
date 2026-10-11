@@ -1,0 +1,8 @@
+# My X-Bows Lite layout: factory defaults plus these changes.
+#
+# Special slots (found by probing, factory value d0 a2 xx):
+#   @39 middle backspace   @40 middle enter   @35 middle ctrl
+#   @41 middle shift       @53 right space    @29 left space (plain space)
+@29 = lgui    # left spacebar -> Super
+@41 = esc     # middle shift  -> Escape
+@35 = rctrl   # middle ctrl -> Ctrl. Factory d0 a2 03 does nothing; rctrl because keyd turns lctrl into alt

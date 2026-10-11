@@ -1,0 +1,57 @@
+# Debian/Ubuntu package list
+# Install: ./bootstrap.sh
+# Lines starting with # are ignored. One package per line (or space-separated).
+
+# --- window manager / desktop ---
+i3
+i3blocks
+rofi
+dunst
+picom
+feh
+xss-lock
+dex
+arandr
+brightnessctl
+flameshot
+
+# --- fonts ---
+fonts-noto
+fonts-font-awesome
+
+# --- terminal / shell ---
+kitty
+zsh
+tmux
+
+# --- editors ---
+neovim
+emacs
+
+# --- browsers ---
+firefox-esr
+qutebrowser
+
+# --- audio / media ---
+pavucontrol
+playerctl
+alsa-utils
+pulseaudio-utils
+
+# --- i3blocks status scripts deps ---
+acpi
+sysstat
+lm-sensors
+power-profiles-daemon
+
+# --- cli utilities ---
+curl
+wget
+jq
+git
+build-essential
+xclip
+
+# --- x11 ---
+xorg
+x11-xserver-utils
