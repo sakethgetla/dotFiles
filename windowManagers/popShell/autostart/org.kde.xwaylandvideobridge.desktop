@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Xwayland Video Bridge
+Exec=xwaylandvideobridge
+NoDisplay=true
+Hidden=true
+X-GNOME-Autostart-enabled=false
