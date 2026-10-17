@@ -5,22 +5,22 @@ Evision VS11K09A chip) from Linux. The vendor's configuration software only runs
 The remap is stored **in the keyboard's own memory**, so it works on any computer and in BIOS, with no daemon.
 
 - `xbows.py`: the tool (Python 3, standard library only)
-- `mac.layout`: Mac layout (left space = Ctrl, middle Ctrl = Cmd, middle Shift = Esc)
-- `my.layout`: **my current layout**. This file is the source of truth (see "Gotchas")
+- `mac.layout`: Mac layout (left space and the small key left of it swapped: Option/Space; middle Ctrl = Cmd, middle Shift = Esc)
+- `linux.layout`: **my Linux layout**. This file is the source of truth (see "Gotchas")
 - `70-xbows.rules`: udev rule so the tool runs without sudo
 
 ## Quick start
 
 ```sh
 cd ~/me/dotFiles/keyboardLayouts/xbowsLite
-./xbows.py apply -n my.layout   # preview
-./xbows.py apply my.layout      # write to the keyboard
+./xbows.py apply -n linux.layout   # preview
+./xbows.py apply linux.layout      # write to the keyboard
 ./xbows.py reset                # factory default layout
 ./xbows.py dump                 # factory default layout with slot numbers
 ./xbows.py info                 # raw device info
 ```
 
-To change a key, add a line to `my.layout` and run `apply`. Then **test by typing**, because the keyboard can't report what it's doing.
+To change a key, add a line to `linux.layout` and run `apply`. Then **test by typing**, because the keyboard can't report what it's doing.
 
 ### One-time setup on a new machine
 
@@ -33,7 +33,7 @@ The rule gives the logged-in user access (`TAG+="uaccess"`, an ACL that logind m
 `/dev/hidraw*` nodes, which are otherwise root-only. Side effect: any process running as you can read raw HID
 from this keyboard. Without the rule, use `sudo ./xbows.py ...`.
 
-## Current layout (`my.layout`)
+## Current layout (`linux.layout`)
 
 | Physical key | Slot | Default | Now |
 |---|---|---|---|
@@ -43,8 +43,8 @@ from this keyboard. Without the rule, use `sudo ./xbows.py ...`.
 
 Everything else is factory default.
 
-**`mac.layout`:** left spacebar → Ctrl (`rctrl`), middle Ctrl → Super/Cmd (`lgui`), middle Shift → Escape.
-Switch with `./xbows.py apply mac.layout`, and switch back with `./xbows.py apply my.layout`. Only one layout is
+**`mac.layout`:** left spacebar → Left Option (`lalt`), small key left of it (@17) → Space, middle Ctrl → Super/Cmd (`lgui`), middle Shift → Escape.
+Switch with `./xbows.py apply mac.layout`, and switch back with `./xbows.py apply linux.layout`. Only one layout is
 stored on the keyboard at a time, so it stays in whichever layout was applied last, even on another computer.
 
 ## Gotchas (read these first)
@@ -52,7 +52,7 @@ stored on the keyboard at a time, so it stays in whichever layout was applied la
 1. **The active layout cannot be read back.** Command 0x07 returns the *factory default* map, not what's
    active. So `dump` always shows defaults, and there's no way to verify a write except by typing.
 2. **Every `apply` replaces the whole layout** with factory defaults + the layout file's changes.
-   Anything set elsewhere (e.g. the Windows driver) is wiped. Keep *all* remaps in `my.layout`.
+   Anything set elsewhere (e.g. the Windows driver) is wiped. Keep *all* remaps in `linux.layout`.
    Removing a line and re-applying reverts that key.
 3. **keyd runs after the keyboard.** `/etc/keyd/default.conf` (applies to all keyboards, `[ids] *`) has:
    ```
@@ -66,7 +66,7 @@ stored on the keyboard at a time, so it stays in whichever layout was applied la
    keyd receives and sends. keyd doesn't touch Super (lgui), so the space→Super remap passes through.
 4. **Middle keys and the right spacebar are special.** Their factory value is `d0 a2 xx`, not a normal key
    code. The factory middle Ctrl (`d0 a2 03`) did **nothing** on Linux, so don't assume a `d0 a2 xx` default
-   works. Give these keys an explicit value in `my.layout`. Overwriting one with a normal key works (verified).
+   works. Give these keys an explicit value in `linux.layout`. Overwriting one with a normal key works (verified).
    When remapping to Ctrl, use `rctrl`: keyd turns `lctrl` into Alt.
 5. Fn (@71, `a0 01 00`) is probably the Fn key, but I haven't tested it. The manual says Fn combos can't be changed.
 
@@ -82,7 +82,7 @@ Empty cells are unused (`none`). Slots 96–169 are unused padding (96–125 `20
 | 2 | 2 tab | 8 q | 14 w | 20 e | 26 r | 32 t | 38 | 44 y | 50 u | 56 i | 62 o | 68 p | 74 lbracket | 80 rbracket | 86 backslash | 92 pageup |
 | 3 | 3 capslock | 9 a | 15 s | 21 d | 27 f | 33 g | 39 mid-bksp | 45 h | 51 j | 57 k | 63 l | 69 semicolon | 75 quote | 81 | 87 enter | 93 pagedown |
 | 4 | 4 lshift | 10 z | 16 x | 22 c | 28 v | 34 b | 40 mid-enter | 46 n | 52 m | 58 comma | 64 dot | 70 slash | 76 rshift | 82 | 88 up | 94 |
-| 5 | 5 lctrl | 11 lgui | 17 lalt | 23 | 29 space (left) | 35 mid-ctrl | 41 mid-shift | 47 | 53 right-space | 59 | 65 ralt | 71 fn? | 77 rctrl | 83 left | 89 down | 95 right |
+| 5 | 5 lctrl | 11 lgui | 17 lalt (small key left of left space) | 23 | 29 space (left) | 35 mid-ctrl | 41 mid-shift | 47 | 53 right-space | 59 | 65 ralt | 71 fn? | 77 rctrl | 83 left | 89 down | 95 right |
 
 Special slots, verified by probing (each one temporarily typed a digit):
 
@@ -94,9 +94,10 @@ Special slots, verified by probing (each one temporarily typed a digit):
 | @41 | `d0 a2 04` | middle Shift |
 | @53 | `d0 a2 05` | right spacebar |
 | @29 | `20 00 2c` | left spacebar (plain Space) |
+| @17 | `20 04 00` | small key left of the left spacebar: plain Left Alt (Option on a Mac) |
 
 **Finding an unknown key fast:** write a temporary layout that maps the candidate slots to `1`, `2`, `3`…,
-press the key in a text editor, and see which digit appears. Then re-apply `my.layout`.
+press the key in a text editor, and see which digit appears. Then re-apply `linux.layout`.
 
 ## Layout file syntax
 
@@ -184,4 +185,4 @@ It reads defaults with begin → info → 0x07 → 0x1b → end.
 - `config interface not found`: keyboard unplugged, or it's in wireless mode with a different PID.
 - `no reply to command`: replug the keyboard and retry.
 - Key does the wrong thing: check keyd (`sudo keyd monitor`) before blaming the keyboard.
-- Something is badly wrong: `./xbows.py reset` (factory layout), then `apply my.layout`.
+- Something is badly wrong: `./xbows.py reset` (factory layout), then `apply linux.layout`.
